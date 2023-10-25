@@ -1,0 +1,105 @@
+﻿@model Shopee_Management.Models.CHITIETSP
+
+@{
+    ViewBag.Title = "Thêm Chi Tiết Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("ThemCTSP", "QuanLySanPham", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            Sản Phẩm :
+            <div class="col-md-10">
+                @Html.DropDownList("id_sp", ViewBag.ChiTietSPSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_sp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Người bán hàng : 
+            <div class="col-md-10">
+                @Html.DropDownList("id_nbh", ViewBag.NBHSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nbh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Kích Cỡ : 
+            <div class="col-md-10">
+                @Html.DropDownList("id_size", ViewBag.SizeSelectList as SelectList , htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Màu : 
+            <div class="col-md-10">
+                @Html.DropDownList("id_color", ViewBag.ColorSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Thương Hiệu : 
+            <div class="col-md-10">
+                @Html.DropDownList("id_brand", ViewBag.BrandSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Xuất Xứ : 
+            <div class="col-md-10">
+                @Html.DropDownList("id_member", ViewBag.MemberSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_member, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Ngành Hàng :
+            <div class="col-md-10">
+                @Html.DropDownList("id_nganhhang", ViewBag.NganhHangSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nganhhang, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Ngành Hàng Con :
+            <div class="col-md-10">
+                @Html.DropDownList("id_nhcon", ViewBag.NganhHangConSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nhcon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Ngành Hàng Cấp 3 :
+            <div class="col-md-10">
+                @Html.DropDownList("id_nhc3", ViewBag.NganhHangC3SelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nhc3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Số Lượng : 
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.so_luong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.so_luong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
