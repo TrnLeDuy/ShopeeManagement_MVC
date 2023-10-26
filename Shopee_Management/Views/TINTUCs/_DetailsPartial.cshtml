@@ -1,0 +1,10 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+<h4>@Model.tieu_de</h4>
+<p>@Model.noi_dung</p>
+<p>Ngày đăng: @Model.ngay_dang</p>
+<p>Thể loại: @Model.THELOAITIN.ten_the_loai</p>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.id_tin_tuc }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Xóa", "Delete", new { id = Model.id_tin_tuc }, new { @class = "btn btn-danger" })
+</p>
