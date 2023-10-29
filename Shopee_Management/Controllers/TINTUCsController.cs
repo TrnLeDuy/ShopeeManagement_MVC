@@ -1,0 +1,177 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Shopee_Management.Models;
+
+namespace Shopee_Management.Controllers
+{
+    public class TINTUCsController : Controller
+    {
+        private TMDTdbEntities db = new TMDTdbEntities();
+
+        // GET: TINTUCs
+        public ActionResult Index()
+        {
+            var tINTUCs = db.TINTUCs.Include(t => t.THELOAITIN);
+            return View(tINTUCs.ToList());
+        }
+
+        // GET: TINTUCs/Details/5
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TINTUC tINTUC = db.TINTUCs.Find(id);
+            if (tINTUC == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tINTUC);
+        }
+
+        //--------------------------------------------
+        /*       public ActionResult Details(int id)
+               {
+                   var tintuc = db.TINTUCs.Find(id); // Lấy dữ liệu tin tức từ cơ sở dữ liệu dựa trên id.
+                   if (tintuc == null)
+                   {
+                       return HttpNotFound(); // Hoặc trả về một trang lỗi 404 nếu không tìm thấy tin tức.
+                   }
+                   return PartialView("_DetailsPartial", tintuc); // Trả về một PartialView cho nội dung chi tiết.
+               }*/
+
+
+
+
+        // GET: TINTUCs/Create
+        public ActionResult Create()
+        {
+            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai");
+            return View();
+        }
+
+        // POST: TINTUCs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai")] TINTUC tINTUC)
+        {
+            if (ModelState.IsValid)
+            {
+                db.TINTUCs.Add(tINTUC);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
+            return View(tINTUC);
+        }
+
+        // GET: TINTUCs/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TINTUC tINTUC = db.TINTUCs.Find(id);
+            if (tINTUC == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
+            return View(tINTUC);
+        }
+
+        /* public ActionResult Edit(int id)
+         {
+             var tinTuc = db.TINTUCs.Find(id);
+             if (tinTuc == null)
+             {
+                 return HttpNotFound();
+             }
+             if (Request.IsAjaxRequest())
+             {
+                 return PartialView("_EditPartial", tinTuc);
+             }
+             return View(tinTuc);
+         }
+         public ActionResult Delete(int id)
+         {
+             var tinTuc = db.TINTUCs.Find(id);
+             if (tinTuc == null)
+             {
+                 return HttpNotFound();
+             }
+             if (Request.IsAjaxRequest())
+             {
+                 return PartialView("_DeletePartial", tinTuc);
+             }
+             return View(tinTuc);
+         }*/
+
+
+
+        // POST: TINTUCs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai")] TINTUC tINTUC)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(tINTUC).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
+            return View(tINTUC);
+        }
+
+        // GET: TINTUCs/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TINTUC tINTUC = db.TINTUCs.Find(id);
+            if (tINTUC == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tINTUC);
+        }
+
+        // POST: TINTUCs/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            TINTUC tINTUC = db.TINTUCs.Find(id);
+            db.TINTUCs.Remove(tINTUC);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

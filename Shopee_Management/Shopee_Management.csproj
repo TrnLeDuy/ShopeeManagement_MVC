@@ -142,6 +142,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
+    <Compile Include="Controllers\KHUYENMAIsController.cs" />
+    <Compile Include="Controllers\QuanLySanPhamController.cs" />
+    <Compile Include="Controllers\SHIPPERsController.cs" />
+    <Compile Include="Controllers\THELOAITINsController.cs" />
+    <Compile Include="Controllers\TINTUCsController.cs" />
+    <Compile Include="Controllers\VANCHUYENsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -673,6 +679,37 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SHIPPERs\Create.cshtml" />
+    <Content Include="Views\SHIPPERs\Delete.cshtml" />
+    <Content Include="Views\SHIPPERs\Details.cshtml" />
+    <Content Include="Views\SHIPPERs\Edit.cshtml" />
+    <Content Include="Views\SHIPPERs\Index.cshtml" />
+    <Content Include="Views\VANCHUYENs\Create.cshtml" />
+    <Content Include="Views\VANCHUYENs\Delete.cshtml" />
+    <Content Include="Views\VANCHUYENs\Details.cshtml" />
+    <Content Include="Views\VANCHUYENs\Edit.cshtml" />
+    <Content Include="Views\VANCHUYENs\Index.cshtml" />
+    <Content Include="Views\KHUYENMAIs\Create.cshtml" />
+    <Content Include="Views\KHUYENMAIs\Delete.cshtml" />
+    <Content Include="Views\KHUYENMAIs\Details.cshtml" />
+    <Content Include="Views\KHUYENMAIs\Edit.cshtml" />
+    <Content Include="Views\KHUYENMAIs\Index.cshtml" />
+    <Content Include="Views\QuanLySanPham\CapNhatCTSP.cshtml" />
+    <Content Include="Views\QuanLySanPham\CapNhatSP.cshtml" />
+    <Content Include="Views\QuanLySanPham\Index.cshtml" />
+    <Content Include="Views\QuanLySanPham\ThemCTSP.cshtml" />
+    <Content Include="Views\QuanLySanPham\ThemSP.cshtml" />
+    <Content Include="Views\THELOAITINs\Create.cshtml" />
+    <Content Include="Views\THELOAITINs\Delete.cshtml" />
+    <Content Include="Views\THELOAITINs\Details.cshtml" />
+    <Content Include="Views\THELOAITINs\Edit.cshtml" />
+    <Content Include="Views\THELOAITINs\Index.cshtml" />
+    <Content Include="Views\TINTUCs\Create.cshtml" />
+    <Content Include="Views\TINTUCs\Delete.cshtml" />
+    <Content Include="Views\TINTUCs\Details.cshtml" />
+    <Content Include="Views\TINTUCs\Edit.cshtml" />
+    <Content Include="Views\TINTUCs\Index.cshtml" />
+    <Content Include="Views\TINTUCs\_DetailsPartial.cshtml" />
     <Content Include="Views\KhachHang\DangNhap.cshtml" />
     <Content Include="Views\KhachHang\DangKy.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
@@ -680,6 +717,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
