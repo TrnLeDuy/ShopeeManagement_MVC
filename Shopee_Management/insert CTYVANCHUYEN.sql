@@ -1,0 +1,10 @@
+insert into CTYVANCHUYEN values (N'Giao Hàng Nhanh');
+insert into CTYVANCHUYEN values (N'Bưu điện Việt Nam');
+insert into CTYVANCHUYEN values (N'Giao Hàng Tiết Kiệm');
+insert into CTYVANCHUYEN values ('Viettel Post');
+insert into CTYVANCHUYEN values ('J&T Express');
+insert into CTYVANCHUYEN values ('Ninja Van');
+insert into CTYVANCHUYEN values ('Kerry Express');
+insert into CTYVANCHUYEN values ('Shipchung');
+insert into CTYVANCHUYEN values ('DHL Express');
+insert into CTYVANCHUYEN values (N'Nhất Tín Express');

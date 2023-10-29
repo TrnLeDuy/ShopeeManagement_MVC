@@ -1,0 +1,59 @@
+﻿@model Shopee_Management.Models.VANCHUYEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VANCHUYEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.phi_vc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phi_vc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngay_giao_hang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_giao_hang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trang_thai_giao_hang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trang_thai_giao_hang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DONHANG.id_kh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DONHANG.id_kh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SHIPPER.ho_ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SHIPPER.ho_ten)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_vc }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

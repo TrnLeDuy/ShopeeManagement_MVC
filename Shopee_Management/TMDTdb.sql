@@ -254,6 +254,7 @@ CREATE TABLE DONHANG_QUATANG (
     FOREIGN KEY (id_qua) REFERENCES QUATANG(id_qua)
 );
 /* ---------- QUÀ TẶNG ---------- */
+/*------------------------------------------------------------*/
  /* ---------- TIN TỨC ---------- */
 CREATE TABLE THELOAITIN (
     id_the_loai INT IDENTITY(1,1),
@@ -279,8 +280,7 @@ CREATE TABLE CHITIETTIN (
     FOREIGN KEY (id_nv) REFERENCES NHANVIEN(id_nv)
 );
 /* ---------- TIN TỨC ---------- */
-
-
+/*------------------------------------------------------------*/
 /*------------ KHU VỰC ------------*/
 
 CREATE TABLE  KHUVUC (
@@ -303,5 +303,4 @@ CREATE TABLE PHUONGXA (
 	id_quan CHAR(3),
 	FOREIGN KEY (id_quan) REFERENCES QUANHUYEN(id_quan)
 );
-
 /*------------ KHU VỰC ------------*/
