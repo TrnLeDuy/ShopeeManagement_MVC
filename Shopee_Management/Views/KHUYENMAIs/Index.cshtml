@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Shopee_Management.Models.KHUYENMAI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ty_le_giam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_tao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_bat_dau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_ket_thuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NHANVIEN.ho_ten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ty_le_giam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_tao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_bat_dau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_ket_thuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGUOIBANHANG.ten_cua_hang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHANVIEN.ho_ten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_voucher }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_voucher }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_voucher })
+        </td>
+    </tr>
+}
+
+</table>
