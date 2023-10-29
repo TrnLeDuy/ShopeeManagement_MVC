@@ -1,0 +1,10 @@
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Conney Abrami', '8576065803', 'cabrami0@telegraph.co.uk', '09285 Farragut Alley', 1, 1);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Stanley Brolan', '8134877286', 'sbrolan1@google.com.au', '75 Kensington Circle', 2, 2);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Mitchell Grenfell', '9137888568', 'mgrenfell2@uiuc.edu', '4 Starling Park', 0, 3);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Zia Elwin', '6141013535', 'zelwin3@booking.com', '1483 Novick Hill', 1, 4);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Vaughn Prettyjohns', '2329719888', 'vprettyjohns4@miibeian.gov.cn', '0 Chinook Hill', 2, 5);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Grethel Liptrod', '9735111545', 'gliptrod5@nifty.com', '43963 Toban Crossing', 1, 6);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Fanchette Cisec', '5795416754', 'fcisec6@yellowbook.com', '612 Melrose Crossing', 1, 7);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Gisella Larchier', '6335820270', 'glarchier7@ebay.co.uk', '61 Mallory Way', 2, 8);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Ethelred Coonan', '4187755867', 'ecoonan8@usgs.gov', '62 Vera Center', 0, 9);
+insert into SHIPPER (ho_ten, sdt, email, dia_chi, trang_thai_shipper, id_cty) values ('Ichabod Moxom', '7026563032', 'imoxom9@microsoft.com', '4611 Farmco Drive', 1, 10);

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Shopee_Management.Models.VANCHUYEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.phi_vc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_giao_hang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.trang_thai_giao_hang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DONHANG.id_kh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SHIPPER.ho_ten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.phi_vc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_giao_hang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.trang_thai_giao_hang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DONHANG.id_kh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SHIPPER.ho_ten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_vc }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_vc }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_vc })
+        </td>
+    </tr>
+}
+
+</table>
