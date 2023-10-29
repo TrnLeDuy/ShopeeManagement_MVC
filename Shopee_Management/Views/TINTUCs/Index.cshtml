@@ -13,18 +13,18 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tieu_de)
+            <strong>TIÊU ĐỀ</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.noi_dung)
+            <strong>NỘI DUNG</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ngay_dang)
+            <strong>NGÀY ĐĂNG</strong>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.THELOAITIN.ten_the_loai)
+            <strong>TÊN THỂ LOẠI</strong>
         </th>
-        <th></th>
+
     </tr>
 
     @foreach (var item in Model)
@@ -34,8 +34,7 @@
                 @Html.DisplayFor(modelItem => item.tieu_de)
             </td>
             <td>
-                <a href="@Url.Action("Details", "TINTUCs", new { id = item.id_tin_tuc }) " style="color: #666666;">@item.noi_dung</a>
-                @*<a href="javascript:void(0)" class="open-details" data-id="@item.id_tin_tuc" style="color: #333;">@item.noi_dung</a>*@
+                <a href="@Url.Action("Details", "TINTUCs", new { id = item.id_tin_tuc })" style="color: #666666; transition: color 0.3s;" onmouseover="this.style.color='orange';" onmouseout="this.style.color='#666666';">@item.noi_dung</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ngay_dang)
