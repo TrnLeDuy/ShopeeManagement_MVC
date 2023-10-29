@@ -9,11 +9,11 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>KHUYENMAI</h4>
+    <h4 >KHUYẾN MÃI</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ty_le_giam)
+            Tỷ lệ giảm
         </dt>
 
         <dd>
@@ -21,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ngay_tao)
+            Ngày tạo
         </dt>
 
         <dd>
@@ -29,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ngay_bat_dau)
+          Ngày bắt đầu
         </dt>
 
         <dd>
@@ -37,7 +37,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ngay_ket_thuc)
+           Ngày kết thúc
         </dt>
 
         <dd>
@@ -45,7 +45,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
+           Người bán hàng
         </dt>
 
         <dd>
@@ -53,7 +53,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NHANVIEN.ho_ten)
+            Nhân viên
         </dt>
 
         <dd>
@@ -65,9 +65,10 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |
+    @Html.ActionLink("Back to List", "Index")
+
+</div>
     }
 </div>
