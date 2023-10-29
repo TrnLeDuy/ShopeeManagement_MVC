@@ -60,7 +60,7 @@ namespace Shopee_Management.Controllers
         }
 
         [HttpPost]
-        public ActionResult DangKy([Bind(Include = "email, username, password")] KHACHHANG khachhang)
+        public ActionResult DangKy([Bind(Include = "sdt, email, username, password")] KHACHHANG khachhang)
         {
             if (ModelState.IsValid)
             {
@@ -72,8 +72,8 @@ namespace Shopee_Management.Controllers
                 if (existingUser == null)
                 {
                     db.Database.ExecuteSqlCommand(
-                        "INSERT INTO KHACHHANG (email, username, password) VALUES (@p0, @p1, @p2)",
-                        khachhang.email, khachhang.username, khachhang.password);
+                        "INSERT INTO KHACHHANG (sdt, email, username, password) VALUES (@p0, @p1, @p2, @p3)",
+                        khachhang.sdt, khachhang.email, khachhang.username, khachhang.password);
                     TempData["Success"] = "Tạo tài khoản thành công !";
                     return RedirectToAction("Default");
                 }
@@ -90,7 +90,7 @@ namespace Shopee_Management.Controllers
             Session["HoTen"] = null;
             Session["Avatar"] = null;
             Session.Abandon();
-            return RedirectToAction("/TrangChu/Index");
+            return Redirect("/TrangChu/Index");
         }
     }
 }
