@@ -297,5 +297,25 @@ namespace Shopee_Management.Controllers
             // Handle the case where the model state is not valid (e.g., validation errors).
             return View(updatedProduct);
         }
+        [HttpPost]
+        public ActionResult XoaCTSP(int id)
+        {
+            using (TMDTdbEntities entities1 = new TMDTdbEntities())
+            {
+                // Get the product from the database
+                var product = entities1.CHITIETSPs.FirstOrDefault(p => p.id_ctsp == id);
+
+                if (product != null)
+                {
+                    // Remove the product from the database
+                    entities1.CHITIETSPs.Remove(product);
+                    entities1.SaveChanges();
+
+                    return Json(new { success = true });
+                }
+            }
+
+            return Json(new { success = false });
+        }
     }
 }
