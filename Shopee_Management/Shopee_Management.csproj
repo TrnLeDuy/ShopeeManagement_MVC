@@ -152,10 +152,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DONHANGsController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\QuanLyShipperController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
-    <Compile Include="Controllers\SHIPPERsController.cs" />
     <Compile Include="Controllers\THELOAITINsController.cs" />
     <Compile Include="Controllers\TINTUCsController.cs" />
     <Compile Include="Controllers\VANCHUYENsController.cs" />
@@ -175,6 +175,7 @@
     <Compile Include="Models\CHUCVU.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelTrangChu.cs" />
     <Compile Include="Models\CTYVANCHUYEN.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
@@ -2811,11 +2812,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\SHIPPERs\Create.cshtml" />
-    <Content Include="Views\SHIPPERs\Delete.cshtml" />
-    <Content Include="Views\SHIPPERs\Details.cshtml" />
-    <Content Include="Views\SHIPPERs\Edit.cshtml" />
-    <Content Include="Views\SHIPPERs\Index.cshtml" />
     <Content Include="Views\VANCHUYENs\Create.cshtml" />
     <Content Include="Views\VANCHUYENs\Delete.cshtml" />
     <Content Include="Views\VANCHUYENs\Details.cshtml" />
@@ -2852,10 +2848,16 @@
     <Content Include="Views\DONHANGs\Details.cshtml" />
     <Content Include="Views\DONHANGs\Edit.cshtml" />
     <Content Include="Views\DONHANGs\Index.cshtml" />
+    <Content Include="Views\QuanLyShipper\ThemShipper.cshtml" />
+    <Content Include="Views\QuanLyShipper\XoaShipper.cshtml" />
+    <Content Include="Views\QuanLyShipper\Details.cshtml" />
+    <Content Include="Views\QuanLyShipper\CapNhatShipper.cshtml" />
+    <Content Include="Views\QuanLyShipper\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CustomerAvatar\" />
+    <Folder Include="Views\ChiTietSP\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
