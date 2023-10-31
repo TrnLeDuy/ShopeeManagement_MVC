@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="text-align:center;">THÔNG TIN CHI TIẾT</h2>
+
 
 <div>
-    <h4>TINTUC</h4>
+    <h2 style="text-align:center;">THÔNG TIN CHI TIẾT</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.tieu_de)
+            <strong>TIÊU ĐỀ</strong>
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.noi_dung)
+            <strong>NỘI DUNG</strong>
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ngay_dang)
+            <strong>NGÀY ĐĂNG</strong>
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.THELOAITIN.ten_the_loai)
+            <strong>THỂ LOẠI</strong>
         </dt>
 
         <dd>
@@ -46,7 +46,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.id_tin_tuc },new {@class="btn btn-success"}) |
-    @Html.ActionLink("Xóa", "Delete", new { id = Model.id_tin_tuc }, new { @class = "btn btn-danger" })|
-    @Html.ActionLink("Quay lại", "Index",null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("SỬA", "Edit", new { id = Model.id_tin_tuc },new {@class="btn btn-success"}) |
+    @Html.ActionLink("XÓA", "Delete", new { id = Model.id_tin_tuc }, new { @class = "btn btn-danger" })|
+    @Html.ActionLink("TRỞ VỀ", "Index",null, new { @class = "btn btn-primary" })
 </p>
