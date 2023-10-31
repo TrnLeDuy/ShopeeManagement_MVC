@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DONHANGsController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
@@ -2582,6 +2583,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\backgroun3.jpg" />
+    <Content Include="Images\Shopee.png" />
     <Content Include="Models\Shopee.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Shopee.Context.cs</LastGenOutput>
@@ -2840,11 +2842,16 @@
     <Content Include="Views\TINTUCs\Edit.cshtml" />
     <Content Include="Views\TINTUCs\Index.cshtml" />
     <Content Include="Views\TINTUCs\_DetailsPartial.cshtml" />
-    <Content Include="Views\KhachHang\DangNhap.cshtml" />
-    <Content Include="Views\KhachHang\DangKy.cshtml" />
     <Content Include="Views\KhachHang\Default.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Shared\_ShopeeLayout.cshtml" />
+    <Content Include="Views\KhachHang\ChiTietKhachHang.cshtml" />
+    <Content Include="Views\Shared\_KenhBanHangLayout.cshtml" />
+    <Content Include="Views\DONHANGs\Create.cshtml" />
+    <Content Include="Views\DONHANGs\Delete.cshtml" />
+    <Content Include="Views\DONHANGs\Details.cshtml" />
+    <Content Include="Views\DONHANGs\Edit.cshtml" />
+    <Content Include="Views\DONHANGs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

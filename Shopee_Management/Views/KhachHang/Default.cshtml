@@ -81,13 +81,13 @@
                         <label>Email</label>
                     </div>
                     <div class="input-box">
-                        <span class="icon"><i class='bx bxs-envelope'></i></span>
+                        <span class="icon"><i class=''></i></span>
                         @Html.TextBoxFor(model => model.sdt, new { @class = "form-control", required = "required" })
                         <label>Số điện thoại</label>
                     </div>
                     <div class="input-box">
                         <span class="icon" onclick="togglePassword()"><i class='bx bxs-lock-alt' id="passwordIcon"></i></span>
-                        @Html.TextBoxFor(model => model.password, new { type = "password", @class = "form-control", required = "required" })
+                        @Html.TextBoxFor(model => model.password, new { type = "password", @class = "form-control", required = "required", id = "passwordInput" })
                         <label>Password</label>
                     </div>
                     <button type="submit" class="btn">Đăng ký</button>
