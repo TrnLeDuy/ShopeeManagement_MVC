@@ -140,6 +140,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SHIPPERsController.cs" />
+    <Compile Include="Controllers\VANCHUYENsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -670,10 +672,19 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SHIPPERs\Create.cshtml" />
+    <Content Include="Views\SHIPPERs\Delete.cshtml" />
+    <Content Include="Views\SHIPPERs\Details.cshtml" />
+    <Content Include="Views\SHIPPERs\Edit.cshtml" />
+    <Content Include="Views\SHIPPERs\Index.cshtml" />
+    <Content Include="Views\VANCHUYENs\Create.cshtml" />
+    <Content Include="Views\VANCHUYENs\Delete.cshtml" />
+    <Content Include="Views\VANCHUYENs\Details.cshtml" />
+    <Content Include="Views\VANCHUYENs\Edit.cshtml" />
+    <Content Include="Views\VANCHUYENs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
