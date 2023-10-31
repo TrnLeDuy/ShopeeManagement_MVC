@@ -50,7 +50,6 @@ namespace Shopee_Management.Models
         public virtual DbSet<QUATANG> QUATANGs { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<SHIPPER> SHIPPERs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<THELOAITIN> THELOAITINs { get; set; }
         public virtual DbSet<THUONGHIEU> THUONGHIEUx { get; set; }
         public virtual DbSet<TINTUC> TINTUCs { get; set; }

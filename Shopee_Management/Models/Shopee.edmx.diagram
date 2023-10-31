@@ -28,7 +28,6 @@
         <EntityTypeShape EntityType="TMDTdbModel.QUATANG" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="TMDTdbModel.SANPHAM" Width="1.5" PointX="3" PointY="29.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TMDTdbModel.SHIPPER" Width="1.5" PointX="8.25" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TMDTdbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TMDTdbModel.THELOAITIN" Width="1.5" PointX="6" PointY="26.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TMDTdbModel.THUONGHIEU" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TMDTdbModel.TINTUC" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />

@@ -1,0 +1,136 @@
+﻿@model Shopee_Management.Models.SHIPPER
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ee4d2d;
+    }
+
+    .form-horizontal {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px 20px 40px 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        font-weight: bold;
+        white-space: nowrap;
+        width: 200px;
+        margin-right: 285px;
+    }
+
+    .form-control {
+        flex: 1;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        padding: 6px 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        float: right;
+    }
+
+    .text-danger {
+        color: #a94442;
+    }
+</style>
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+ {
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4 style="text-align: center;">SHIPPER</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_shipper)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Họ tên</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ho_ten, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ho_ten, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số điện thoại</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Địa chỉ</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dia_chi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dia_chi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Trạng thái</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.trang_thai_shipper, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.trang_thai_shipper, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Cty vận chuyển</label>
+            <div class="col-md-10">
+                @Html.DropDownList("id_cty", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_cty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+ }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

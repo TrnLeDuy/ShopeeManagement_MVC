@@ -1,0 +1,67 @@
+﻿@model Shopee_Management.Models.SHIPPER
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SHIPPER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ho_ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ho_ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sdt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sdt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dia_chi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dia_chi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trang_thai_shipper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trang_thai_shipper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTYVANCHUYEN.ten_cty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTYVANCHUYEN.ten_cty)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_shipper }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

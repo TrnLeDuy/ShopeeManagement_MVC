@@ -10,20 +10,24 @@ GO
 USE [TMDTdb]
 GO
 /* ---------- NGƯỜI DÙNG ---------- */
+
 CREATE TABLE KHACHHANG (
-	id_kh VARCHAR(255),
-	ho_ten NVARCHAR(255) NULL,
-	sdt CHAR(50) NULL,
-	email VARCHAR(255) NULL,
-	ngay_sinh DATE NULL,
-	dia_chi NVARCHAR(MAX) NULL,
-	username VARCHAR(255) UNIQUE NULL,
-	password VARCHAR(255) NULL,
-	avatar VARCHAR(255) NULL,
-	tinh_trang_kh INT NULL,
-diem_tich_luy INT DEFAULT 0,
-	PRIMARY KEY (id_kh)
+    id_kh VARCHAR(255) PRIMARY KEY,
+    ho_ten NVARCHAR(255) NULL,
+    sdt CHAR(50) NULL,
+    email VARCHAR(255) NULL,
+    ngay_sinh DATE NULL,
+    dia_chi NVARCHAR(MAX) NULL,
+    username VARCHAR(255) UNIQUE NULL,
+    [password] VARCHAR(255) NULL,
+    avatar VARCHAR(255) NULL,
+    tinh_trang_kh INT DEFAULT 1,
+    diem_tich_luy INT DEFAULT 0
 );
+
+
+
+
 
 CREATE TABLE NGUOIBANHANG (
 	id_nbh VARCHAR(255),
@@ -250,6 +254,7 @@ CREATE TABLE DONHANG_QUATANG (
     FOREIGN KEY (id_qua) REFERENCES QUATANG(id_qua)
 );
 /* ---------- QUÀ TẶNG ---------- */
+/*------------------------------------------------------------*/
  /* ---------- TIN TỨC ---------- */
 CREATE TABLE THELOAITIN (
     id_the_loai INT IDENTITY(1,1),
@@ -275,8 +280,7 @@ CREATE TABLE CHITIETTIN (
     FOREIGN KEY (id_nv) REFERENCES NHANVIEN(id_nv)
 );
 /* ---------- TIN TỨC ---------- */
-
-
+/*------------------------------------------------------------*/
 /*------------ KHU VỰC ------------*/
 
 CREATE TABLE  KHUVUC (
@@ -299,5 +303,4 @@ CREATE TABLE PHUONGXA (
 	id_quan CHAR(3),
 	FOREIGN KEY (id_quan) REFERENCES QUANHUYEN(id_quan)
 );
-
 /*------------ KHU VỰC ------------*/

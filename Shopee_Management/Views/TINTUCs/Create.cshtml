@@ -1,0 +1,68 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4 style="text-align:center;">THÊM TIN TỨC MỚI</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+           
+            <div class="col-md-10">
+                <p>TIÊU ĐỀ</p>
+                @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                <p>NỘI DUNG</p>
+                @Html.EditorFor(model => model.noi_dung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           
+            <div class="col-md-10">
+                <p>NGÀY ĐĂNG</p>
+                @Html.EditorFor(model => model.ngay_dang, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           
+            <div class="col-md-10">
+                <p>THỂ LOẠI</p>
+                @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="TẠO MỚI" class="btn btn-success" />|
+                @Html.ActionLink("TRỞ VỀ", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

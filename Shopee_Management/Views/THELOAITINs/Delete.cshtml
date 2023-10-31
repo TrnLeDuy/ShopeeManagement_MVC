@@ -1,0 +1,31 @@
+﻿@model Shopee_Management.Models.THELOAITIN
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4 style="text-align:center;">XÓA THỂ LOẠI TIN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <strong>TÊN THỂ LOẠI</strong>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten_the_loai)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="XÓA" class="btn btn-danger" /> |
+            @Html.ActionLink("TRỞ VỀ", "Index", null, new {@class="btn btn-primary"})
+        </div>
+    }
+</div>

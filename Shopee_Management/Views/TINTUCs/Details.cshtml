@@ -1,0 +1,52 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h2 style="text-align:center;">THÔNG TIN CHI TIẾT</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <strong>TIÊU ĐỀ</strong>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieu_de)
+        </dd>
+
+        <dt>
+            <strong>NỘI DUNG</strong>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.noi_dung)
+        </dd>
+
+        <dt>
+            <strong>NGÀY ĐĂNG</strong>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_dang)
+        </dd>
+
+        <dt>
+            <strong>THỂ LOẠI</strong>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.THELOAITIN.ten_the_loai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("SỬA", "Edit", new { id = Model.id_tin_tuc },new {@class="btn btn-success"}) |
+    @Html.ActionLink("XÓA", "Delete", new { id = Model.id_tin_tuc }, new { @class = "btn btn-danger" })|
+    @Html.ActionLink("TRỞ VỀ", "Index",null, new { @class = "btn btn-primary" })
+</p>

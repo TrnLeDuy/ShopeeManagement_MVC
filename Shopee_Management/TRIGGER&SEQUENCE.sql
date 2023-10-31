@@ -1,0 +1,23 @@
+CREATE SEQUENCE KHACHHANG_SEQUENCE
+    AS INT
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    NO MAXVALUE
+    CYCLE;
+
+CREATE OR ALTER TRIGGER trgInsertKHACHHANG
+ON KHACHHANG
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NewID VARCHAR(255);
+    SELECT @NewID = 'KH' + RIGHT('0000000000' + CAST((SELECT ISNULL(MAX(CAST(RIGHT(id_kh, 10) AS INT)), 0) + 1 FROM KHACHHANG) AS VARCHAR), 10);
+
+    INSERT INTO KHACHHANG (id_kh, email, username, [password])
+    SELECT 
+        CASE WHEN i.id_kh IS NULL THEN @NewID ELSE i.id_kh END,
+        i.email, i.username, i.[password]
+    FROM inserted i;
+END;
+
