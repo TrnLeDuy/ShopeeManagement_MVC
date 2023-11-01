@@ -4680,6 +4680,8 @@
     <Content Include="Views\QuanLyShipper\CapNhatShipper.cshtml" />
     <Content Include="Views\QuanLyShipper\Index.cshtml" />
     <Content Include="Views\GioHang\SanPhamGH.cshtml" />
+    <Content Include="Views\GioHang\ThanhToan.cshtml" />
+    <Content Include="Views\GioHang\HoanTatThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
