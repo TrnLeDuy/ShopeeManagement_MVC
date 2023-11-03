@@ -15,6 +15,11 @@ namespace Shopee_Management.Controllers
     {
         private TMDTdbEntities db = new TMDTdbEntities();
 
+        public ActionResult Index()
+        {
+            var khachHang = db.KHACHHANGs.Include(t => t.NGUOIBANHANGs);
+            return View(khachHang.ToList());
+        }
         public ActionResult Default()
         {
             return View();

@@ -124,6 +124,7 @@
           <Property Name="ngay_ket_thuc" Type="datetime" />
           <Property Name="id_nbh" Type="varchar" MaxLength="255" />
           <Property Name="id_nv" Type="int" />
+          <Property Name="soluong" Type="int" />
         </EntityType>
         <EntityType Name="KICHCO">
           <Key>
@@ -972,6 +973,7 @@
           <NavigationProperty Name="DONHANGs" Relationship="Self.FK__DONHANG__id_vouc__6B24EA82" FromRole="KHUYENMAI" ToRole="DONHANG" />
           <NavigationProperty Name="NGUOIBANHANG" Relationship="Self.FK__KHUYENMAI__id_nb__628FA481" FromRole="KHUYENMAI" ToRole="NGUOIBANHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__KHUYENMAI__id_nv__6383C8BA" FromRole="KHUYENMAI" ToRole="NHANVIEN" />
+          <Property Name="soluong" Type="Int32" />
         </EntityType>
         <EntityType Name="KICHCO">
           <Key>
@@ -1838,6 +1840,7 @@
           <EntitySetMapping Name="KHUYENMAIs">
             <EntityTypeMapping TypeName="TMDTdbModel.KHUYENMAI">
               <MappingFragment StoreEntitySet="KHUYENMAI">
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
                 <ScalarProperty Name="id_voucher" ColumnName="id_voucher" />
                 <ScalarProperty Name="ty_le_giam" ColumnName="ty_le_giam" />
                 <ScalarProperty Name="ngay_tao" ColumnName="ngay_tao" />

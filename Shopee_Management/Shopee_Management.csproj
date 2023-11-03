@@ -4682,6 +4682,7 @@
     <Content Include="Views\GioHang\SanPhamGH.cshtml" />
     <Content Include="Views\GioHang\ThanhToan.cshtml" />
     <Content Include="Views\GioHang\HoanTatThanhToan.cshtml" />
+    <Content Include="Views\KhachHang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
