@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <style>
     .table {
         width: 100%;
@@ -27,7 +27,7 @@
         }
 
         .table tr:nth-child(odd) {
-            background-color: #f6f88c;
+            background-color: #f0f8ff;
         }
 
 
@@ -88,7 +88,7 @@
 <h2>QUẢN LÝ SHIPPER</h2>
 
 <div class="btn-form__controls">
-    <a class="btn btn--add" href="~/SHIPPERs/Create">
+    <a class="btn btn--add" href="~/QuanLyShipper/ThemShipper">
         <i class="fa-solid fa-plus"></i>
     </a>
 </div>
@@ -117,7 +117,7 @@
     </tr>
 
     @foreach (var item in Model)
-     {
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ho_ten)
@@ -149,14 +149,14 @@
                 @Html.DisplayFor(modelItem => item.CTYVANCHUYEN.ten_cty)
             </td>
             <td>
-                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/SHIPPERs/Edit/@item.id_shipper">
+                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/QuanLyShipper/CapNhatShipper/@item.id_shipper">
                     <i class="fa-regular fa-pen-to-square"></i>
                 </a>
-                <a class="btn btn--delete" href="~/SHIPPERs/Delete/@item.id_shipper">
+                <a class="btn btn--delete" href="~/QuanLyShipper/XoaShipper/@item.id_shipper">
                     <i class="fa-solid fa-trash"></i>
                 </a>
             </td>
         </tr>
-     }
+    }
 
 </table>
