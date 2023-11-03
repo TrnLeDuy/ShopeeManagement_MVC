@@ -1,0 +1,138 @@
+﻿@model Shopee_Management.Models.SHIPPER
+
+@{
+    ViewBag.Title = "XoaShipper";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ee4d2d;
+    }
+
+    .form-horizontal {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px 20px 40px 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f0f8ff;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        font-weight: bold;
+        white-space: nowrap;
+        width: 200px;
+        margin-right: 285px;
+    }
+
+    .form-control {
+        flex: 1;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff !important;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        padding: 6px 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        float: right;
+        margin-right: -176px;
+    }
+
+    .text-danger {
+        color: #a94442;
+    }
+</style>
+
+<h2>XÓA SHIPPER</h2>
+
+<h3>Bạn có chắc muốn xóa shipper này?</h3>
+
+<div class="form-horizontal">
+    <h4 style="text-align: center;">SHIPPER</h4>
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2">Họ tên</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ho_ten, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Số điện thoại</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Email</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Địa chỉ</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.dia_chi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Trạng thái</label>
+        <div class="col-md-10">
+            @{ 
+                if (@Model.trang_thai_shipper == 0) {
+                    <input type="text" value="Tạm vắng" class="form-control" readonly="readonly">
+                }
+                if (@Model.trang_thai_shipper == 1) {
+                    <input type="text" value="Chờ đợi vận chuyển" class="form-control" readonly="readonly">
+                }
+                if (@Model.trang_thai_shipper == 2) {
+                    <input type="text" value="Đang gửi hàng" class="form-control" readonly="readonly">
+                }          
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Cty vận chuyển</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CTYVANCHUYEN.ten_cty, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+
+

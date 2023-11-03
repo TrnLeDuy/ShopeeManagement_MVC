@@ -1,0 +1,136 @@
+﻿@model Shopee_Management.Models.CHITIETSP
+
+@{
+    ViewBag.Title = "Cập nhật chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CapNhatCTSP</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_ctsp)
+
+        <div class="form-group">
+            Mã Sản Phẩm
+            <div class="col-md-10">
+                @Html.DropDownList("id_sp", ViewBag.ChiTietSPSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_sp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã người bán hàng
+            <div class="col-md-10">
+                @Html.DropDownList("id_nbh", ViewBag.NBHSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nbh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã kích cỡ
+            <div class="col-md-10">
+                @Html.DropDownList("id_size", ViewBag.SizeSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã màu
+            <div class="col-md-10">
+                @Html.DropDownList("id_color", ViewBag.ColorSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã thương hiệu
+            <div class="col-md-10">
+                @Html.DropDownList("id_brand", ViewBag.BrandSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã xuất xứ
+            <div class="col-md-10">
+                @Html.DropDownList("id_member", ViewBag.MemberSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_member, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã ngành hàng
+            <div class="col-md-10">
+                @Html.DropDownList("id_nganhhang", ViewBag.NganhHangSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nganhhang, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã ngành hàng con
+            <div class="col-md-10">
+                @Html.DropDownList("id_nhcon", ViewBag.NganhHangConSelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nhcon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Mã ngành hàng cấp 3
+            <div class="col-md-10">
+                @Html.DropDownList("id_nhc3", ViewBag.NganhHangC3SelectList as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_nhc3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Số lượng
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.so_luong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.so_luong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Delete" id="delete-product" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $("#delete-product").click(function () {
+            var productId = @Model.id_ctsp; // Get the product ID from the model
+
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this product?")) {
+                // If the user confirms, send an AJAX request to delete the product
+                $.ajax({
+                    url: '/QuanLySanPham/XoaCTSP/' + productId,
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.success) {
+                            alert("Product deleted successfully.");
+                            window.location.href = '/QuanLySanPham/Index';
+                        } else {
+                            alert("Failed to delete the product.");
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred while trying to delete the product.");
+                    }
+                });
+            }
+        });
+    });
+</script>
+

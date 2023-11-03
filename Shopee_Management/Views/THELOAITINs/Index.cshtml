@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Shopee_Management.Models.THELOAITIN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;">THỂ LOẠI TIN TỨC</h2>
+
+<p style="margin:14px;">
+    @Html.ActionLink("TẠO MỚI", "Create",null,new {@class="btn btn-success"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <strong>THỂ LOẠI</strong>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ten_the_loai)
+        </td>
+        <td>
+            @Html.ActionLink("SỬA", "Edit", new { id=item.id_the_loai }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("CHI TIẾT", "Details", new { id=item.id_the_loai }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("XÓA", "Delete", new { id=item.id_the_loai }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
