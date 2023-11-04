@@ -38,10 +38,19 @@ namespace Shopee_Management.Controllers
 
         // GET: KHUYENMAIs/Create
         public ActionResult Create()
+
         {
-            ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang");
-            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten");
-            return View();
+            using (TMDTdbEntities entities1 = new TMDTdbEntities())
+            {
+                var nbhList = entities1.NGUOIBANHANGs.ToList();
+                SelectList nbhSelectList = new SelectList(nbhList, "id_nbh", "ten_cua_hang");
+                var nvList = entities1.NHANVIENs.ToList();
+                SelectList nvSelectList = new SelectList(nbhList, "id_nv", "ho_ten");
+                ViewBag.NBHSelectList = nbhSelectList;
+                ViewBag.NVSelectList = nvSelectList;
+                return View();
+            }
+                
         }
 
         // POST: KHUYENMAIs/Create
@@ -132,5 +141,12 @@ namespace Shopee_Management.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Text()
+        {
+            ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang");
+            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten");
+            return View();
+        }
     }
+    
 }

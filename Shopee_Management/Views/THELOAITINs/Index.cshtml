@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center;">THỂ LOẠI TIN TỨC</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p style="margin:14px;">
+    @Html.ActionLink("TẠO MỚI", "Create",null,new {@class="btn btn-success"})
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ten_the_loai)
+            <strong>THỂ LOẠI</strong>
         </th>
         <th></th>
     </tr>
@@ -24,9 +24,9 @@
             @Html.DisplayFor(modelItem => item.ten_the_loai)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_the_loai }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_the_loai }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_the_loai })
+            @Html.ActionLink("SỬA", "Edit", new { id=item.id_the_loai }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("CHI TIẾT", "Details", new { id=item.id_the_loai }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("XÓA", "Delete", new { id=item.id_the_loai }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

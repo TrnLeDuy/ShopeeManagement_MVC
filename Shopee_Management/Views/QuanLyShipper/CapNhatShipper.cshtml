@@ -1,7 +1,7 @@
 ﻿@model Shopee_Management.Models.SHIPPER
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "CapNhatShipper";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -17,6 +17,7 @@
         padding: 20px 20px 40px 20px;
         border: 1px solid #ddd;
         border-radius: 5px;
+        background-color: #f0f8ff;
     }
 
     .form-group {
@@ -62,13 +63,13 @@
     }
 </style>
 
-<h2>Edit</h2>
+<h2>CẬP NHẬT SHIPPER</h2>
 
 
 @using (Html.BeginForm())
- {
+{
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4 style="text-align: center;">SHIPPER</h4>
         <hr />
@@ -110,7 +111,12 @@
         <div class="form-group">
             <label class="control-label col-md-2">Trạng thái</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.trang_thai_shipper, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.trang_thai_shipper, new SelectList(new[]
+                {
+                    new { Value = "0", Text = "Tạm vắng" },
+                    new { Value = "1", Text = "Chờ đợi vận chuyển" },
+                    new { Value = "2", Text = "Đang gửi hàng" }
+                }, "Value", "Text"), "Chọn trạng thái", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.trang_thai_shipper, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -129,7 +135,7 @@
             </div>
         </div>
     </div>
- }
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
