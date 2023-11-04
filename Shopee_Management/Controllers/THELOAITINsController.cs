@@ -12,7 +12,7 @@ namespace Shopee_Management.Controllers
 {
     public class THELOAITINsController : Controller
     {
-        private TMDTdbEntities1 db = new TMDTdbEntities1();
+        private TMDTdbEntities db = new TMDTdbEntities();
 
         // GET: THELOAITINs
         public ActionResult Index()

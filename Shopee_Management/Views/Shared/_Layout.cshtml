@@ -181,7 +181,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="/Dashboard/Dashboard">
-                    <img src="~/CoolAdmin-master/images/icon/logo-stk.png" alt="Cool" />
+                    <img src="~/Images/Shopee.png" alt="Cool" />
 
                 </a>
 
@@ -189,17 +189,41 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="/Dashboard/Dashboard">
+                        @*<li class="active has-sub">
+                            <a class="js-arrow" href="">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
+                        </li>*@
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-database" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/KhachHang/Index">Danh mục Khách hàng</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-database" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/QuanLySanPham/Index">Danh mục sản phẩm</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-archive" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/QuanLyShipper/Index">Quản lí Shipper</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/DONHANGs/Index">Quản lí Đơn hàng</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/TINTUCs/Index">Tin Tức</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/KHUYENMAIs/Index">Voucher Khuyến mãi</a>
                         </li>
                         @*Sau khi xong chức năng sẽ xóa*@
                         @*<li class="d-flex align-content-center ">
-                                <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
-                            </li>*@
-                        @if (Session["Role"] != null && Session["Role"].ToString() == "quan_tri_vien")
+                            <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
+                        </li>*@
+                        @*@if (Session["Role"] != null && Session["Role"].ToString() == "quan_tri_vien")
                         {
                             <li class="d-flex align-content-center ">
                                 <i class="fas fa-user" style="padding: 20px 0"></i>
@@ -264,7 +288,7 @@
                                 <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
                                 <a class="w-100 ml-3" href="/HoaDon/Index">Quản lí Hóa đơn</a>
                             </li>
-                        }
+                        }*@
                     </ul>
                 </nav>
             </div>

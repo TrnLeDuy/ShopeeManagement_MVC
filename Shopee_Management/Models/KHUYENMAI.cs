@@ -27,6 +27,7 @@ namespace Shopee_Management.Models
         public Nullable<System.DateTime> ngay_ket_thuc { get; set; }
         public string id_nbh { get; set; }
         public Nullable<int> id_nv { get; set; }
+        public Nullable<int> soluong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DONHANG> DONHANGs { get; set; }

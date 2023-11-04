@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Shopee_Management.Models.DONHANG>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>Quản Lý Đơn Hàng</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ngày Đặt
+        </th>
+        <th>
+            Trạng Thái
+        </th>
+        <th>
+            Tình Trạng Thanh Toán
+        </th>
+        <th>
+            Tổng Cộng
+        </th>
+        <th>
+            Thành Tiền
+        </th>
+        <th>
+            Họ Tên
+        </th>
+        <th>
+            Tên Cửa Hàng
+        </th>
+        <th>
+            PTTT
+        </th>
+        <th>
+            Mã NBH
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_dat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.trang_thai_dh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tt_thanh_toan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tong_cong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thanh_tien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG.ho_ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGUOIBANHANG.ten_cua_hang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PTTT.ten_pttt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHUYENMAI.id_nbh)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Cập nhật", "Edit", new { id = item.id_don }) |
+                @Html.ActionLink("Chi Tiết", "Details", new { id = item.id_don }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.id_don })
+            </td>
+        </tr>
+    }
+
+</table>

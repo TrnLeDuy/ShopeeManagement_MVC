@@ -1,0 +1,157 @@
+﻿@model List<Shopee_Management.Models.shoppingCart.CartItemViewModel>
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_ShopeeLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    h3.title {
+        text-align: center;
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #f2f2f2;
+    }
+
+    h3 span {
+        background-color: #f16767;
+        padding: 10px;
+    }
+
+    .title i {
+        margin-right: 10px;
+    }
+
+    /* Style for table */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    thead {
+        background-color: #f2f2f2;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Style for form */
+    form {
+        margin: 20px 0;
+    }
+
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    /* Style for button */
+    #button-container {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        margin: 0 0 0 110rem;
+    }
+
+        #button-container:hover {
+            background-color: #3e8e41;
+        }
+
+    .button-container {
+        text-align: right;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #333;
+        text-align: center;
+    }
+
+    div .method {
+        text-align: center;
+        font-size: 16px;
+    }
+</style>
+
+<h3 class="title">
+    <span><i class="fa fa-shopping-cart"></i>Thông tin đơn hàng</span>
+</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName - (@item.ProductSize)</td>
+                <td><img src="~/images/@item.ProductImg" alt="@item.ProductName" style="width: 100px; height: 100px;" /></td>
+                <td>@item.Price.ToString("c")</td>
+                <td>@item.Quantity</td>
+                <td>@item.Subtotal.ToString("c")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" align="right">Tổng cộng:</td>
+            <td>@Model.Sum(item => item.Subtotal).ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<h3 class="title">
+    <span><i class="fa fa-id-card-o"></i>Thông tin giao hàng</span>
+</h3>
+<p>Tên khách hàng: @ViewBag.TenKH</p>
+<p>Số điện thoại: @ViewBag.PhoneNumber</p>
+<p>Địa chỉ giao hàng: @ViewBag.Address</p>
+<h3 class="title">
+    <span><i class="fa fa-credit-card"></i>Phương thức thanh toán</span>
+</h3>
+<form action="~/Cart/XacNhanDonDat" method="get">
+    <div class="method">
+        <label>
+            <input type="radio" name="paymentMethod" value="thanh toán khi nhận hàng" checked>
+            <i class="fa fa-truck"></i>
+            Thanh toán khi nhận hàng
+        </label><br />
+        <label style="margin-right:155px;">
+            <input type="radio" name="paymentMethod" value="paypal">
+            <i class="fa fa-cc-paypal"></i>
+            Paypal
+        </label>
+    </div>
+    <div>
+        <input id="button-container" type="submit" value="Xác nhận">
+    </div>
+</form>
+
+
+
+

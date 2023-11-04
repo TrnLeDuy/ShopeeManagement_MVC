@@ -13,7 +13,7 @@ namespace Shopee_Management.Controllers
 {
     public class TINTUCsController : Controller
     {
-        private TMDTdbEntities1 db = new TMDTdbEntities1();
+        private TMDTdbEntities db = new TMDTdbEntities();
 
         // GET: TINTUCs
         public ActionResult Index()
