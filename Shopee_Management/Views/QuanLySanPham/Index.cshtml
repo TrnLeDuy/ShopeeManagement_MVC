@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var sanPhamList = (List<Shopee_Management.Models.SANPHAM>)ViewBag.SanPhamList;
+    var nbhList = (List<Shopee_Management.Models.NGUOIBANHANG>)ViewBag.NBHList;
+    var sizeList = (List<Shopee_Management.Models.KICHCO>)ViewBag.SizeList;
+    var colorList = (List<Shopee_Management.Models.BANGMAU>)ViewBag.ColorList;
+    var brandList = (List<Shopee_Management.Models.THUONGHIEU>)ViewBag.BrandList;
+    var memberList = (List<Shopee_Management.Models.XUATXU>)ViewBag.MemberList;
+    var nganhhangList = (List<Shopee_Management.Models.NGANHHANG>)ViewBag.NganhHangList;
+    var nhconList = (List<Shopee_Management.Models.NGANHHANGCON>)ViewBag.NganhHangConList;
+    var nhc3List = (List<Shopee_Management.Models.NGANHHANGCAP3>)ViewBag.NganhHangC3List;
     var modelData = Model;
 }
 <head>
@@ -13,67 +21,6 @@
 
 <div class="section__content section__content--p30">
     <div class="container-fluid">
-        <div class="ManagerInfo" style="margin-bottom:25px;">
-            <table>
-                <tr>
-                    <td colspan="14"></td>
-                    <td class="control" colspan="3">
-                        <a style="width:100%" href=""></a>
-                    </td>
-                    <td class="control">
-                        <a href="~/QuanLySanPham/ThemCTSP">Thêm Chi Tiết Sản Phẩm</a>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="table-responsive table--no-card m-b-30">
-                    <table class="table table-borderless table-striped table-earning">
-                        <thead>
-                            <tr>
-                                <th>Mã chi tiết</th>
-                                <th>Mã sản phẩm</th>
-                                <th>Mã nhà bán hàng</th>
-                                <th>Mã kích cỡ</th>
-                                <th>Mã màu</th>
-                                <th>Mã thương hiệu</th>
-                                <th>Mã xuất xứ</th>
-                                <th>Mã ngành hàng</th>
-                                <th>Mã ngành hàng con</th>
-                                <th>Mã ngành hàng cấp 3</th>
-                                <th>Số lượng</th>
-                                <th>Cập nhật</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.ChiTietSPList)
-                            {
-                                <tr>
-                                    <td>@item.id_ctsp</td>
-                                    <td>@item.id_sp</td>
-                                    <td>@item.id_nbh</td>
-                                    <td>@item.id_size</td>
-                                    <td>@item.id_color</td>
-                                    <td>@item.id_brand</td>
-                                    <td>@item.id_member</td>
-                                    <td>@item.id_nganhhang</td>
-                                    <td>@item.id_nhcon</td>
-                                    <td>@item.id_nhc3</td>
-                                    <td>@item.so_luong</td>
-                                    <td>
-                                        <button class="edit-product-detail" data-id="@item.id_ctsp">Edit</button>
-                                    </td>
-                                    
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
         <div class="ManagerInfo">
             <table>
                 <tr>
@@ -88,6 +35,8 @@
                 </tr>
             </table>
         </div>
+        <input type="text" id="categorySearch" placeholder="Tìm kiếm...">
+        <button id="searchButton">Search</button>
         <div class="row m-t-30">
             <div class="col-md-12">
                 <!-- DATA TABLE-->
@@ -111,10 +60,14 @@
                                     <td>
                                         <button class="edit-product" data-id="@item.id_sp">Edit</button>
                                     </td>
+                                    <td> <button class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                </div>
+                <div id="productList">
+                    a
                 </div>
                 <!-- END DATA TABLE-->
             </div>
@@ -133,8 +86,27 @@
         var productId = $(this).data("id");
         window.location.href = '/QuanLySanPham/CapNhatSP/' + productId;
     });
+    $(".detail-product").click(function () {
+        var productId = $(this).data("id");
+        window.location.href = '/QuanLySanPham/XemChiTietSanPham/' + productId;
+    });
     $(".edit-product-detail").click(function () {
         var productId = $(this).data("id");
         window.location.href = '/QuanLySanPham/CapNhatCTSP/' + productId;
     });
+    
+        $('#searchButton').click(function () {
+            var category = $('#categorySearch').val();
+            // Send an AJAX request to search for products
+            $.ajax({
+                url: '/QuanLySanPham/SearchByCategory',
+                method: 'POST',
+                data: { category: category },
+                success: function (data) {
+                    // Update the product list with the search results
+                    $('#productList').html(data);
+                }
+            });
+        });
+    
 </script>

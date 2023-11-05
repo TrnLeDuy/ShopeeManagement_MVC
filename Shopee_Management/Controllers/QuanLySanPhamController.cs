@@ -16,17 +16,60 @@ namespace Shopee_Management.Controllers
         {
             using (TMDTdbEntities entities1 = new TMDTdbEntities())
             {
-                // Truy vấn danh sách sản phẩm từ cơ sở dữ liệu
                 var sanPhamList = entities1.SANPHAMs.ToList();
-
-                // Truy vấn danh sách chi tiết sản phẩm từ cơ sở dữ liệu
                 var chiTietSPList = entities1.CHITIETSPs.ToList();
-
-                // Truyền danh sách sản phẩm và danh sách chi tiết sản phẩm vào View
+                var nbhList = entities1.NGUOIBANHANGs.ToList();
+                var sizeList = entities1.KICHCOes.ToList();
+                var colorList = entities1.BANGMAUs.ToList();
+                var brandList = entities1.THUONGHIEUx.ToList();
+                var memberList = entities1.XUATXUs.ToList();
+                var nganhhangList = entities1.NGANHHANGs.ToList();
+                var nhconList = entities1.NGANHHANGCONs.ToList();
+                var nhc3List = entities1.NGANHHANGCAP3.ToList();
+                var soluongList = entities1.BANGMAUs.ToList();
                 ViewBag.SanPhamList = sanPhamList;
                 ViewBag.ChiTietSPList = chiTietSPList;
-
+                ViewBag.NBHList = nbhList;
+                ViewBag.SizeList = sizeList;
+                ViewBag.ColorList = colorList;
+                ViewBag.BrandList = brandList;
+                ViewBag.MemberList = memberList;
+                ViewBag.NganhHangList = nganhhangList;
+                ViewBag.NganhHangConList = nhconList;
+                ViewBag.NganhHangC3List = nhc3List;
                 return View();
+            }
+        }
+        public ActionResult XemChiTietSanPham (int id)
+        {
+
+
+            using (TMDTdbEntities entities1 = new TMDTdbEntities())
+            {
+                var chiTietSPList = entities1.CHITIETSPs.Where(p => p.id_sp == id).ToList();
+                var sanPhamList = entities1.SANPHAMs.ToList();
+                    var nbhList = entities1.NGUOIBANHANGs.ToList();
+                    var sizeList = entities1.KICHCOes.ToList();
+                    var colorList = entities1.BANGMAUs.ToList();
+                    var brandList = entities1.THUONGHIEUx.ToList();
+                    var memberList = entities1.XUATXUs.ToList();
+                    var nganhhangList = entities1.NGANHHANGs.ToList();
+                    var nhconList = entities1.NGANHHANGCONs.ToList();
+                    var nhc3List = entities1.NGANHHANGCAP3.ToList();
+                    var soluongList = entities1.BANGMAUs.ToList();
+                    ViewBag.SanPhamList = sanPhamList;
+                    ViewBag.ChiTietSPList = chiTietSPList;
+                    ViewBag.NBHList = nbhList;
+                    ViewBag.SizeList = sizeList;
+                    ViewBag.ColorList = colorList;
+                    ViewBag.BrandList = brandList;
+                    ViewBag.MemberList = memberList;
+                    ViewBag.NganhHangList = nganhhangList;
+                    ViewBag.NganhHangConList = nhconList;
+                    ViewBag.NganhHangC3List = nhc3List;
+                    return View();
+                
+                
             }
         }
         [HttpGet]
@@ -316,6 +359,34 @@ namespace Shopee_Management.Controllers
             }
 
             return Json(new { success = false });
+        }
+        [HttpPost]
+        public ActionResult SearchByCategory(string category)
+        {
+            try
+            {
+                using (TMDTdbEntities entities1 = new TMDTdbEntities())
+                {
+                    var productIds = entities1.NGANHHANGs
+                        .Where(c => c.ten_nganhhang == category)
+                        .SelectMany(c => c.CHITIETSPs)
+                        .Select(c => c.id_sp)
+                        .ToList();
+
+                    var products = entities1.SANPHAMs
+                        .Where(p => productIds.Contains(p.id_sp))
+                        .ToList();
+
+                    return PartialView("_ProductListPartial", products);
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
+            
         }
     }
 }

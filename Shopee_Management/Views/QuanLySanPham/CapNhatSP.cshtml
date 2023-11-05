@@ -1,7 +1,7 @@
 ﻿@model Shopee_Management.Models.SANPHAM
 
 <!-- Your edit form here -->
-@using (Html.BeginForm("Cập nhật sản phẩm", "QuanLySanPham", FormMethod.Post))
+@using (Html.BeginForm("CapNhatProduct", "QuanLySanPham", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,12 +15,17 @@
     <div class="form-group">
         Giá :
         @Html.EditorFor(model => model.gia_sp)
-        
 
-        <input type="submit" value="Save" />
 
-        <input type="button" value="Delete" id="delete-product" />
-</div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Delete" id="delete-product" />
+            </div>
+        </div>
+    </div>
 }
 <script>
     $(document).ready(function () {
