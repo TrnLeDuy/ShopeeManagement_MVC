@@ -5,63 +5,183 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+    }
 
-<div>
-    <h4>KHUYENMAI</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ty_le_giam)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ty_le_giam)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ngay_tao)
-        </dt>
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ngay_tao)
-        </dd>
+    .table tr th {
+        color: #fff;
+        text-align: center;
+        background-color: #ee4d2d;
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ngay_bat_dau)
-        </dt>
+    .form-horizontal {
+        margin-top: 50px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ngay_bat_dau)
-        </dd>
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ngay_ket_thuc)
-        </dt>
+    label.control-label {
+        font-weight: bold;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ngay_ket_thuc)
-        </dd>
+    .col-md-6 {
+        width: 50%;
+        color: #333;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
-        </dt>
+    .col-md-10 {
+        width: 85%;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.NGUOIBANHANG.ten_cua_hang)
-        </dd>
+    .form-control {
+        width: 120%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NHANVIEN.ho_ten)
-        </dt>
+    .btn-default {
+        background-color: #ee4d2d;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.NHANVIEN.ho_ten)
-        </dd>
+        .btn-default:hover {
+            background-color: #0056b3;
+        }
 
-    </dl>
+    .text-danger {
+        color: #ff0000;
+    }
+    h2 {
+        color: #ee4d2d;
+        font-size: 24px;
+    }
+
+    h4 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .action-links {
+        margin-top: 20px;
+    }
+
+        .action-links   {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+            .action-links a:hover {
+                text-decoration: underline;
+            }
+    .form-actions {
+        margin-top: 20px;
+    }
+
+        .form-actions .btn {
+            margin-right: 10px;
+        }
+
+</style>
+
+
+<h2>Chi Tiết</h2>
+<div class="details-container">
+    <div>
+        <table class="table">
+            <tr><th>KHUYẾN MÃI</th></tr>
+
+        </table>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                <label>Tỷ lệ giảm</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ty_le_giam)
+            </dd>
+
+            <dt>
+                <label>Ngày tạo</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_tao)
+            </dd>
+
+            <dt>
+                <label>Ngày bắt đầu</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_bat_dau)
+            </dd>
+
+            <dt>
+                <label>Ngày kết thúc</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_ket_thuc)
+            </dd>
+
+            <dt>
+                <label>Số lượng</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.soluong)
+            </dd>
+
+            <dt>
+                <label>Tên cửa hàng</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NGUOIBANHANG.ten_cua_hang)
+            </dd>
+
+            <dt>
+                <label>Nhân viên</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NHANVIEN.ho_ten)
+            </dd>
+        </dl>
+    </div>
+    <div class="action-links">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_voucher }, new { @class = "btn btn-sm btn-primary" }) |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_voucher }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

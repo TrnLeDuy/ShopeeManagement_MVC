@@ -31,6 +31,7 @@ namespace Shopee_Management.Models
         public Nullable<int> id_nhcon { get; set; }
         public Nullable<int> id_nhc3 { get; set; }
         public Nullable<int> so_luong { get; set; }
+        public string hinh_sp { get; set; }
     
         public virtual BANGMAU BANGMAU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
