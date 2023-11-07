@@ -361,32 +361,54 @@ namespace Shopee_Management.Controllers
             return Json(new { success = false });
         }
         [HttpPost]
+        public List<SANPHAM> Search (string key)
+        {
+            TMDTdbEntities entity = new TMDTdbEntities();
+            return entity.SANPHAMs.SqlQuery("Select * FROM SANPHAM JOIN CHITIETSP ON SANPHAM.id_sp = CHITIETSP.id_sp JOIN NGANHHANG ON CHITIETSP.id_nganhhang = NGANHHANG.id_nganhhang WHERE NGANHHANG.ten_nganhhang like N'%" + key+"%'").ToList();
+        }
+
+        [HttpPost]
         public ActionResult SearchByCategory(string category)
         {
-            try
+            using (TMDTdbEntities entities1 = new TMDTdbEntities())
             {
-                using (TMDTdbEntities entities1 = new TMDTdbEntities())
-                {
-                    var productIds = entities1.NGANHHANGs
-                        .Where(c => c.ten_nganhhang == category)
-                        .SelectMany(c => c.CHITIETSPs)
-                        .Select(c => c.id_sp)
-                        .ToList();
+                //var productIds = entities1.NGANHHANGs
+                //    .Where(c => c.ten_nganhhang == category)
+                //    .SelectMany(c => c.CHITIETSPs)
+                //    .Select(c => c.id_sp)
+                //    .ToList();
 
-                    var products = entities1.SANPHAMs
-                        .Where(p => productIds.Contains(p.id_sp))
-                        .ToList();
+                var products = entities1.SANPHAMs
+                    .Where(c => c.ten_sp == category)
+                    .ToList();
 
-                    return PartialView("_ProductListPartial", products);
-                }
-
-               
+                return PartialView("_ProductListPartial", products);
             }
-            catch (Exception ex)
-            {
-                return Json(new { error = ex.Message });
-            }
-            
+
+            //try
+            //{
+            //    using (TMDTdbEntities entities1 = new TMDTdbEntities())
+            //    {
+            //        var productIds = entities1.NGANHHANGs
+            //            .Where(c => c.ten_nganhhang == category)
+            //            .SelectMany(c => c.CHITIETSPs)
+            //            .Select(c => c.id_sp)
+            //            .ToList();
+
+            //        var products = entities1.SANPHAMs
+            //            .Where(p => productIds.Contains(p.id_sp))
+            //            .ToList();
+
+            //        return PartialView("_ProductListPartial", products);
+            //    }
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Json(new { error = ex.Message });
+            //}
+
         }
     }
 }
