@@ -372,11 +372,6 @@ namespace Shopee_Management.Controllers
         {
             using (TMDTdbEntities entities1 = new TMDTdbEntities())
             {
-                //var productIds = entities1.NGANHHANGs
-                //    .Where(c => c.ten_nganhhang == category)
-                //    .SelectMany(c => c.CHITIETSPs)
-                //    .Select(c => c.id_sp)
-                //    .ToList();
 
                 var products = entities1.SANPHAMs
                     .Where(c => c.ten_sp == category)
@@ -384,31 +379,33 @@ namespace Shopee_Management.Controllers
 
                 return PartialView("_ProductListPartial", products);
             }
+        }
+        public ActionResult SanPhamCuaToi(string id)
+        {
+            using (TMDTdbEntities entities1 = new TMDTdbEntities())
+            {
+                // Get the NGUOIBANHANG with the given id
+                var nguoiBanHang = entities1.NGUOIBANHANGs.FirstOrDefault(nbh => nbh.id_nbh == id);
 
-            //try
-            //{
-            //    using (TMDTdbEntities entities1 = new TMDTdbEntities())
-            //    {
-            //        var productIds = entities1.NGANHHANGs
-            //            .Where(c => c.ten_nganhhang == category)
-            //            .SelectMany(c => c.CHITIETSPs)
-            //            .Select(c => c.id_sp)
-            //            .ToList();
+                if (nguoiBanHang != null)
+                {
+                    // Get the SANPHAM and CHITIETSP associated with the NGUOIBANHANG
+                    var sanPhamList = entities1.SANPHAMs
+                        .Where(sp => sp.CHITIETSPs.Any(ct => ct.id_nbh == nguoiBanHang.id_nbh))
+                        .ToList();
 
-            //        var products = entities1.SANPHAMs
-            //            .Where(p => productIds.Contains(p.id_sp))
-            //            .ToList();
+                    ViewBag.SanPhamList = sanPhamList;
+                    ViewBag.NguoiBanHang = nguoiBanHang;
 
-            //        return PartialView("_ProductListPartial", products);
-            //    }
-
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Json(new { error = ex.Message });
-            //}
-
+                    return View();
+                }
+                else
+                {
+                    // Handle if NGUOIBANHANG with the given id is not found
+                    return HttpNotFound();
+                }
+            }
         }
     }
 }
+
