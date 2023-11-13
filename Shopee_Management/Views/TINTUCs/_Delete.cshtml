@@ -1,0 +1,18 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">XÓA TIN TỨC</h4>
+</div>
+<div class="modal-body">
+    <p>Bạn có chắc chắn muốn xóa tin tức này?</p>
+    @using (Html.BeginForm("DeleteConfirmed", "TINTUCs", FormMethod.Post, new { id = "deleteForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.id_tin_tuc)
+        <input type="submit" value="Xác nhận" class="btn btn-danger" />
+    }
+</div>
+

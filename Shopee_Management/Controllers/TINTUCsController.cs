@@ -24,30 +24,35 @@ namespace Shopee_Management.Controllers
 
         // GET: TINTUCs/Details/5
 
-        public ActionResult Details(int? id)
+        /*        public ActionResult Details(int? id)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    TINTUC tINTUC = db.TINTUCs.Find(id);
+                    if (tINTUC == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tINTUC);
+                }*/
+
+        //--------------------------------------------
+        [HttpGet]
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TINTUC tINTUC = db.TINTUCs.Find(id);
+            TINTUC tINTUC = db.TINTUCs.Find(id); // Lấy dữ liệu tin tức từ cơ sở dữ liệu dựa trên id.
             if (tINTUC == null)
             {
-                return HttpNotFound();
+                return HttpNotFound(); // Hoặc trả về một trang lỗi 404 nếu không tìm thấy tin tức.
             }
-            return View(tINTUC);
+            return PartialView("_Details", tINTUC); // Trả về một PartialView cho nội dung chi tiết.
         }
-
-        //--------------------------------------------
-        /*       public ActionResult Details(int id)
-               {
-                   var tintuc = db.TINTUCs.Find(id); // Lấy dữ liệu tin tức từ cơ sở dữ liệu dựa trên id.
-                   if (tintuc == null)
-                   {
-                       return HttpNotFound(); // Hoặc trả về một trang lỗi 404 nếu không tìm thấy tin tức.
-                   }
-                   return PartialView("_DetailsPartial", tintuc); // Trả về một PartialView cho nội dung chi tiết.
-               }*/
 
 
 
@@ -78,67 +83,107 @@ namespace Shopee_Management.Controllers
         }
 
         // GET: TINTUCs/Edit/5
-        public ActionResult Edit(int? id)
+        /*       public ActionResult Edit(int? id)
+               {
+                   if (id == null)
+                   {
+                       return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                   }
+                   TINTUC tINTUC = db.TINTUCs.Find(id);
+                   if (tINTUC == null)
+                   {
+                       return HttpNotFound();
+                   }
+                   ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
+                   return View(tINTUC);
+               }*/
+
+        /*   // POST: TINTUCs/Edit/5
+           // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+           // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+           [HttpPost]
+           [ValidateAntiForgeryToken]
+           public ActionResult Edit([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai")] TINTUC tINTUC)
+           {
+               if (ModelState.IsValid)
+               {
+                   db.Entry(tINTUC).State = EntityState.Modified;
+                   db.SaveChanges();
+                   return RedirectToAction("Index");
+               }
+               ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
+               return View(tINTUC);
+           }*/
+        //-----------------------------------------------------------------------------------------------
+
+        /*   public ActionResult Edit(int? id)
+           {
+               if (id == null)
+               {
+                   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               }
+               TINTUC tintuc = db.TINTUCs.Find(id);
+               if (tintuc == null)
+               {
+                   return HttpNotFound();
+               }
+               return PartialView("_Edit", tintuc);
+           }*/
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TINTUC tINTUC = db.TINTUCs.Find(id);
-            if (tINTUC == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
-            return View(tINTUC);
+            // Lấy dữ liệu cần thiết, bao gồm danh sách thể loại
+            var model = db.TINTUCs.Find(id); // Thay thế db.TINTUCs bằng context của bạn
+            var theLoaiList = db.THELOAITINs.ToList(); // Thay thế db.THELOAITINs bằng context của bạn
+
+            // Chuyển danh sách thể loại vào ViewBag
+            ViewBag.TheloaiList = new SelectList(theLoaiList, "Id", "TenTheLoai");
+
+            return PartialView("_Edit", model);
         }
-
-        /* public ActionResult Edit(int id)
-         {
-             var tinTuc = db.TINTUCs.Find(id);
-             if (tinTuc == null)
-             {
-                 return HttpNotFound();
-             }
-             if (Request.IsAjaxRequest())
-             {
-                 return PartialView("_EditPartial", tinTuc);
-             }
-             return View(tinTuc);
-         }
-         public ActionResult Delete(int id)
-         {
-             var tinTuc = db.TINTUCs.Find(id);
-             if (tinTuc == null)
-             {
-                 return HttpNotFound();
-             }
-             if (Request.IsAjaxRequest())
-             {
-                 return PartialView("_DeletePartial", tinTuc);
-             }
-             return View(tinTuc);
-         }*/
-
 
 
         // POST: TINTUCs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai")] TINTUC tINTUC)
+        public ActionResult Edit([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_the_loai")] TINTUC tintuc)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tINTUC).State = EntityState.Modified;
+                db.Entry(tintuc).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_theloai = new SelectList(db.THELOAITINs, "id_the_loai", "ten_the_loai", tINTUC.id_theloai);
-            return View(tINTUC);
+            return PartialView("_Edit", tintuc);
         }
 
+
+
+        /*   // GET: TINTUCs/Delete/5
+           public ActionResult Delete(int? id)
+           {
+               if (id == null)
+               {
+                   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               }
+               TINTUC tINTUC = db.TINTUCs.Find(id);
+               if (tINTUC == null)
+               {
+                   return HttpNotFound();
+               }
+               return View(tINTUC);
+           }
+
+           // POST: TINTUCs/Delete/5
+           [HttpPost, ActionName("Delete")]
+           [ValidateAntiForgeryToken]
+           public ActionResult DeleteConfirmed(int id)
+           {
+               TINTUC tINTUC = db.TINTUCs.Find(id);
+               db.TINTUCs.Remove(tINTUC);
+               db.SaveChanges();
+               return RedirectToAction("Index");
+           }*/
+        //---------------------------------------------------------------------------------
         // GET: TINTUCs/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -146,12 +191,12 @@ namespace Shopee_Management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TINTUC tINTUC = db.TINTUCs.Find(id);
-            if (tINTUC == null)
+            TINTUC tintuc = db.TINTUCs.Find(id);
+            if (tintuc == null)
             {
                 return HttpNotFound();
             }
-            return View(tINTUC);
+            return PartialView("_Delete", tintuc);
         }
 
         // POST: TINTUCs/Delete/5
@@ -159,11 +204,14 @@ namespace Shopee_Management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TINTUC tINTUC = db.TINTUCs.Find(id);
-            db.TINTUCs.Remove(tINTUC);
+            TINTUC tintuc = db.TINTUCs.Find(id);
+            db.TINTUCs.Remove(tintuc);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
@@ -175,3 +223,5 @@ namespace Shopee_Management.Controllers
         }
     }
 }
+
+
