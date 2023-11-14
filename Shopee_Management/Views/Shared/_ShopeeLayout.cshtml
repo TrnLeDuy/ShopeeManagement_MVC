@@ -114,7 +114,14 @@
                         @if (Session["KhachHang"] != null)
                         {
                             <li class="header__navbar-item header__navbar-user">
-                                <img src="~/CustomerAvatar/@Session["Avatar"]" alt="" class="header__navbar-user-img">
+                                @if (Session["Avatar"] == null)
+                                {
+                                    <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" class="header__navbar-user-img"/>
+                                }
+                                else
+                                {
+                                    <img src="~/CustomerAvatar/@Session["Avatar"]" alt="" class="header__navbar-user-img">
+                                }
                                 <span class="header__navbar-user-name">@Session["HoTen"]</span>
 
                                 <ul class="header__navbar-user-menu">
