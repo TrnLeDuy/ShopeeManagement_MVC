@@ -150,8 +150,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DONHANGsController.cs" />
-    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\QuanLyShipperController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
@@ -5978,19 +5976,11 @@
     <Content Include="Views\Shared\_ShopeeLayout.cshtml" />
     <Content Include="Views\KhachHang\ChiTietKhachHang.cshtml" />
     <Content Include="Views\Shared\_KenhBanHangLayout.cshtml" />
-    <Content Include="Views\DONHANGs\Create.cshtml" />
-    <Content Include="Views\DONHANGs\Delete.cshtml" />
-    <Content Include="Views\DONHANGs\Details.cshtml" />
-    <Content Include="Views\DONHANGs\Edit.cshtml" />
-    <Content Include="Views\DONHANGs\Index.cshtml" />
     <Content Include="Views\QuanLyShipper\ThemShipper.cshtml" />
     <Content Include="Views\QuanLyShipper\XoaShipper.cshtml" />
     <Content Include="Views\QuanLyShipper\Details.cshtml" />
     <Content Include="Views\QuanLyShipper\CapNhatShipper.cshtml" />
     <Content Include="Views\QuanLyShipper\Index.cshtml" />
-    <Content Include="Views\GioHang\SanPhamGH.cshtml" />
-    <Content Include="Views\GioHang\ThanhToan.cshtml" />
-    <Content Include="Views\GioHang\HoanTatThanhToan.cshtml" />
     <Content Include="Views\KhachHang\Index.cshtml" />
     <Content Include="star-admin2\CHANGELOG.md" />
     <Content Include="star-admin2\README.md" />
@@ -6238,7 +6228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ChiTietSP\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
