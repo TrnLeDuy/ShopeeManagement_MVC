@@ -4,71 +4,196 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4 >KHUYẾN MÃI</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Tỷ lệ giảm
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ty_le_giam)
-        </dd>
-
-        <dt>
-            Ngày tạo
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngay_tao)
-        </dd>
-
-        <dt>
-          Ngày bắt đầu
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngay_bat_dau)
-        </dd>
-
-        <dt>
-           Ngày kết thúc
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngay_ket_thuc)
-        </dd>
-
-        <dt>
-           Người bán hàng
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGUOIBANHANG.ten_cua_hang)
-        </dd>
-
-        <dt>
-            Nhân viên
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NHANVIEN.ho_ten)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-default" /> |
-    @Html.ActionLink("Back to List", "Index")
-
-</div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
     }
+
+
+
+    .delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .table tr th {
+        color: #fff;
+        text-align: center;
+        background-color: #ee4d2d;
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-horizontal {
+        margin-top: 50px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label.control-label {
+        font-weight: bold;
+    }
+
+    .col-md-6 {
+        width: 50%;
+        color: #333;
+    }
+
+    .col-md-10 {
+        width: 85%;
+    }
+
+    .form-control {
+        width: 120%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-default {
+        background-color: #ee4d2d;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+    }
+
+        .btn-default:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        color: #ff0000;
+    }
+
+    h2 {
+        color: #ee4d2d;
+        font-size: 24px;
+    }
+
+    h3 {
+        color: #333;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    h4 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .dl-horizontal dt label {
+        font-weight: bold;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .form-actions {
+        margin-top: 10px;
+    }
+
+        .form-actions .btn {
+            margin-right: 10px;
+        }
+
+    .btn-default {
+        background-color: #ee4d2d;
+        color: #fff;
+       
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+    }
+
+        .btn-default:hover {
+            background-color: #ee4d2d;
+            color: #333;
+        }
+</style>
+
+<h2>Xóa</h2>
+<h3>Bạn có chắc muốn xóa voucher này?</h3>
+<div class="delete-container">
+    
+    <div>
+        <table class="table">
+            <tr><th>KHUYẾN MÃI</th></tr>
+
+        </table>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                <label>Tỷ lệ giảm</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ty_le_giam)
+            </dd>
+
+            <dt>
+                <label>Ngày tạo</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_tao)
+            </dd>
+
+            <dt>
+                <label>Ngày bắt đầu</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_bat_dau)
+            </dd>
+
+            <dt>
+                <label>Ngày kết thúc</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ngay_ket_thuc)
+            </dd>
+
+            <dt>
+                <label>Số lượng</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.soluong)
+            </dd>
+
+            <dt>
+                <label>Tên cửa hàng</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NGUOIBANHANG.ten_cua_hang)
+            </dd>
+
+            <dt>
+                <label>Nhân viên</label>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NHANVIEN.ho_ten)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
 </div>
