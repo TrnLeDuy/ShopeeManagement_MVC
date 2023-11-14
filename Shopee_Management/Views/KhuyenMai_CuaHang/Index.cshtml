@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Shopee_Management.Models.KHUYENMAI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #ee4d2d;
+            color: #000000;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tr:nth-child(odd) {
+            background-color: #f6f88c;
+        }
+
+
+
+    .action-links a {
+        margin-right: 10px;
+        color: #ee4d2d;
+    }
+
+    p {
+        margin-top: 20px;
+        color: #555;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ee4d2d;
+    }
+
+    .btn td {
+        min-width: 70px;
+        height: 34px;
+        text-decoration: none;
+        border: none;
+        border-radius: 2px;
+        font-size: 1.2rem;
+        padding: 0 12px;
+        outline: none;
+        cursor: pointer;
+        color: #fff !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.6rem;
+    }
+
+    .btn.btn--add {
+        color: #fff;
+        background-color: #0ab618;
+    }
+
+    .btn.btn--edit {
+        color: #fff;
+        background-color: #ffce3e;
+    }
+
+    .btn--details {
+        color: #fff;
+        background-color: #000000
+    }
+
+    .btn.btn--delete {
+        color: #fff;
+        background-color: #e72311;
+    }
+
+    .btn-form__controls-mr {
+        margin-right: 8px;
+    }
+</style>
+<h2>Voucher</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tỷ lệ giảm
+        </th>
+        <th>
+            Ngày tạo
+        </th>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày kết thúc
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ty_le_giam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_tao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_bat_dau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_ket_thuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soluong)
+            </td>
+           
+            <td>
+                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/KHUYENMAIs/Edit/@item.id_voucher">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+
+                <a class="btn btn--delete btn-form__controls-mr" href="~/KHUYENMAIs/Delete/@item.id_voucher">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+
+                <a class="btn btn--details" id="details-btn" href="~/KHUYENMAIs/Details/@item.id_voucher">
+                    <i class="fa-solid fa-circle-info"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
