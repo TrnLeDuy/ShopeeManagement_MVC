@@ -44,3 +44,11 @@ BEGIN
     FROM inserted i;
 END;
 
+/*Reset all the id  with identity 1,1*/
+DECLARE @SqlCommand NVARCHAR(MAX) = N'';
+
+SELECT @SqlCommand += N'DBCC CHECKIDENT(''' + TABLE_SCHEMA + '.' + TABLE_NAME + ''', RESEED, 0);' + CHAR(13)
+FROM INFORMATION_SCHEMA.TABLES
+WHERE OBJECTPROPERTY(OBJECT_ID(TABLE_NAME), 'TableHasIdentity') = 1;
+
+EXEC sp_executesql @SqlCommand;

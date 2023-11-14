@@ -159,6 +159,7 @@ CREATE TABLE KHUYENMAI (
 	ngay_tao DATETIME NULL,
 	ngay_bat_dau DATETIME NULL,
 	ngay_ket_thuc DATETIME NULL,
+	so_luong INT NULL,
 	id_nbh VARCHAR(255),
 	id_nv INT,
 	PRIMARY KEY (id_voucher),

@@ -1,26 +1,28 @@
-﻿const loginsec = document.querySelector('.login-section')
-const loginlink = document.querySelector('.login-link')
-const registerlink = document.querySelector('.register-link')
-registerlink.addEventListener('click', () => {
-    loginsec.classList.add('active')
-})
-loginlink.addEventListener('click', () => {
-    loginsec.classList.remove('active')
-})
+﻿const container = document.getElementById('container');
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
 
-function togglePassword() {
-    var passwordInput = document.getElementById('passwordInput');
-    var passwordIcon = document.getElementById('passwordIcon');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        passwordIcon.classList.remove('bx', 'bxs-lock-alt');
-        passwordIcon.classList.add('bx', 'bxs-lock-open-alt');
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
+});
+function togglePassword(inputId, iconId) {
+    var x = document.getElementById(inputId);
+    var y = document.getElementById(iconId);
+    if (x.type === "password") {
+        x.type = "text";
+        y.classList.remove("bxs-lock-alt");
+        y.classList.add("bxs-unlock");
     } else {
-        passwordInput.type = 'password';
-        passwordIcon.classList.remove('bx', 'bxs-lock-open-alt');
-        passwordIcon.classList.add('bx', 'bxs-lock-alt');
+        x.type = "password";
+        y.classList.remove("bxs-unlock");
+        y.classList.add("bxs-lock-alt");
     }
 }
+
 
 registerlink.addEventListener('click', () => {
     $.ajax({

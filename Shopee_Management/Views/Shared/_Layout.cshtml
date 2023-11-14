@@ -140,7 +140,15 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="~/Images/@Session["Avatar"]" alt="avatar" />
+                                        @if (Session["Avatar"] == null)
+                                        {
+                                            <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/CustomerAvatar/NhanVien/@Session["Avatar"]" alt="avatar" />
+                                        }
+
                                     </div>
                                     <div class="content">
                                         <a class="js-acc-btn" href="#">@Session["FullName"]</a>
