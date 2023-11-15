@@ -70,30 +70,30 @@ namespace Shopee_Management.Controllers
             return PartialView("BagCart");
         }
 
-        public ActionResult CheckOut(FormCollection form)
-        {
-            try
-            {
-                Cart cart = Session["Cart"] as Cart;
-                DONHANG _order = new DONHANG();
-                _order.ngay_dat = DateTime.Now;
-                _order.trang_thai_dh = 1;
-                _order.tt_thanh_toan = 1;
-                _order.id_pttt = null;
-                _order.ngay_giao = DateTime.Now.AddDays(3);
-                foreach(var item in cart.Items)
-                {
-                    CHITIETDONHANG _order_Detail = new CHITIETDONHANG();
-                    _order_Detail.id_don = _order.id_don;
-                    _order_Detail.id_ctsp = item._shopping_product.id_ctsp;
-                    _order_Detail.so_luong = item._shopping_quantity;
-                    _db.CHITIETDONHANGs.Add( _order_Detail );    
-                }
-            } 
-            catch 
-            { 
+        //public ActionResult CheckOut(FormCollection form)
+        //{
+        //    try
+        //    {
+        //        Cart cart = Session["Cart"] as Cart;
+        //        DONHANG _order = new DONHANG();
+        //        _order.ngay_dat = DateTime.Now;
+        //        _order.trang_thai_dh = 1;
+        //        _order.tt_thanh_toan = 1;
+        //        _order.id_pttt = null;
+        //        _order.ngay_giao = DateTime.Now.AddDays(3);
+        //        foreach(var item in cart.Items)
+        //        {
+        //            CHITIETDONHANG _order_Detail = new CHITIETDONHANG();
+        //            _order_Detail.id_don = _order.id_don;
+        //            _order_Detail.id_ctsp = item._shopping_product.id_ctsp;
+        //            _order_Detail.so_luong = item._shopping_quantity;
+        //            _db.CHITIETDONHANGs.Add( _order_Detail );    
+        //        }
+        //    } 
+        //    catch 
+        //    { 
                 
-            }
-        }
+        //    }
+        //}
     }
 }

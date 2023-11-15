@@ -9,7 +9,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="~/assets/js/chuyenDoiNumeric.js"></script>
-<h2>ShowToCart</h2>
+<h2>Giỏ hàng</h2>
 
     <div class="container">
         <table id="cart" class="table table-hover table-condensed">
@@ -44,12 +44,12 @@
                             {
                                 <input type="hidden" value="@item._shopping_product.id_ctsp" name="ID_Product" />
                                 <input class="form-control text-center" value="@item._shopping_quantity" type="number" name="Quantity" />
-                                <input type="submit" value="Update" />
+                                <input type="submit" value="Cập nhật" />
                             }
                         </td>
                         <td data-th="Subtotal" class="text-center numeric_value">@total</td>
                         <td class="actions" data-th="">
-                            <a href="~/ShoppingCart/RemoveCart/@item._shopping_product.id_ctsp">Remove</a>
+                            <a href="~/ShoppingCart/RemoveCart/@item._shopping_product.id_ctsp">Xóa</a>
                         </td>
                     </tr>
                 }
@@ -63,17 +63,9 @@
                 <tr>
                     <td colspan="2" class="hidden-xs"> </td>
                     <td class="hidden-xs text-center">
-                        <strong>Tổng tiền @Model.Total_Money()</strong>
+                        <strong>Tổng tiền: @Model.Total_Money()</strong>
                     </td>
-                    <td colspan="2">
-                        <select id="paymentMethod" name="paymentMethod">
-                            @foreach (var item in Model.pttt)
-                            {
-                                <option value="@item.id_pttt">@item.ten_pttt</option>
-                            }
-                        </select>
-                        <a href="http://hocwebgiare.com/" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
-                    </td>
+                    
                 </tr>
             </tfoot>
 
