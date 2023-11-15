@@ -17,11 +17,13 @@
         <dd>@(Model.KHACHHANG != null ? Model.KHACHHANG.ho_ten : "Không có thông tin")</dd>
 
         <dt>Email liên hệ:</dt>
-        <dd>@(Model.KHACHHANG != null ? Model.KHACHHANG.email : "Không có thông tin")</dd>
+        <dd>@Model.email_ch</dd>
 
         <dt>Địa chỉ:</dt>
-        <dd>@(Model.KHACHHANG != null ? Model.KHACHHANG.dia_chi : "Không có thông tin")</dd>
+        <dd>@Model.dia_chi_ch</dd>
 
+        <dt>Số điện thoại:</dt>
+        <dd>@Model.sdt_ch</dd>
 
         <dt>Tình trạng Cửa hàng:</dt>
         <dd>

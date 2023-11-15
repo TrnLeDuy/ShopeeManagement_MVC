@@ -25,7 +25,25 @@
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
-                        <li class="header__navbar-item header__navbar-item--separate"><a class="default_b">Kênh người bán</a></li>
+                        <li class="header__navbar-item header__navbar-item--separate">
+                            @{
+                                if (Session["KhachHang"] != null)
+                                {
+                                    if (Session["StoreID"] == null)
+                                    {
+                                        <a href="@Url.Action("DangKyCuaHang", "KhachHang")" class="default_b">Kênh người bán</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("QuanLySanPham", "NguoiBanHang")" class="default_b">Kênh người bán</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Default", "KhachHang")" class="default_b">Kênh người bán</a>
+                                }
+                            }
+                        </li>
                         <li class="header__navbar-item header__navbar-item--separate">Trở thành người bán</li>
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
                             Tải ứng dụng

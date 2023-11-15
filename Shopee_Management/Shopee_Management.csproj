@@ -158,6 +158,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
+    <Compile Include="Controllers\NguoiBanHangController.cs" />
     <Compile Include="Controllers\QuanLyCuaHangController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLyKhachHangController.cs" />
@@ -6252,6 +6253,13 @@
     <Content Include="Views\QuanLyDonHang\Index.cshtml" />
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
     <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
+    <Content Include="Views\KhachHang\DangKyCuaHang.cshtml" />
+    <Content Include="Views\NguoiBanHang\CapNhatCTSP.cshtml" />
+    <Content Include="Views\NguoiBanHang\CapNhatSP.cshtml" />
+    <Content Include="Views\NguoiBanHang\QuanLySanPham.cshtml" />
+    <Content Include="Views\NguoiBanHang\ThemCTSP.cshtml" />
+    <Content Include="Views\NguoiBanHang\ThemSP.cshtml" />
+    <Content Include="Views\NguoiBanHang\XemChiTietSanPham.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

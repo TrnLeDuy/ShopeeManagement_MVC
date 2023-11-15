@@ -210,6 +210,62 @@ namespace Shopee_Management.Controllers
             return View(kh);
         }
 
+        // Action để hiển thị form đăng ký cửa hàng
+        public ActionResult DangKyCuaHang()
+        {
+            // Kiểm tra đăng nhập sử dụng Session
+            if (Session["KhachHang"] == null)
+            {
+                // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+                return RedirectToAction("Default", "KhachHang");
+            }
+            return View();
+        }
 
+        // Action để xử lý đăng ký cửa hàng
+        [HttpPost]
+        public ActionResult DangKyCuaHang([Bind(Exclude = "id_nbh")] NGUOIBANHANG model, HttpPostedFileBase hinhCuaHang)
+        {
+            string idNguoiBanHang_New = Session["ID"] as string;
+
+            if (ModelState.IsValid)
+            {
+                // Kiểm tra xem đã tồn tại tài khoản có cùng ID_chưa
+                if (db.NGUOIBANHANGs.Any(nbh => nbh.id_nbh == model.id_nbh))
+                {
+                    ModelState.AddModelError("", "Tài khoản đã tồn tại.");
+                    return View(model);
+                }
+
+                // Lưu hình cửa hàng vào thư mục và cập nhật tên hình trong model
+                if (hinhCuaHang != null && hinhCuaHang.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(hinhCuaHang.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    hinhCuaHang.SaveAs(path);
+                    model.hinh_cua_hang = fileName;
+                }
+
+                //Gán ID Khách hàng cho Chủ sở hữu của việc tạo Cửa hàng
+                model.id_kh = idNguoiBanHang_New;
+
+                // Thực hiện câu lệnh SQL để chèn dữ liệu vào bảng NGUOIBANHANG
+                string sqlInsert = "INSERT INTO NGUOIBANHANG (ten_cua_hang, id_kh, sdt_ch, dia_chi_ch, email_ch) VALUES (@ten_cua_hang, @id_kh, @sdt_ch, @dia_chi_ch, @email_ch)";
+
+                db.Database.ExecuteSqlCommand(sqlInsert,
+                    new SqlParameter("@ten_cua_hang", model.ten_cua_hang),
+                    new SqlParameter("@id_kh", model.id_kh),
+                    new SqlParameter("@sdt_ch", model.sdt_ch),
+                    new SqlParameter("@dia_chi_ch", model.dia_chi_ch),
+                    new SqlParameter("@email_ch", model.email_ch));
+
+
+                TempData["Success"] = "Đăng ký cửa hàng thành công!";
+                return RedirectToAction("Index", "TrangChu"); // Chuyển hướng đến trang chủ hoặc trang khác tùy vào yêu cầu
+            }
+
+            // Nếu ModelState không hợp lệ, hiển thị lại form đăng ký với thông báo lỗi
+            return View(model);
+        }
     }
 }
