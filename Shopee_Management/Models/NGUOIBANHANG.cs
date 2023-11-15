@@ -26,6 +26,10 @@ namespace Shopee_Management.Models
         public string ten_cua_hang { get; set; }
         public Nullable<int> trang_thai_ch { get; set; }
         public string id_kh { get; set; }
+        public string sdt_ch { get; set; }
+        public string dia_chi_ch { get; set; }
+        public string hinh_cua_hang { get; set; }
+        public string email_ch { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }
