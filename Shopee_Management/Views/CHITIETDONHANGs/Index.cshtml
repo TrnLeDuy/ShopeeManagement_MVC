@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Shopee_Management.Models.CHITIETDONHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.so_luong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gia_tien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CHITIETSP.id_nbh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DONHANG.id_kh)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.so_luong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gia_tien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CHITIETSP.id_nbh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DONHANG.id_kh)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

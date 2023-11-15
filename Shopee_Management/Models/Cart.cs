@@ -15,8 +15,6 @@ namespace Shopee_Management.Models
 
     public class Cart
     {
-        public List<PTTT> pttt { get; set; }
-
         List<CartItem> items = new List<CartItem>();
         public IEnumerable<CartItem> Items
         {

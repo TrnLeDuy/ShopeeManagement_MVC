@@ -28,11 +28,19 @@ namespace Shopee_Management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             DONHANG dONHANG = db.DONHANGs.Find(id);
+
             if (dONHANG == null)
             {
                 return HttpNotFound();
             }
+
+            // Retrieve details associated with the order's ID
+            var orderDetails = db.CHITIETDONHANGs.Where(detail => detail.id_don == id).ToList();
+
+            // Pass both order and details to the view
+            ViewBag.OrderDetails = orderDetails;
             return View(dONHANG);
         }
 
