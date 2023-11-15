@@ -155,7 +155,7 @@ namespace Shopee_Management.Controllers
                     }
                     return PartialView("_Edit", tintuc);
                 }*/
-
+        //reup
 
 
         // GET: TINTUCs/Delete/5
