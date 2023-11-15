@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Shopee_Management.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sanPhamList = (List<Shopee_Management.Models.SANPHAM>)ViewBag.SanPhamList;
+    var nbhList = (List<Shopee_Management.Models.NGUOIBANHANG>)ViewBag.NBHList;
+    var sizeList = (List<Shopee_Management.Models.KICHCO>)ViewBag.SizeList;
+    var colorList = (List<Shopee_Management.Models.BANGMAU>)ViewBag.ColorList;
+    var brandList = (List<Shopee_Management.Models.THUONGHIEU>)ViewBag.BrandList;
+    var memberList = (List<Shopee_Management.Models.XUATXU>)ViewBag.MemberList;
+    var nganhhangList = (List<Shopee_Management.Models.NGANHHANG>)ViewBag.NganhHangList;
+    var nhconList = (List<Shopee_Management.Models.NGANHHANGCON>)ViewBag.NganhHangConList;
+    var nhc3List = (List<Shopee_Management.Models.NGANHHANGCAP3>)ViewBag.NganhHangC3List;
+    var modelData = Model;
+}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<div class="row m-t-30">
+    <div class="col-md-12">
+        <!-- DATA TABLE-->
+        <div class="table-responsive m-b-40">
+            <table class="table table-borderless table-data3">
+                <thead>
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá sản phẩm</th>
+                        <th>Cập nhật</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id_sp</td>
+                            <td>@item.ten_sp</td>
+                            <td>@item.gia_sp</td>
+                            <td>
+                                <button class="edit-product" data-id="@item.id_sp">Edit</button>
+                            </td>
+                            <td> <button class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE-->
+    </div>
+</div>
+
+<script>
+    $(".edit-product").click(function () {
+        var productId = $(this).data("id");
+        window.location.href = '/QuanLySanPham/CapNhatSP/' + productId;
+    });
+    $(".detail-product").click(function () {
+        var productId = $(this).data("id");
+        window.location.href = '/QuanLySanPham/XemChiTietSanPham/' + productId;
+    });
+    $(".edit-product-detail").click(function () {
+        var productId = $(this).data("id");
+        window.location.href = '/QuanLySanPham/CapNhatCTSP/' + productId;
+    });
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var category = $('#categorySearch').val();
+            // Send an AJAX request to search for products
+            $.ajax({
+                url: '/QuanLySanPham/SearchByCategory',
+                method: 'POST',
+                data: { category: category },
+                success: function (data) {
+                    // Update the product list with the search results
+                    $('#productList').html(data);
+                }
+            });
+        });
+    });
+</script>
