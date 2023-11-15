@@ -1,0 +1,74 @@
+﻿@model Shopee_Management.Models.KHACHHANG
+
+@{
+    Layout = null;
+}
+<style>
+    .avatar-container {
+        float: right;
+    }
+
+    .avatar-img {
+        max-width: 200px;
+        max-height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+</style>
+<div class="row">
+        <h4>Mã Khách hàng: @Model.id_kh</h4>
+        <br />
+        <!-- Hiển thị thông tin chi tiết của khách hàng -->
+        <dl class="dl-horizontal">
+            <hr />
+
+            <div class="avatar-container">
+                <!-- Hiển thị hình ảnh avatar -->
+                <img src="~/star-admin2/template/images/faces/@Model.avatar" alt="Avatar" class="img-responsive" />
+            </div>
+            <dt>Họ và tên:</dt>
+            <dd>@Model.ho_ten</dd>
+
+            <dt>Số điện thoại:</dt>
+            <dd>@Model.sdt</dd>
+
+            <dt>Email:</dt>
+            <dd>@Model.email</dd>
+
+            <dt>Địa chỉ:</dt>
+            <dd>@Model.dia_chi</dd>
+
+            <dt>Điểm tích lũy:</dt>
+            <dd>@Model.diem_tich_luy</dd>
+
+            <dt>Username:</dt>
+            <dd>@Model.username</dd>
+
+            <dt>Tình trạng khách hàng:</dt>
+            <dd>@(Model.tinh_trang_kh == 0 ? "Khóa" : "Hoạt động")</dd>
+
+            <!-- Thêm các thông tin khác tùy ý -->
+        </dl>
+
+</div>
+<div class="form-group modal-footer">
+    <button type="button" class="btn btn-secondary">Đóng</button>
+</div>
+
+<script>
+    // Close button in modal header
+    $('.modal-header .close').on('click', function () {
+        closeModal();
+    });
+    // Close button in modal footer
+    $('.modal-footer .btn-secondary').on('click', function () {
+        closeModal();
+    });
+    function closeModal() {
+        // Hide the modal
+        $('#detailModal').css('display', 'none');
+    }
+</script>

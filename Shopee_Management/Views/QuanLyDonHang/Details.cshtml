@@ -1,0 +1,18 @@
+﻿@model Shopee_Management.Models.DONHANG
+
+<!-- Display order details -->
+<h2>Order Details</h2>
+@foreach (var detail in ViewBag.OrderDetails)
+{
+    <p>Product ID: @detail.id_ctsp</p>
+    <p>Quantity: @detail.so_luong</p>
+    <p>Price: @detail.gia_tien</p>
+    <!-- Add more fields as needed -->
+    <hr />
+}
+
+<!-- Display other order information -->
+<h2>Order Information</h2>
+<p>Order ID: @Model.id_don</p>
+<p>Order Date: @Model.ngay_dat</p>
+<!-- Add more fields as needed -->

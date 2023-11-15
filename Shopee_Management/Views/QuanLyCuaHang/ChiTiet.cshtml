@@ -1,0 +1,72 @@
+﻿@model Shopee_Management.Models.NGUOIBANHANG
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <h4>Mã Cửa hàng: @Model.id_nbh</h4>
+    <br />
+    <!-- Hiển thị thông tin chi tiết của khách hàng -->
+    <dl class="dl-horizontal">
+        <hr />
+        <dt>Tên cửa hàng:</dt>
+        <dd>@Model.ten_cua_hang</dd>
+
+        <dt>Chủ cửa hàng:</dt>
+        <dd>@(Model.KHACHHANG != null ? Model.KHACHHANG.ho_ten : "Không có thông tin")</dd>
+
+        <dt>Email liên hệ:</dt>
+        <dd>@Model.email_ch</dd>
+
+        <dt>Địa chỉ:</dt>
+        <dd>@Model.dia_chi_ch</dd>
+
+        <dt>Số điện thoại:</dt>
+        <dd>@Model.sdt_ch</dd>
+
+        <dt>Tình trạng Cửa hàng:</dt>
+        <dd>
+            @{
+                string trangThaiText = "";
+                switch (Model.trang_thai_ch)
+                {
+                    case 0:
+                        trangThaiText = "Ngừng Kinh doanh";
+                        break;
+                    case 1:
+                        trangThaiText = "Đang kinh doanh";
+                        break;
+                    case 2:
+                        trangThaiText = "Cấm Kinh doanh";
+                        break;
+                    default:
+                        trangThaiText = "Trạng thái không hợp lệ";
+                        break;
+                }
+            }
+            @trangThaiText
+        </dd>
+
+        <!-- Thêm các thông tin khác tùy ý -->
+    </dl>
+
+</div>
+<div class="form-group modal-footer">
+    <button type="button" class="btn btn-secondary">Đóng</button>
+</div>
+
+<script>
+    // Close button in modal header
+    $('.modal-header .close').on('click', function () {
+        closeModal();
+    });
+    // Close button in modal footer
+    $('.modal-footer .btn-secondary').on('click', function () {
+        closeModal();
+    });
+    function closeModal() {
+        // Hide the modal
+        $('#detailModal').css('display', 'none');
+    }
+</script>

@@ -25,7 +25,25 @@
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
-                        <li class="header__navbar-item header__navbar-item--separate"><a class="default_b">Kênh người bán</a></li>
+                        <li class="header__navbar-item header__navbar-item--separate">
+                            @{
+                                if (Session["KhachHang"] != null)
+                                {
+                                    if (Session["StoreID"] == null)
+                                    {
+                                        <a href="@Url.Action("DangKyCuaHang", "KhachHang")" class="default_b">Kênh người bán</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("QuanLySanPham", "NguoiBanHang")" class="default_b">Kênh người bán</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Default", "KhachHang")" class="default_b">Kênh người bán</a>
+                                }
+                            }
+                        </li>
                         <li class="header__navbar-item header__navbar-item--separate">Trở thành người bán</li>
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item--separate">
                             Tải ứng dụng
@@ -114,7 +132,14 @@
                         @if (Session["KhachHang"] != null)
                         {
                             <li class="header__navbar-item header__navbar-user">
-                                <img src="~/CustomerAvatar/@Session["Avatar"]" alt="" class="header__navbar-user-img">
+                                @if (Session["Avatar"] == null)
+                                {
+                                    <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" class="header__navbar-user-img"/>
+                                }
+                                else
+                                {
+                                    <img src="~/CustomerAvatar/@Session["Avatar"]" alt="" class="header__navbar-user-img">
+                                }
                                 <span class="header__navbar-user-name">@Session["HoTen"]</span>
 
                                 <ul class="header__navbar-user-menu">
@@ -190,7 +215,7 @@
                     <div class="header__cart">
                         <div class="header__cart-wrap">
                             <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
-                            <span class="header__cart-notice">3</span>
+                            @Html.Action("BagCart", "ShoppingCart")
 
                             <!-- No cart: header__cart-list--no-cart -->
                             <div class="header__cart-list">

@@ -1,0 +1,80 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+
+
+<h2 style="text-align:center;"><strong> CHI TIẾT TIN TỨC</strong></h2>
+<p><strong>Tiêu đề:</strong> @Model.tieu_de</p>
+<p><strong>Nội dung:</strong> @Model.noi_dung</p>
+<p><strong>Ngày đăng:</strong> @Model.ngay_dang</p>
+<p><strong>Thể loại:</strong> @Model.THELOAITIN.ten_the_loai</p>
+@Html.ActionLink("Sửa", "Edit", "TINTUCs", new { id = Model.id_tin_tuc }, new { @class = "btn btn-success" })|
+@Html.ActionLink("Xóa", "Delete", "TINTUCs", new { id = Model.id_tin_tuc }, new { @class = "btn btn-danger" })
+@*reup*@
+
+
+<!-- Liên kết để mở pop-up sửa -->
+<!--<a href="javascript:void(0);" class="popupEdit" data-toggle="modal" data-target="#ModalEdit" data-id="@Model.id_tin_tuc" style="background-color: #28A745; margin:2px; padding:5px; color: #FFFFFF; transition: color 0.3s; " onmouseover="this.style.color='orange';" onmouseout="this.style.color='#FFFFFF';">Sửa</a>|-->
+<!-- Liên kết để mở pop-up xóa -->
+<!--<a href="javascript:void(0);" class="popupDelete" data-toggle="modal" data-target="#ModalDelete" data-id="@Model.id_tin_tuc" style="color: #FFFFFF; margin: 2px; padding: 5px; background-color: #C82333; transition: color 0.3s; " onmouseover="this.style.color='orange';" onmouseout="this.style.color='#FFFFFF';">Xóa</a>
+
+<script>
+        $(document).ready(function () {
+            $('.popupEdit').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+
+                // Gửi yêu cầu Ajax để lấy dữ liệu cho modal sửa
+                $.ajax({
+                    url: '@Url.Action("Edit", "TINTUCs")',
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (result) {
+                        // Hiển thị nội dung của modal sửa
+                        $('#ModalEdit .modal-content').html(result);
+                        // Hiển thị modal sửa
+                        $('#ModalEdit').modal('show');
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi khi tải dữ liệu sửa.');
+                    }
+                });
+            });
+
+            $('.popupDelete').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+
+                // Gửi yêu cầu Ajax để lấy dữ liệu cho modal xóa
+                $.ajax({
+                    url: '@Url.Action("Delete", "TINTUCs")',
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (result) {
+                        // Hiển thị nội dung của modal xóa
+                        $('#ModalDelete .modal-content').html(result);
+                        // Hiển thị modal xóa
+                        $('#ModalDelete').modal('show');
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi khi tải dữ liệu xóa.');
+                    }
+                });
+            });
+        });
+</script>-->
+<!-- Thêm modal cho phần sửa -->
+<!--<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="ModalEditTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">-->
+<!-- Nội dung của modal sửa sẽ được xử lý ở phía client hoặc gửi một yêu cầu Ajax đến máy chủ -->
+<!--</div>
+    </div>
+</div>-->
+<!-- Thêm modal cho phần xóa -->
+<!--<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="ModalDeleteTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">-->
+<!-- Nội dung của modal xóa sẽ được xử lý ở phía client hoặc gửi một yêu cầu Ajax đến máy chủ -->
+<!--</div>
+    </div>
+</div>-->

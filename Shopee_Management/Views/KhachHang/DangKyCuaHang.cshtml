@@ -1,0 +1,139 @@
+﻿@model Shopee_Management.Models.NGUOIBANHANG
+
+@{
+    ViewBag.Title = "Đăng ký cửa hàng";
+    Layout = null;
+}
+
+<style>
+    /* Đối với demo, bạn có thể tinh chỉnh các thuộc tính CSS này để phù hợp với thiết kế của bạn */
+    /* Style cho form */
+    .registration-form {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px #000000;
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    /* Style cho hình ảnh trước khi tải lên */
+    #previewImage {
+        max-width: 100%;
+        margin-top: 10px;
+        display: none;
+    }
+
+    /* Style cho nút đăng ký */
+    .btn-register {
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    /* Thêm các kiểu dáng tùy chỉnh khác nếu cần */
+
+</style>
+
+<div class="registration-form">
+    @using (Html.BeginForm("DangKyCuaHang", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label>Tên cửa hàng</label>
+            @Html.TextBoxFor(model => model.ten_cua_hang, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ten_cua_hang)
+        </div>
+
+        <div class="form-group">
+            <label>Địa chỉ cửa hàng</label>
+            @Html.TextBoxFor(model => model.dia_chi_ch, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.dia_chi_ch)
+        </div>
+
+        <div class="form-group">
+            <label>Số điện thoại</label>
+            @Html.TextBoxFor(model => model.sdt_ch, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.sdt_ch)
+        </div>
+
+        <div class="form-group">
+            <label>Email liên hệ</label>
+            @Html.TextBoxFor(model => model.email_ch, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.email_ch)
+        </div>
+
+        <div class="form-group">
+            @Html.TextBoxFor(model => model.hinh_cua_hang, new { type = "file", @class = "form-control", id = "fileInput" })
+
+            <img id="previewImage" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Đăng ký" class="btn btn-register" />
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            // Bắt sự kiện thay đổi của trường input file
+            $("#fileInput").change(function () {
+                readURL(this);
+            });
+
+            // Hàm đọc URL của hình ảnh và hiển thị
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#previewImage').attr('src', e.target.result);
+                        $('#previewImage').show();
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+    </script>
+}
