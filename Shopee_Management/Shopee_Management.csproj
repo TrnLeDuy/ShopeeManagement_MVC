@@ -156,7 +156,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CHITIETDONHANGsController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
     <Compile Include="Controllers\NguoiBanHangController.cs" />
@@ -6254,11 +6253,6 @@
     <Content Include="Views\QuanLyDonHang\Index.cshtml" />
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
     <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
-    <Content Include="Views\CHITIETDONHANGs\Create.cshtml" />
-    <Content Include="Views\CHITIETDONHANGs\Delete.cshtml" />
-    <Content Include="Views\CHITIETDONHANGs\Details.cshtml" />
-    <Content Include="Views\CHITIETDONHANGs\Edit.cshtml" />
-    <Content Include="Views\CHITIETDONHANGs\Index.cshtml" />
     <Content Include="Views\KhachHang\DangKyCuaHang.cshtml" />
     <Content Include="Views\NguoiBanHang\CapNhatCTSP.cshtml" />
     <Content Include="Views\NguoiBanHang\CapNhatSP.cshtml" />
@@ -6266,6 +6260,12 @@
     <Content Include="Views\NguoiBanHang\ThemCTSP.cshtml" />
     <Content Include="Views\NguoiBanHang\ThemSP.cshtml" />
     <Content Include="Views\NguoiBanHang\XemChiTietSanPham.cshtml" />
+    <Content Include="Views\QuanLySanPham\ProductListPartial.cshtml" />
+    <Content Include="Views\QuanLySanPham\SanPhamCuaToi.cshtml" />
+    <Content Include="Views\QuanLySanPham\XemChiTietSanPham.cshtml" />
+    <Content Include="Views\TINTUCs\_Delete.cshtml" />
+    <Content Include="Views\TINTUCs\_Details.cshtml" />
+    <Content Include="Views\TINTUCs\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
