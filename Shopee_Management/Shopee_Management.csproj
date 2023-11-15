@@ -51,8 +51,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=7.0.0.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>packages\EPPlus.7.0.0\lib\net462\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=7.0.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>packages\EPPlus.7.0.1\lib\net462\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
       <HintPath>packages\EPPlus.Interfaces.6.1.1\lib\net462\EPPlus.Interfaces.dll</HintPath>
@@ -69,6 +69,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -151,6 +157,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\QuanLyCuaHangController.cs" />
+    <Compile Include="Controllers\QuanLyKhachHangController.cs" />
     <Compile Include="Controllers\QuanLyShipperController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
@@ -2359,6 +2367,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="CoolAdmin-master\alert.html" />
     <Content Include="CoolAdmin-master\badge.html" />
     <Content Include="CoolAdmin-master\button.html" />
@@ -5981,7 +5990,6 @@
     <Content Include="Views\QuanLyShipper\Details.cshtml" />
     <Content Include="Views\QuanLyShipper\CapNhatShipper.cshtml" />
     <Content Include="Views\QuanLyShipper\Index.cshtml" />
-    <Content Include="Views\KhachHang\Index.cshtml" />
     <Content Include="star-admin2\CHANGELOG.md" />
     <Content Include="star-admin2\README.md" />
     <Content Include="star-admin2\template\css\maps\horizontal-layout-dark\style.css.map" />
@@ -6225,6 +6233,12 @@
     <Content Include="star-admin2\template\vendors\typicons\typicons.ttf" />
     <Content Include="star-admin2\template\vendors\typicons\typicons.woff" />
     <Content Include="star-admin2\template\vendors\typicons\typicons.woff2" />
+    <Content Include="Views\QuanLyKhachHang\Index.cshtml" />
+    <Content Include="Views\QuanLyCuaHang\Index.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\ChinhSuaTrangThai.cshtml" />
+    <Content Include="Views\QuanLyKhachHang\ChiTiet.cshtml" />
+    <Content Include="Views\QuanLyCuaHang\ChinhSuaTrangThai.cshtml" />
+    <Content Include="Views\QuanLyCuaHang\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
