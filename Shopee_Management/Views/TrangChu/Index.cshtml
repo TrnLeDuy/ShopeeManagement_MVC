@@ -7,6 +7,7 @@
 <head>
     <link rel="stylesheet" href="~/assets/css/main.css" />
     <link rel="stylesheet" href="~/assets/css/base.css" />
+    <script src="~/assets/js/chuyenDoiNumeric.js"></script>
 </head>
 <body>
     <div class="app__container">
@@ -74,11 +75,16 @@
                             @foreach (var item in Model.ctsp)
                              {
                                 <div class="grid__column-2-4 home-product-item-wrapper">
-                                    <a class="home-product-item" href="#">
+                                    <div class="home-product-item">
                                         <div class="home-product-item__img" style="border: 1px solid #ccc; background-image: url(https://png.pngtree.com/element_origin_min_pic/17/08/13/7d6b28465113fefd1a263f392aa41666.jpg);"></div>
                                         <h4 class="home-product-item__name">@item.SANPHAM.ten_sp</h4>
                                         <div class="home-product-item__price">
-                                            <span class="home-product-item__price-current"> @item.SANPHAM.gia_sp đ</span>
+                                            <span class="home-product-item__price-current numeric_value">@item.SANPHAM.gia_sp</span>
+                                            <span class="home-product-item__buy" style="font-size: 1.4rem; margin-left: 90px;">
+                                                <a href="~/ShoppingCart/AddToCart/@item.id_ctsp" style="text-decoration: none; color: var(--black-color);">
+                                                    <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </span>
                                         </div>
                                         <div class="home-product-item__action">
                                             <span class="home-product-item__like home-product-item__like--liked">
@@ -106,7 +112,7 @@
                                             <span class="home-product-item__sale-off-percent">43%</span>
                                             <span class="home-product-item__sale-off-label">GIẢM</span>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
                              }
                         </div>

@@ -1,0 +1,82 @@
+﻿@model Shopee_Management.Models.Cart
+
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/_ShopeeLayout.cshtml";
+}
+<link rel="stylesheet" href="~/assets/css/trangGioHang.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="~/assets/js/chuyenDoiNumeric.js"></script>
+<h2>ShowToCart</h2>
+
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Tên sản phẩm</th>
+                    <th style="width:10%">Giá</th>
+                    <th style="width:8%">Số lượng</th>
+                    <th style="width:22%" class="text-center">Thành tiền</th>
+                    <th style="width:10%"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    double total = Convert.ToDouble(item._shopping_product.SANPHAM.gia_sp.Value * item._shopping_quantity);
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs">
+                                    <img src="" alt="@item._shopping_product.SANPHAM.ten_sp" class="img-responsive" width="100">
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">@item._shopping_product.SANPHAM.ten_sp</h4>
+                                    <p>Mô tả của sản phẩm 1</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price" class="numeric_value">@item._shopping_product.SANPHAM.gia_sp</td>
+                        <td data-th="Quantity">
+                            @using (Html.BeginForm("Update_Quantity_Cart", "ShoppingCart"))
+                            {
+                                <input type="hidden" value="@item._shopping_product.id_ctsp" name="ID_Product" />
+                                <input class="form-control text-center" value="@item._shopping_quantity" type="number" name="Quantity" />
+                                <input type="submit" value="Update" />
+                            }
+                        </td>
+                        <td data-th="Subtotal" class="text-center numeric_value">@total</td>
+                        <td class="actions" data-th="">
+                            <a href="~/ShoppingCart/RemoveCart/@item._shopping_product.id_ctsp">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <a href="@Url.Action("Index", "TrangChu")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="hidden-xs"> </td>
+                    <td class="hidden-xs text-center">
+                        <strong>Tổng tiền @Model.Total_Money()</strong>
+                    </td>
+                    <td colspan="2">
+                        <select id="paymentMethod" name="paymentMethod">
+                            @foreach (var item in Model.pttt)
+                            {
+                                <option value="@item.id_pttt">@item.ten_pttt</option>
+                            }
+                        </select>
+                        <a href="http://hocwebgiare.com/" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                    </td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
