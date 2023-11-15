@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_KenhBanHangLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -135,15 +135,15 @@
             </td>
            
             <td>
-                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/KHUYENMAIs/Edit/@item.id_voucher">
+                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/Khuyenmai_CuaHang/Edit/@item.id_voucher">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
 
-                <a class="btn btn--delete btn-form__controls-mr" href="~/KHUYENMAIs/Delete/@item.id_voucher">
+                <a class="btn btn--delete btn-form__controls-mr" href="~/Khuyenmai_CuaHang/Delete/@item.id_voucher">
                     <i class="fa-solid fa-trash"></i>
                 </a>
 
-                <a class="btn btn--details" id="details-btn" href="~/KHUYENMAIs/Details/@item.id_voucher">
+                <a class="btn btn--details" id="details-btn" href="~/Khuyenmai_CuaHang/Details/@item.id_voucher">
                     <i class="fa-solid fa-circle-info"></i>
                 </a>
             </td>

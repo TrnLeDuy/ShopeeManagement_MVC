@@ -1,4 +1,5 @@
-﻿using Shopee_Management.Models;
+﻿using Antlr.Runtime.Tree;
+using Shopee_Management.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,7 @@ namespace Shopee_Management.Controllers
             try
             {
                 Cart cart = Session["Cart"] as Cart;
+                string kh = (string)Session["ID"];
                 DONHANG _order = new DONHANG();
                 _order.ngay_dat = DateTime.Now;
                 _order.trang_thai_dh = 1;
@@ -82,7 +84,7 @@ namespace Shopee_Management.Controllers
                 _order.tong_cong = 10;
                 _order.thanh_tien = 1;
                 _order.id_pttt = int.Parse(form["paymentMethod"]);
-                _order.id_kh = "KH0000000001";
+                _order.id_kh = kh;
                 _order.id_nbh = "NBH0000000001";
                 _order.id_voucher = 5;
                 _order.ngay_giao = DateTime.Now.AddDays(3);
