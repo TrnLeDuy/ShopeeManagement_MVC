@@ -1,0 +1,51 @@
+﻿@model Shopee_Management.Models.CHITIETDONHANG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CHITIETDONHANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.so_luong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.so_luong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gia_tien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gia_tien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHITIETSP.id_nbh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHITIETSP.id_nbh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DONHANG.id_kh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DONHANG.id_kh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

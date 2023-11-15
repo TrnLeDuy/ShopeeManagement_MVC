@@ -9,7 +9,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="~/assets/js/chuyenDoiNumeric.js"></script>
-<h2>Giỏ hàng</h2>
+<body>
+    <h2 class="text-center">Giỏ hàng</h2>
 
     <div class="container">
         <table id="cart" class="table table-hover table-condensed">
@@ -44,10 +45,10 @@
                             {
                                 <input type="hidden" value="@item._shopping_product.id_ctsp" name="ID_Product" />
                                 <input class="form-control text-center" value="@item._shopping_quantity" type="number" name="Quantity" />
-                                <input type="submit" value="Cập nhật" />
+                                <input type="submit" value="Cập nhật" class="btn btn-info btn-sm" style="margin-top: 3px;"/>
                             }
                         </td>
-                        <td data-th="Subtotal" class="text-center numeric_value">@total</td>
+                        <td data-th="Subtotal" class="text-center numeric_value" name="SubTotal">@total</td>
                         <td class="actions" data-th="">
                             <a href="~/ShoppingCart/RemoveCart/@item._shopping_product.id_ctsp">Xóa</a>
                         </td>
@@ -56,19 +57,40 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5">
+                    <td>
                         <a href="@Url.Action("Index", "TrangChu")" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
                     </td>
-                </tr>
-                <tr>
                     <td colspan="2" class="hidden-xs"> </td>
                     <td class="hidden-xs text-center">
-                        <strong>Tổng tiền: @Model.Total_Money()</strong>
+                        <strong>Tổng tiền: <span name="TongTien">@Model.Total_Money()</span></strong>
                     </td>
-                    
+                    <td>
+                    </td>
                 </tr>
+                @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+                {
+                    <tr>
+                        <td>Phương thức thanh toán</td>
+                        <td>
+                            <select id="paymentMethod" name="paymentMethod">
+                                <option selected>Chọn phương thức thanh toán...</option>
+                                <option value="0">Thanh toán khi nhận hàng</option>
+                                <option value="1">Momo</option>
+                                <option value="2">Paypal</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Thanh toán" class="btn btn-success btn-block" />
+                        </td>
+                    </tr>
+                }
             </tfoot>
 
         </table>
+                                            
     </div>
+</body>
 
