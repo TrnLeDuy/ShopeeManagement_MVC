@@ -157,9 +157,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
     <Compile Include="Controllers\QuanLyCuaHangController.cs" />
+    <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLyKhachHangController.cs" />
     <Compile Include="Controllers\QuanLyShipperController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
@@ -173,6 +176,7 @@
     <Compile Include="Models\BANGMAU.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CHITIETDONHANG.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
@@ -255,11 +259,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Shopee.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\shoppingCart\Cart.cs" />
-    <Compile Include="Models\shoppingCart\CartItem.cs" />
-    <Compile Include="Models\shoppingCart\CartItemGroup.cs" />
-    <Compile Include="Models\shoppingCart\CartItemViewModel.cs" />
-    <Compile Include="Models\shoppingCart\PaymentViewModel.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
@@ -286,6 +285,7 @@
   <ItemGroup>
     <Content Include="assets\css\base.css" />
     <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\trangGioHang.css" />
     <Content Include="assets\fonts\fontawesome-free-6.4.2-web\css\all.css" />
     <Content Include="assets\fonts\fontawesome-free-6.4.2-web\css\all.min.css" />
     <Content Include="assets\fonts\fontawesome-free-6.4.2-web\css\brands.css" />
@@ -2351,6 +2351,7 @@
     <Content Include="assets\img\gg_play.png" />
     <Content Include="assets\img\no_cart.png" />
     <Content Include="assets\img\qr_code.png" />
+    <Content Include="assets\js\chuyenDoiNumeric.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -6239,9 +6240,22 @@
     <Content Include="Views\QuanLyKhachHang\ChiTiet.cshtml" />
     <Content Include="Views\QuanLyCuaHang\ChinhSuaTrangThai.cshtml" />
     <Content Include="Views\QuanLyCuaHang\ChiTiet.cshtml" />
+    <Content Include="Views\KhuyenMai_CuaHang\Create.cshtml" />
+    <Content Include="Views\KhuyenMai_CuaHang\Delete.cshtml" />
+    <Content Include="Views\KhuyenMai_CuaHang\Details.cshtml" />
+    <Content Include="Views\KhuyenMai_CuaHang\Edit.cshtml" />
+    <Content Include="Views\KhuyenMai_CuaHang\Index.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Create.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Delete.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Details.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Edit.cshtml" />
+    <Content Include="Views\QuanLyDonHang\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\BagCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\shoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
