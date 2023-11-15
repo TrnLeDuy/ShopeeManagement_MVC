@@ -1,7 +1,8 @@
 ﻿@model Shopee_Management.Models.SANPHAM
-
-<!-- Your edit form here -->
-@using (Html.BeginForm("CapNhatProduct", "QuanLySanPham", FormMethod.Post))
+@{ 
+    Layout = "~/Views/Shared/_KenhBanHangLayout.cshtml";
+}
+@using (Html.BeginForm("CapNhatProduct", "NguoiBanHang", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -36,12 +37,12 @@
             if (confirm("Are you sure you want to delete this product?")) {
                 // If the user confirms, send an AJAX request to delete the product
                 $.ajax({
-                    url: '/QuanLySanPham/XoaSP/' + productId,
+                    url: '/NguoiBanHang/XoaSP/' + productId,
                     type: 'POST',
                     success: function (result) {
                         if (result.success) {
                             alert("Product deleted successfully.");
-                            window.location.href = '/QuanLySanPham/Index';
+                            window.location.href = '/NguoiBanHang/Index';
                         } else {
                             alert("Failed to delete the product.");
                         }

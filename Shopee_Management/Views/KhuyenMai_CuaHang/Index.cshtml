@@ -76,6 +76,11 @@
         background-color: #ffce3e;
     }
 
+    .btn--details {
+        color: #fff;
+        background-color: #000000
+    }
+
     .btn.btn--delete {
         color: #fff;
         background-color: #e72311;
@@ -84,7 +89,6 @@
     .btn-form__controls-mr {
         margin-right: 8px;
     }
-
 </style>
 <h2>Voucher</h2>
 
@@ -108,12 +112,6 @@
         <th>
             Số lượng
         </th>
-        <th>
-            Tên cửa hàng
-        </th>
-        <th>
-            Họ tên
-        </th>
         <th></th>
     </tr>
 
@@ -135,18 +133,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.soluong)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.NGUOIBANHANG.ten_cua_hang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NHANVIEN.ho_ten)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_voucher },new { @class = "btn btn-sm btn-primary" }) ○
+                <a class="btn btn--edit btn-form__controls-mr" id="edit-btn" href="~/KHUYENMAIs/Edit/@item.id_voucher">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
 
-                @Html.ActionLink("Details", "Details", new { id = item.id_voucher }, new { @class = "btn btn-sm btn-primary" }) ○
+                <a class="btn btn--delete btn-form__controls-mr" href="~/KHUYENMAIs/Delete/@item.id_voucher">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_voucher }, new { @class = "btn btn-sm btn-primary" }) 
+                <a class="btn btn--details" id="details-btn" href="~/KHUYENMAIs/Details/@item.id_voucher">
+                    <i class="fa-solid fa-circle-info"></i>
+                </a>
             </td>
         </tr>
     }

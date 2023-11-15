@@ -10,17 +10,22 @@ using Shopee_Management.Models;
 
 namespace Shopee_Management.Controllers
 {
-    public class KHUYENMAIsController : Controller
+    public class KhuyenMai_CuaHangController : Controller
     {
         private TMDTdbEntities db = new TMDTdbEntities();
 
-        // GET: KHUYENMAIs
+
+        // Hiển thị danh sách Voucher của người bán hàng
         public ActionResult Index()
         {
-            var kHUYENMAIs = db.KHUYENMAIs.Include(k => k.NGUOIBANHANG).Include(k => k.NHANVIEN);
-            return View(kHUYENMAIs.ToList());
-        }
+            // Lấy ID người bán hàng từ session
+            string idNguoiBanHang = Session["StoreID"] as string;
 
+            // Lấy danh sách Voucher của người bán hàng
+            var voucherList = db.KHUYENMAIs.Where(v => v.id_nbh == idNguoiBanHang).ToList();
+
+            return View(voucherList);
+        }
         // GET: KHUYENMAIs/Details/5
         public ActionResult Details(int? id)
         {
@@ -40,7 +45,7 @@ namespace Shopee_Management.Controllers
         public ActionResult Create()
         {
             ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang");
-            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten");
+       
             return View();
         }
 
@@ -49,18 +54,25 @@ namespace Shopee_Management.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_voucher,ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,id_nbh,id_nv,soluong")] KHUYENMAI kHUYENMAI)
+        public ActionResult Create([Bind(Include = "id_voucher,ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,soluong")] KHUYENMAI voucher)
         {
             if (ModelState.IsValid)
             {
-                db.KHUYENMAIs.Add(kHUYENMAI);
+                // Lấy ID người bán hàng từ session
+                string idNguoiBanHang = Session["StoreID"] as string;
+
+                // Gán ID người bán hàng cho Voucher
+                voucher.id_nbh = idNguoiBanHang;
+                // Thêm Voucher mới vào cơ sở dữ liệu
+
+                db.KHUYENMAIs.Add(voucher);
                 db.SaveChanges();
+                TempData["Success"] = "Thêm Voucher thành công!";
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang", kHUYENMAI.id_nbh);
-            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten", kHUYENMAI.id_nv);
-            return View(kHUYENMAI);
+          
+            return View(voucher);
         }
 
         // GET: KHUYENMAIs/Edit/5
@@ -75,8 +87,7 @@ namespace Shopee_Management.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang", kHUYENMAI.id_nbh);
-            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten", kHUYENMAI.id_nv);
+           
             return View(kHUYENMAI);
         }
 
@@ -85,17 +96,21 @@ namespace Shopee_Management.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_voucher,ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,id_nbh,id_nv,soluong")] KHUYENMAI kHUYENMAI)
+        public ActionResult Edit([Bind(Include = "id_voucher,ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,soluong")] KHUYENMAI voucher)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(kHUYENMAI).State = EntityState.Modified;
+            {// Lấy ID người bán hàng từ session
+                string idNguoiBanHang = Session["StoreID"] as string;
+
+                // Gán ID người bán hàng cho Voucher
+                voucher.id_nbh = idNguoiBanHang;
+
+                db.Entry(voucher).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_nbh = new SelectList(db.NGUOIBANHANGs, "id_nbh", "ten_cua_hang", kHUYENMAI.id_nbh);
-            ViewBag.id_nv = new SelectList(db.NHANVIENs, "id_nv", "ho_ten", kHUYENMAI.id_nv);
-            return View(kHUYENMAI);
+           
+            return View(voucher);
         }
 
         // GET: KHUYENMAIs/Delete/5

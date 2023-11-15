@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Shopee_Management.Models.SANPHAM>
 @using Shopee_Management.Controllers
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "QuanLySanPham";
+    Layout = "~/Views/Shared/_KenhBanHangLayout.cshtml";
     var sanPhamList = (List<Shopee_Management.Models.SANPHAM>)ViewBag.SanPhamList;
     var nbhList = (List<Shopee_Management.Models.NGUOIBANHANG>)ViewBag.NBHList;
     var sizeList = (List<Shopee_Management.Models.KICHCO>)ViewBag.SizeList;
@@ -12,16 +12,14 @@
     var nganhhangList = (List<Shopee_Management.Models.NGANHHANG>)ViewBag.NganhHangList;
     var nhconList = (List<Shopee_Management.Models.NGANHHANGCON>)ViewBag.NganhHangConList;
     var nhc3List = (List<Shopee_Management.Models.NGANHHANGCAP3>)ViewBag.NganhHangC3List;
-    var modelData = Model;
 
     string key = Request.QueryString["key"];
     List<Shopee_Management.Models.SANPHAM> result = new List<Shopee_Management.Models.SANPHAM>();
-
 }
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-
+<h2>Cửa Hàng:  @ViewBag.NguoiBanHang.ten_cua_hang</h2>
 
 <div class="section__content section__content--p30">
     <div class="container-fluid">
@@ -33,7 +31,7 @@
                         <a style="width:100%" href=""></a>
                     </td>
                     <td class="control">
-                        <a href="~/QuanLySanPham/ThemSP">Thêm Sản Phẩm</a>
+                        <a href="~/NguoiBanHang/ThemSP">Thêm Sản Phẩm</a>
                     </td>
                     <td></td>
                 </tr>
@@ -67,8 +65,7 @@
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Giá sản phẩm</th>
-                                    <th>...</th>
-                                    <th>...</th>
+                                    <th>Cập nhật</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,22 +133,22 @@
 <script>
     $(".edit-product").click(function () {
         var productId = $(this).data("id");
-        window.location.href = '/QuanLySanPham/CapNhatSP/' + productId;
+        window.location.href = '/NguoiBanHang/CapNhatSP/' + productId;
     });
     $(".detail-product").click(function () {
         var productId = $(this).data("id");
-        window.location.href = '/QuanLySanPham/XemChiTietSanPham/' + productId;
+        window.location.href = '/NguoiBanHang/XemChiTietSanPham/' + productId;
     });
     $(".edit-product-detail").click(function () {
         var productId = $(this).data("id");
-        window.location.href = '/QuanLySanPham/CapNhatCTSP/' + productId;
+        window.location.href = '/NguoiBanHang/CapNhatCTSP/' + productId;
     });
 
     $('#searchButton').click(function () {
         var category = $('#categorySearch').val();
         // Send an AJAX request to search for products
         $.ajax({
-            url: '/QuanLySanPham/SearchByCategory',
+            url: '/NguoiBanHang/SearchByCategory',
             method: 'POST',
             data: { category: category },
             success: function (data) {

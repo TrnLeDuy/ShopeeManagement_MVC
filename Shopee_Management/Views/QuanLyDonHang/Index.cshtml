@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Shopee_Management.Models.DONHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #ffcc00;
+            color: #333;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tr:nth-child(odd) {
+            background-color: #f0f8ff;
+        }
+
+
+
+    .action-links a {
+        margin-right: 5px;
+        color: #0000ff;
+    }
+
+    p {
+        margin-top: 20px;
+        color: #555;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ee4d2d;
+    }
+
+    .btn {
+        min-width: 70px;
+        height: 34px;
+        text-decoration: none;
+        border: none;
+        border-radius: 2px;
+        font-size: 1.2rem;
+        padding: 0 12px;
+        outline: none;
+        cursor: pointer;
+        color: #fff !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.6rem;
+    }
+
+        .btn.btn--add {
+            color: #fff;
+            background-color: #0ab618;
+        }
+
+        .btn.btn--edit {
+            color: #fff;
+            background-color: #ffce3e;
+        }
+
+        .btn.btn--delete {
+            color: #fff;
+            background-color: #e72311;
+        }
+
+    .btn-form__controls-mr {
+        margin-right: 8px;
+    }
+</style>
+
+<h2>QUẢN LÝ ĐƠN HÀNG</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Ngày đặt
+            @Html.DisplayNameFor(model => model.ngay_dat)
+        </th>
+        <th>
+            Trạng thái đơn hàng
+            @Html.DisplayNameFor(model => model.trang_thai_dh)
+        </th>
+        <th>
+            Trạng thái thanh toán
+            @Html.DisplayNameFor(model => model.tt_thanh_toan)
+        </th>
+        <th>
+            Tổng tiền
+            @Html.DisplayNameFor(model => model.tong_cong)
+        </th>
+        <th>
+            Thành tiền
+            @Html.DisplayNameFor(model => model.thanh_tien)
+        </th>
+        <th>
+            Ngày giao
+            @Html.DisplayNameFor(model => model.ngay_giao)
+        </th>
+        <th>
+            Họ tên khách hàng
+            @Html.DisplayNameFor(model => model.KHACHHANG.ho_ten)
+        </th>
+        <th>
+            Tên cửa hàng
+            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
+        </th>
+        <th>
+            Phương thức thanh toán
+            @Html.DisplayNameFor(model => model.PTTT.ten_pttt)
+        </th>
+        <th>
+            Mã khuyến mãi
+            @Html.DisplayNameFor(model => model.KHUYENMAI.id_nbh)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_dat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.trang_thai_dh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tt_thanh_toan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tong_cong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thanh_tien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngay_giao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG.ho_ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGUOIBANHANG.ten_cua_hang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PTTT.ten_pttt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHUYENMAI.id_nbh)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_don }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_don }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_don })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -2,16 +2,17 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Chi Tiết</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Đơn Hàng</h4>
+    <h4>DONHANG</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Ngày Đặt
+            @Html.DisplayNameFor(model => model.ngay_dat)
         </dt>
 
         <dd>
@@ -19,7 +20,7 @@
         </dd>
 
         <dt>
-            Trạng Thái Đơn Hàng
+            @Html.DisplayNameFor(model => model.trang_thai_dh)
         </dt>
 
         <dd>
@@ -27,7 +28,7 @@
         </dd>
 
         <dt>
-            Tình Trạng Thanh Toán
+            @Html.DisplayNameFor(model => model.tt_thanh_toan)
         </dt>
 
         <dd>
@@ -35,7 +36,7 @@
         </dd>
 
         <dt>
-            Tổng Cộng
+            @Html.DisplayNameFor(model => model.tong_cong)
         </dt>
 
         <dd>
@@ -43,7 +44,7 @@
         </dd>
 
         <dt>
-            Thành Tiền
+            @Html.DisplayNameFor(model => model.thanh_tien)
         </dt>
 
         <dd>
@@ -51,7 +52,15 @@
         </dd>
 
         <dt>
-            Họ Tên Khách Hàng
+            @Html.DisplayNameFor(model => model.ngay_giao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_giao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KHACHHANG.ho_ten)
         </dt>
 
         <dd>
@@ -59,7 +68,7 @@
         </dd>
 
         <dt>
-            Tên Cửa Hàng
+            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
         </dt>
 
         <dd>
@@ -67,7 +76,7 @@
         </dd>
 
         <dt>
-            Phương Thức Thanh Toán
+            @Html.DisplayNameFor(model => model.PTTT.ten_pttt)
         </dt>
 
         <dd>
@@ -75,7 +84,7 @@
         </dd>
 
         <dt>
-            Mã Nhà Bán Hàng
+            @Html.DisplayNameFor(model => model.KHUYENMAI.id_nbh)
         </dt>
 
         <dd>
@@ -85,6 +94,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.id_don }) |
-    @Html.ActionLink("Danh sách đơn hàng", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_don }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

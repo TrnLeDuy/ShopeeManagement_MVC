@@ -10,18 +10,18 @@ using Shopee_Management.Models;
 
 namespace Shopee_Management.Controllers
 {
-    public class DONHANGsController : Controller
+    public class QuanLyDonHangController : Controller
     {
         private TMDTdbEntities db = new TMDTdbEntities();
 
-        // GET: DONHANGs
+        // GET: QuanLyDonHang
         public ActionResult Index()
         {
             var dONHANGs = db.DONHANGs.Include(d => d.KHACHHANG).Include(d => d.NGUOIBANHANG).Include(d => d.PTTT).Include(d => d.KHUYENMAI);
             return View(dONHANGs.ToList());
         }
 
-        // GET: DONHANGs/Details/5
+        // GET: QuanLyDonHang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace Shopee_Management.Controllers
             return View(dONHANG);
         }
 
-        // GET: DONHANGs/Create
+        // GET: QuanLyDonHang/Create
         public ActionResult Create()
         {
             ViewBag.id_kh = new SelectList(db.KHACHHANGs, "id_kh", "ho_ten");
@@ -46,12 +46,12 @@ namespace Shopee_Management.Controllers
             return View();
         }
 
-        // POST: DONHANGs/Create
+        // POST: QuanLyDonHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_don,ngay_dat,trang_thai_dh,tt_thanh_toan,tong_cong,thanh_tien,id_pttt,id_kh,id_nbh,id_voucher")] DONHANG dONHANG)
+        public ActionResult Create([Bind(Include = "id_don,ngay_dat,trang_thai_dh,tt_thanh_toan,tong_cong,thanh_tien,id_pttt,id_kh,id_nbh,id_voucher,ngay_giao")] DONHANG dONHANG)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Shopee_Management.Controllers
             return View(dONHANG);
         }
 
-        // GET: DONHANGs/Edit/5
+        // GET: QuanLyDonHang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,12 +86,12 @@ namespace Shopee_Management.Controllers
             return View(dONHANG);
         }
 
-        // POST: DONHANGs/Edit/5
+        // POST: QuanLyDonHang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_don,ngay_dat,trang_thai_dh,tt_thanh_toan,tong_cong,thanh_tien,id_pttt,id_kh,id_nbh,id_voucher")] DONHANG dONHANG)
+        public ActionResult Edit([Bind(Include = "id_don,ngay_dat,trang_thai_dh,tt_thanh_toan,tong_cong,thanh_tien,id_pttt,id_kh,id_nbh,id_voucher,ngay_giao")] DONHANG dONHANG)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace Shopee_Management.Controllers
             return View(dONHANG);
         }
 
-        // GET: DONHANGs/Delete/5
+        // GET: QuanLyDonHang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace Shopee_Management.Controllers
             return View(dONHANG);
         }
 
-        // POST: DONHANGs/Delete/5
+        // POST: QuanLyDonHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

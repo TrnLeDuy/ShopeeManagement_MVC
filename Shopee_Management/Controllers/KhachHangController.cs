@@ -17,13 +17,13 @@ namespace Shopee_Management.Controllers
     {
         private TMDTdbEntities db = new TMDTdbEntities();
 
-        public ActionResult Index()
-        {
-            var khachHang = db.KHACHHANGs.Include(t => t.NGUOIBANHANGs);
-            return View(khachHang.ToList());
-        }
         public ActionResult Default()
         {
+            // Kiểm tra xem có thông điệp lỗi không
+            if (TempData["Error"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["Error"].ToString();
+            }
             return View();
         }
 
@@ -58,6 +58,7 @@ namespace Shopee_Management.Controllers
                     if (user.tinh_trang_kh == 0)
                     {
                         TempData["Error"] = "Tài khoản này hiện tại đang không hiệu lực!";
+                        return RedirectToAction("Default");
                     }
                     else
                     {
@@ -87,7 +88,7 @@ namespace Shopee_Management.Controllers
                 else
                     TempData["Error"] = "Tên đăng nhập hoặc mật khẩu không đúng!";
             }
-            return View();
+            return RedirectToAction("Default");
         }
 
         [HttpPost]
@@ -117,7 +118,7 @@ namespace Shopee_Management.Controllers
                 }
             }
             TempData["Error"] = "Tạo tài khoản thất bại !";
-            return View();
+            return RedirectToAction("Default");
         }
 
         public ActionResult DoiMatKhau()

@@ -5,19 +5,46 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace Shopee_Management.Controllers
 {
-    public class QuanLySanPhamController : Controller
+    public class NguoiBanHangController : Controller
     {
+        private TMDTdbEntities entities1 = new TMDTdbEntities();
 
-        // GET: QuanLySanPham
-        public ActionResult Index()
+        // GET: NguoiBanHang
+        public ActionResult QuanLySanPham()
         {
+            
+            // Lấy ID người bán hàng từ session
+            string idNguoiBanHang = Session["StoreID"] as string;
+            var nguoiBanHang = entities1.NGUOIBANHANGs.FirstOrDefault(nbh => nbh.id_nbh == idNguoiBanHang);
+            // Lấy danh sách sản phẩm của người bán hàng
+            if (nguoiBanHang != null)
+            {
+                // Get the SANPHAM and CHITIETSP associated with the NGUOIBANHANG
+                var sanPhamList = entities1.SANPHAMs
+                    .Where(sp => sp.CHITIETSPs.Any(ct => ct.id_nbh == nguoiBanHang.id_nbh))
+                    .ToList();
+
+                ViewBag.SanPhamList = sanPhamList;
+                ViewBag.NguoiBanHang = nguoiBanHang;
+
+                return View();
+            }
+            else
+            {
+                // Handle if NGUOIBANHANG with the given id is not found
+                return HttpNotFound();
+            }
+        }
+        public ActionResult XemChiTietSanPham(int id)
+        {
+            string idNguoiBanHang = Session["StoreID"] as string;
+
             using (TMDTdbEntities entities1 = new TMDTdbEntities())
             {
+                var chiTietSPList = entities1.CHITIETSPs.Where(p => p.id_sp == id).ToList();
                 var sanPhamList = entities1.SANPHAMs.ToList();
-                var chiTietSPList = entities1.CHITIETSPs.ToList();
                 var nbhList = entities1.NGUOIBANHANGs.ToList();
                 var sizeList = entities1.KICHCOes.ToList();
                 var colorList = entities1.BANGMAUs.ToList();
@@ -38,38 +65,8 @@ namespace Shopee_Management.Controllers
                 ViewBag.NganhHangConList = nhconList;
                 ViewBag.NganhHangC3List = nhc3List;
                 return View();
-            }
-        }
-        public ActionResult XemChiTietSanPham (int id)
-        {
 
 
-            using (TMDTdbEntities entities1 = new TMDTdbEntities())
-            {
-                var chiTietSPList = entities1.CHITIETSPs.Where(p => p.id_sp == id).ToList();
-                var sanPhamList = entities1.SANPHAMs.ToList();
-                    var nbhList = entities1.NGUOIBANHANGs.ToList();
-                    var sizeList = entities1.KICHCOes.ToList();
-                    var colorList = entities1.BANGMAUs.ToList();
-                    var brandList = entities1.THUONGHIEUx.ToList();
-                    var memberList = entities1.XUATXUs.ToList();
-                    var nganhhangList = entities1.NGANHHANGs.ToList();
-                    var nhconList = entities1.NGANHHANGCONs.ToList();
-                    var nhc3List = entities1.NGANHHANGCAP3.ToList();
-                    var soluongList = entities1.BANGMAUs.ToList();
-                    ViewBag.SanPhamList = sanPhamList;
-                    ViewBag.ChiTietSPList = chiTietSPList;
-                    ViewBag.NBHList = nbhList;
-                    ViewBag.SizeList = sizeList;
-                    ViewBag.ColorList = colorList;
-                    ViewBag.BrandList = brandList;
-                    ViewBag.MemberList = memberList;
-                    ViewBag.NganhHangList = nganhhangList;
-                    ViewBag.NganhHangConList = nhconList;
-                    ViewBag.NganhHangC3List = nhc3List;
-                    return View();
-                
-                
             }
         }
         [HttpGet]
@@ -81,16 +78,33 @@ namespace Shopee_Management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemSP(SANPHAM sanpham)
         {
+            string idNguoiBanHang = Session["StoreID"] as string;
+
             if (ModelState.IsValid)
             {
                 using (TMDTdbEntities entities1 = new TMDTdbEntities())
                 {
                     // Thêm sản phẩm vào cơ sở dữ liệu
                     entities1.SANPHAMs.Add(sanpham);
+                    entities1.SaveChanges();  // SaveChanges here to get the id_sp
+
+                    // Tạo và thêm chi tiết sản phẩm
+                    CHITIETSP chiTietSP = new CHITIETSP
+                    {
+                        id_sp = sanpham.id_sp,
+                        id_nbh = idNguoiBanHang,
+                        id_brand = 1,
+                        id_member = "US"
+                        // Các giá trị khác nếu cần
+                    };
+
+                    entities1.CHITIETSPs.Add(chiTietSP);
                     entities1.SaveChanges();
                 }
-                return RedirectToAction("Index");
+
+                return RedirectToAction("QuanLySanPham");
             }
+
             return View(sanpham);
         }
         [HttpGet]
@@ -121,7 +135,7 @@ namespace Shopee_Management.Controllers
                 var nhc3List = entities1.NGANHHANGCAP3.ToList();
                 SelectList nhc3SelectList = new SelectList(nhc3List, "id_nhc3", "ten_nhc3");
                 var soluongList = entities1.BANGMAUs.ToList();
-               
+
 
                 // Truyền SelectList vào ViewBag để sử dụng trong View
                 ViewBag.ChiTietSPSelectList = ctsanPhamSelectList;
@@ -141,13 +155,14 @@ namespace Shopee_Management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemCTSP(CHITIETSP ctsanpham)
         {
+            string idNguoiBanHang = Session["StoreID"] as string;
             using (TMDTdbEntities entities1 = new TMDTdbEntities())
             {
-                
+
                 var ctsanPhamList = entities1.SANPHAMs.ToList();
                 SelectList ctsanPhamSelectList = new SelectList(ctsanPhamList, "id_sp", "ten_sp");
 
-               
+
                 var nbhList = entities1.NGUOIBANHANGs.ToList();
                 SelectList nbhSelectList = new SelectList(nbhList, "id_nbh", "ten_cua_hang");
                 var sizeList = entities1.KICHCOes.ToList();
@@ -177,18 +192,18 @@ namespace Shopee_Management.Controllers
                 ViewBag.NganhHangConSelectList = nhconSelectList;
                 ViewBag.NganhHangC3SelectList = nhc3SelectList;
                 ViewBag.SoLuongList = soluongList;
-
+                ctsanpham.id_nbh = idNguoiBanHang;
                 // Tương tự, bạn cần thiết lập SelectList cho các trường khác ở đây
 
                 if (ModelState.IsValid)
                 {
-                    
+
                     {
                         // Thêm sản phẩm vào cơ sở dữ liệu
                         entities1.CHITIETSPs.Add(ctsanpham);
                         entities1.SaveChanges();
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("QuanLySanPham");
                 }
                 return View(ctsanpham);
             }
@@ -228,7 +243,7 @@ namespace Shopee_Management.Controllers
                         // Save changes to the database
                         entities1.SaveChanges();
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("QuanLySanPham");
                     }
                 }
                 // Handle the case where the product was not found or there was an issue with saving.
@@ -297,7 +312,7 @@ namespace Shopee_Management.Controllers
                     ViewBag.NganhHangSelectList = nganhhangSelectList;
                     ViewBag.NganhHangConSelectList = nhconSelectList;
                     ViewBag.NganhHangC3SelectList = nhc3SelectList;
-                    ViewBag.SoLuongList = soluongList; 
+                    ViewBag.SoLuongList = soluongList;
                     return View(product);
                 }
             }
@@ -332,7 +347,7 @@ namespace Shopee_Management.Controllers
                         // Save changes to the database
                         entities1.SaveChanges();
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("QuanLySanPham");
                     }
                 }
                 // Handle the case where the product was not found or there was an issue with saving.
@@ -361,10 +376,10 @@ namespace Shopee_Management.Controllers
             return Json(new { success = false });
         }
         [HttpPost]
-        public List<SANPHAM> Search (string key)
+        public List<SANPHAM> Search(string key)
         {
             TMDTdbEntities entity = new TMDTdbEntities();
-            return entity.SANPHAMs.SqlQuery("Select * FROM SANPHAM JOIN CHITIETSP ON SANPHAM.id_sp = CHITIETSP.id_sp JOIN NGANHHANG ON CHITIETSP.id_nganhhang = NGANHHANG.id_nganhhang WHERE NGANHHANG.ten_nganhhang like N'%" + key+"%'").ToList();
+            return entity.SANPHAMs.SqlQuery("Select * FROM SANPHAM JOIN CHITIETSP ON SANPHAM.id_sp = CHITIETSP.id_sp JOIN NGANHHANG ON CHITIETSP.id_nganhhang = NGANHHANG.id_nganhhang WHERE NGANHHANG.ten_nganhhang like N'%" + key + "%'").ToList();
         }
 
         [HttpPost]
@@ -380,32 +395,5 @@ namespace Shopee_Management.Controllers
                 return PartialView("_ProductListPartial", products);
             }
         }
-        public ActionResult SanPhamCuaToi(string id)
-        {
-            using (TMDTdbEntities entities1 = new TMDTdbEntities())
-            {
-                // Get the NGUOIBANHANG with the given id
-                var nguoiBanHang = entities1.NGUOIBANHANGs.FirstOrDefault(nbh => nbh.id_nbh == id);
-
-                if (nguoiBanHang != null)
-                {
-                    // Get the SANPHAM and CHITIETSP associated with the NGUOIBANHANG
-                    var sanPhamList = entities1.SANPHAMs
-                        .Where(sp => sp.CHITIETSPs.Any(ct => ct.id_nbh == nguoiBanHang.id_nbh))
-                        .ToList();
-
-                    ViewBag.SanPhamList = sanPhamList;
-                    ViewBag.NguoiBanHang = nguoiBanHang;
-
-                    return View();
-                }
-                else
-                {
-                    // Handle if NGUOIBANHANG with the given id is not found
-                    return HttpNotFound();
-                }
-            }
-        }
     }
 }
-

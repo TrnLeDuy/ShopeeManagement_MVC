@@ -25,9 +25,8 @@ CREATE TABLE KHACHHANG (
     diem_tich_luy INT DEFAULT 0
 );
 
-
-
-
+Insert into KHACHHANG(id_kh,ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_kh,diem_tich_luy) values ('KH001',N'Nguyễn Hà Xuân Tài',0926247716,'xuantai@gmail.com','2002-01-16',N'Q.12,TP.Hồ Chí Minh','Batai123','Batai123','GODDID',1,0)
+Insert into KHACHHANG(id_kh,ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_kh,diem_tich_luy) values ('KH002',N'Phan Lại Hào',0902569671,'haomam@gmail.com','2002-12-2',N'Q.11,TP.Hồ Chí Minh','haomam123','haomam123','YOUSEE',2,0)
 
 CREATE TABLE NGUOIBANHANG (
 	id_nbh VARCHAR(255),
@@ -37,6 +36,10 @@ CREATE TABLE NGUOIBANHANG (
 	PRIMARY KEY (id_nbh),
 	FOREIGN KEY (id_kh) REFERENCES KHACHHANG(id_kh)
 );
+
+Insert into NGUOIBANHANG(id_nbh,ten_cua_hang,trang_thai_ch,id_kh) values ('NBH01','COZY WORLDWIDE',1,'KH001')
+Insert into NGUOIBANHANG(id_nbh,ten_cua_hang,trang_thai_ch,id_kh) values ('NBH02','CH2 WORLDWIDE',1,'KH002')
+SELECT * from NGUOIBANHANG
 /* ---------- NGƯỜI DÙNG ---------- */ 
 /*------------------------------------------------------------*/
 /* ---------- BỘ PHẬN QUẢN LÝ ---------- */
@@ -60,7 +63,7 @@ CREATE TABLE NHANVIEN (
 	ngay_sinh DATE NULL,
 	dia_chi NVARCHAR(MAX) NULL,
 	username VARCHAR(255) UNIQUE NULL,
-	password VARCHAR(255) NULL,
+	[password] VARCHAR(255) NULL,
 	avatar VARCHAR(255) NULL,
 	tinh_trang_nv INT NULL,
 	id_cv VARCHAR(3),
@@ -69,6 +72,10 @@ CREATE TABLE NHANVIEN (
 	FOREIGN KEY (id_cv) REFERENCES CHUCVU(id_cv),
 	FOREIGN KEY (id_pb) REFERENCES PHONGBAN(id_pb)
 );
+Insert into NHANVIEN(ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_nv) values (N'Trần Lê Duy',0903404070,'leduy123@gmail.com','2002-01-01',N'Q.10,TP.Hồ Chí Minh','duy123','duy123','HELLO',1)
+Insert into NHANVIEN(ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_nv) values (N'Nguyễn Hoàng Kha',0969698998,'hoangkha123@gmail.com','2002-02-02',N'Q.10,TP.Hồ Chí Minh','kha123','kha123','HI',1)
+
+Select * from nhanvien
 /* ---------- BỘ PHẬN QUẢN LÝ ---------- */
 /*------------------------------------------------------------*/
 /* ---------- SẢN PHẨM ---------- */
@@ -162,10 +169,16 @@ CREATE TABLE KHUYENMAI (
 	so_luong INT NULL,
 	id_nbh VARCHAR(255),
 	id_nv INT,
+	so_luong INT NULL,
 	PRIMARY KEY (id_voucher),
 	FOREIGN KEY (id_nbh) REFERENCES NGUOIBANHANG(id_nbh),
 	FOREIGN KEY (id_nv) REFERENCES NHANVIEN(id_nv),
 );
+
+Insert into KHUYENMAI(ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,id_nbh,id_nv,soluong) values (40,'2023-11-11','2023-11-11','2023-11-15','NBH01',1,20)
+Insert into KHUYENMAI(ty_le_giam,ngay_tao,ngay_bat_dau,ngay_ket_thuc,id_nbh,id_nv,soluong) values (50,'2023-12-12','2023-11-12','2023-12-15','NBH02',2,30)
+
+SELECT * from KHUYENMAI
 /* ---------- VOUCHER ---------- */
 /*------------------------------------------------------------*/
 /* ---------- ĐƠN HÀNG ---------- */

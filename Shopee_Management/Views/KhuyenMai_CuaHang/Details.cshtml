@@ -78,6 +78,7 @@
     .text-danger {
         color: #ff0000;
     }
+
     h2 {
         color: #ee4d2d;
         font-size: 24px;
@@ -101,15 +102,16 @@
         margin-top: 20px;
     }
 
-        .action-links   {
-            margin-right: 20px;
-            text-decoration: none;
-            color: #007bff;
+    .action-links {
+        margin-right: 20px;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+        .action-links a:hover {
+            text-decoration: underline;
         }
 
-            .action-links a:hover {
-                text-decoration: underline;
-            }
     .form-actions {
         margin-top: 20px;
     }
@@ -117,7 +119,6 @@
         .form-actions .btn {
             margin-right: 10px;
         }
-
 </style>
 
 
@@ -165,19 +166,6 @@
                 @Html.DisplayFor(model => model.soluong)
             </dd>
 
-            <dt>
-                <label>Tên cửa hàng</label>
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NGUOIBANHANG.ten_cua_hang)
-            </dd>
-
-            <dt>
-                <label>Nhân viên</label>
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NHANVIEN.ho_ten)
-            </dd>
         </dl>
     </div>
     <div class="action-links">

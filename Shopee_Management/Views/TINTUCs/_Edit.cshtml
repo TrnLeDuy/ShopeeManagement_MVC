@@ -1,25 +1,22 @@
 ﻿@model Shopee_Management.Models.TINTUC
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">SỬA TIN TỨC</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("Edit", "TINTUCs", FormMethod.Post, new { id = "editForm" }))
+    {
+        @Html.AntiForgeryToken()
 
-
-
-
-@using (Html.BeginForm())
-{
-    <h4 style="text-align:center;">CHỈNH SỬA</h4>
-    @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id_tin_tuc)
 
         <div class="form-group">
-            <strong>TIÊU ĐỀ</strong>
+            @Html.LabelFor(model => model.tieu_de, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
@@ -27,15 +24,15 @@
         </div>
 
         <div class="form-group">
-            <strong>NỘI DUNG</strong>
+            @Html.LabelFor(model => model.noi_dung, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.noi_dung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.noi_dung, new { @class = "form-control", rows = 4 })
                 @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <strong>NGÀY ĐĂNG</strong>
+            @Html.LabelFor(model => model.ngay_dang, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ngay_dang, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
@@ -43,25 +40,19 @@
         </div>
 
         <div class="form-group">
-            <strong>THỂ LOẠI</strong>
+            @Html.LabelFor(model => model.id_theloai, "Thể Loại", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.id_theloai, ViewBag.TheloaiList as SelectList, "Chọn thể loại", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="LƯU" class="btn btn-success" />|
-                @Html.ActionLink("TRỞ VỀ", "Index", new {id = Model.id_tin_tuc}, new { @class = "btn btn-primary" })
+                <input type="submit" value="Lưu" class="btn btn-success" />
             </div>
-
         </div>
     </div>
-}
-
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    }
+</div>
