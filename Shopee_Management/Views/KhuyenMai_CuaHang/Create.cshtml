@@ -1,0 +1,152 @@
+﻿@model Shopee_Management.Models.KHUYENMAI
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    .create-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        color: #ee4d2d;
+        font-size: 24px;
+    }
+
+    .table tr th {
+        color: #fff;
+        text-align: center;
+        background-color: #ee4d2d;
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-horizontal {
+        margin-top: 50px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label.control-label {
+        font-weight: bold;
+    }
+
+    .col-md-6 {
+        width: 50%;
+        color: #333;
+    }
+
+    .col-md-10 {
+        width: 85%;
+    }
+
+    .form-control {
+        width: 120%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-default {
+        background-color: #ee4d2d;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+    }
+
+        .btn-default:hover {
+            background-color: #ee4d2d;
+        }
+
+    .text-danger {
+        color: #ff0000;
+    }
+</style>
+<h2>THÊM MÃ MỚI</h2>
+<div class="create-container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <table class="table">
+            <tr><th>KHUYẾN MÃI</th></tr>
+
+        </table>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-6">Tỷ lệ giảm</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ty_le_giam, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ty_le_giam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-6">Ngày tạo</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ngay_tao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngay_tao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-6">Ngày bắt đầu</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ngay_bat_dau, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngay_bat_dau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-6">Ngày kết thúc</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ngay_ket_thuc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ngay_ket_thuc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-6">Số lượng</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <!-- Add similar styling for other form fields -->
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

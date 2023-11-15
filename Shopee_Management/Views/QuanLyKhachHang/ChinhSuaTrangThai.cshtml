@@ -1,0 +1,83 @@
+﻿@model Shopee_Management.Models.KHACHHANG
+
+@{
+    Layout = null; // This will exclude the shared layout for this specific partial view
+}
+
+<style>
+    /* Style cho form */
+    .form-horizontal {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Style cho nhãn (label) */
+    .control-label {
+        font-weight: bold;
+    }
+
+    /* Style cho dropdown */
+    .form-control {
+        width: 100%;
+        padding: 8px;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.id_kh)
+
+    <div class="form-group">
+        <label for="ho_ten" class="control-label">Họ và tên</label>
+
+        <div>
+            @Html.DisplayFor(model => model.ho_ten)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username" class="control-label">Tài khoản</label>
+
+        <div>
+            @Html.DisplayFor(model => model.username)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="tinh_trang_kh" class="control-label">Tình trạng tài khoản</label>
+        <div>
+            @Html.DropDownListFor(model => model.tinh_trang_kh,
+            new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "Khóa" },
+                new SelectListItem { Value = "1", Text = "Hoạt động" }
+            },
+            new { @class = "form-control" })
+        </div>
+    </div>
+
+        <div class="form-group modal-footer">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary">Đóng</button>
+        </div>
+    </div>
+}
+
+<script>
+    // Close button in modal header
+    $('.modal-header .close').on('click', function () {
+        closeModal();
+    });
+    // Close button in modal footer
+    $('.modal-footer .btn-secondary').on('click', function () {
+        closeModal();
+    });
+    function closeModal() {
+        // Hide the modal
+        $('#editModal').css('display', 'none');
+    }
+</script>
