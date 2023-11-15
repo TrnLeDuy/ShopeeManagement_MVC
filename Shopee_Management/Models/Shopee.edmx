@@ -166,6 +166,10 @@
           <Property Name="ten_cua_hang" Type="nvarchar(max)" />
           <Property Name="trang_thai_ch" Type="int" />
           <Property Name="id_kh" Type="varchar" MaxLength="255" />
+          <Property Name="sdt_ch" Type="char" MaxLength="50" />
+          <Property Name="dia_chi_ch" Type="nvarchar(max)" />
+          <Property Name="hinh_cua_hang" Type="varchar" MaxLength="255" />
+          <Property Name="email_ch" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -1027,6 +1031,10 @@
           <NavigationProperty Name="DONHANGs" Relationship="Self.FK__DONHANG__id_nbh__6A30C649" FromRole="NGUOIBANHANG" ToRole="DONHANG" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK__NGUOIBANH__id_kh__3B75D760" FromRole="NGUOIBANHANG" ToRole="KHACHHANG" />
           <NavigationProperty Name="KHUYENMAIs" Relationship="Self.FK__KHUYENMAI__id_nb__628FA481" FromRole="NGUOIBANHANG" ToRole="KHUYENMAI" />
+          <Property Name="sdt_ch" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="dia_chi_ch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hinh_cua_hang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email_ch" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -1890,6 +1898,10 @@
           <EntitySetMapping Name="NGUOIBANHANGs">
             <EntityTypeMapping TypeName="TMDTdbModel.NGUOIBANHANG">
               <MappingFragment StoreEntitySet="NGUOIBANHANG">
+                <ScalarProperty Name="email_ch" ColumnName="email_ch" />
+                <ScalarProperty Name="hinh_cua_hang" ColumnName="hinh_cua_hang" />
+                <ScalarProperty Name="dia_chi_ch" ColumnName="dia_chi_ch" />
+                <ScalarProperty Name="sdt_ch" ColumnName="sdt_ch" />
                 <ScalarProperty Name="id_nbh" ColumnName="id_nbh" />
                 <ScalarProperty Name="ten_cua_hang" ColumnName="ten_cua_hang" />
                 <ScalarProperty Name="trang_thai_ch" ColumnName="trang_thai_ch" />
