@@ -3,6 +3,7 @@
 <!-- Your edit form here -->
 @using (Html.BeginForm("CapNhatProduct", "QuanLySanPham", FormMethod.Post))
 {
+    <div style="color: #ee4d2d;font-size:34px;margin-bottom:20px">Cập nhật sản phẩm</div>
     @Html.AntiForgeryToken()
 
     <!-- Product ID -->
@@ -19,10 +20,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" style="margin-top: 20px; background-color: #0ab618;color:white" />
             </div>
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Delete" id="delete-product" />
+                <input type="button" value="Delete" id="delete-product" style="margin-top: 20px; background-color: #da6767;color:white" />
             </div>
         </div>
     </div>
