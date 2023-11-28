@@ -1,0 +1,28 @@
+﻿<div style="margin: 10px auto; width:90%;">
+    <h2 style="text-align:center;">DANH SÁCH TIN TỨC</h2>
+    <hr />
+    <div class="row">
+        @foreach (var tinTuc in Model)
+        {
+            <div class="col-lg-6 mb-3" style="background-color: #E5E5E5;">
+                <div class="card h-100">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <a href="@Url.Action("Details", new { id = tinTuc.id_tin_tuc })">
+                                <img src="~/imagesTINTUC/@tinTuc.image_tintuc" alt="@tinTuc.tieu_de" style="margin:10px; width: 100%; height:auto;" class="card-img">
+                            </a>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="@Url.Action("Details", new { id = tinTuc.id_tin_tuc })" style="color: #666666; transition: color 0.3s;" onmouseover="this.style.color='orange';" onmouseout="this.style.color='#666666';">@tinTuc.tieu_de</a>
+                                </h4>
+                                <p class="card-text" style="text-align:right;">@tinTuc.ngay_dang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -13,51 +13,61 @@
     <h4 style="text-align:center;">CHỈNH SỬA</h4>
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id_tin_tuc)
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id_tin_tuc)
 
-        <div class="form-group">
-            <strong>TIÊU ĐỀ</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong>NỘI DUNG</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.noi_dung, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong>NGÀY ĐĂNG</strong>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ngay_dang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <strong>THỂ LOẠI</strong>
-            <div class="col-md-10">
-                @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="LƯU" class="btn btn-success" />|
-                @Html.ActionLink("TRỞ VỀ", "Index", new {id = Model.id_tin_tuc}, new { @class = "btn btn-primary" })
-            </div>
-
+    <div class="form-group">
+        <strong>TIÊU ĐỀ</strong>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        <strong>NỘI DUNG</strong>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.noi_dung, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Hình ảnh
+        <div class="col-md-10">
+            CHỌN ẢNH MỚI
+            <input type="file" name="image_tintuc" style="padding-bottom: 20px;" />
+            <img src="~/ImagesTINTUC/@Model.image_tintuc" style="height:200px; width:300px;" />(Ảnh hiện tại)
+            @Html.ValidationMessageFor(model => model.image_tintuc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <strong>NGÀY ĐĂNG</strong>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ngay_dang, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <strong>THỂ LOẠI</strong>
+        <div class="col-md-10">
+            @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="LƯU" class="btn btn-success" />|
+            @Html.ActionLink("TRỞ VỀ", "Index", new { id = Model.id_tin_tuc }, new { @class = "btn btn-primary" })
+        </div>
+
+    </div>
+</div>
 }
 
 
