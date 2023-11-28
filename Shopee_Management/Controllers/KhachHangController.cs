@@ -267,5 +267,39 @@ namespace Shopee_Management.Controllers
             // Nếu ModelState không hợp lệ, hiển thị lại form đăng ký với thông báo lỗi
             return View(model);
         }
+
+
+        //----------------------------------------
+
+        //Thông tin quản lý của khách hàng
+
+        public ActionResult profile(string id)
+        {
+            id = Session["ID"] as string;
+            // Lấy thông tin khách hàng từ id
+            var khachHang = db.KHACHHANGs.Find(id);
+
+            if (khachHang == null)
+            {
+                // Xử lý khi không tìm thấy khách hàng
+                return HttpNotFound();
+            }
+
+            return View(khachHang);
+        }
+        public ActionResult address(string id)
+        {
+            id = Session["ID"] as string;
+            // Lấy thông tin khách hàng từ id
+            var khachHang = db.KHACHHANGs.Find(id);
+
+            if (khachHang == null)
+            {
+                // Xử lý khi không tìm thấy khách hàng
+                return HttpNotFound();
+            }
+
+            return View(khachHang);
+        }
     }
 }
