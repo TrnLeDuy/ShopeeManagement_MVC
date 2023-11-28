@@ -25,17 +25,17 @@
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
-                        <li class="header__navbar-item header__navbar-item--separate">
+                        <li>
                             @{
                                 if (Session["KhachHang"] != null)
                                 {
                                     if (Session["StoreID"] == null)
                                     {
-                                        <a href="@Url.Action("DangKyCuaHang", "KhachHang")" class="default_b">Kênh người bán</a>
+                                        <a href="@Url.Action("DangKyCuaHang", "KhachHang")" class="header__navbar-item header__navbar-item--separate default_b">Kênh người bán</a>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("QuanLySanPham", "NguoiBanHang")" class="default_b">Kênh người bán</a>
+                                        <a href="@Url.Action("QuanLySanPham", "NguoiBanHang")" class="header__navbar-item header__navbar-item--separate default_b">Kênh người bán</a>
                                     }
                                 }
                                 else
@@ -134,20 +134,17 @@
                             <li class="header__navbar-item header__navbar-user">
                                 @if (Session["Avatar"] == null)
                                 {
-                                    <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" class="header__navbar-user-img"/>
+                                    <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" class="header__navbar-user-img" />
                                 }
                                 else
                                 {
                                     <img src="~/CustomerAvatar/@Session["Avatar"]" alt="" class="header__navbar-user-img">
                                 }
-                                <span class="header__navbar-user-name">@Session["HoTen"]</span>
+                                <span class="header__navbar-user-name">@Session["Username"]</span>
 
                                 <ul class="header__navbar-user-menu">
                                     <li class="header__navbar-user-item">
-                                        <a href="#">Tài khoản của tôi</a>
-                                    </li>
-                                    <li class="header__navbar-user-item">
-                                        <a href="#">Địa chỉ của tôi</a>
+                                        <a href="/KhachHang/profile">Tài khoản của tôi</a>
                                     </li>
                                     <li class="header__navbar-user-item">
                                         <a href="#">Đơn mua</a>
@@ -298,167 +295,8 @@
 
         <footer class="footer">
         </footer>
-    </div>
+    </div>        
+    
 
-    <!-- Modal -->
-    <!--<div class="modal" id="modal" style="display: none;">
-        <div class="modal__overlay"></div>
-
-        <div class="modal__body">-->
-            <!-- Register form -->
-            <!--<div class="auth-form" id="register-form">
-                <div class="auth-form__container">
-                    <div class="auth-form__header">
-                        <h3 class="auth-form__heading">Đăng ký</h3>
-                        <span class="auth-form__switch-btn btn-login">Đăng nhập</span>
-                    </div>
-
-                    <div class="auth-form__form">
-                        <div class="auth-form__group">
-                            <input type="text" class="auth-form__input" placeholder="Email của bạn">
-                        </div>
-                        <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Mật khẩu của bạn">
-                        </div>
-                        <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Nhập lại mật khẩu">
-                        </div>
-                    </div>
-
-                    <div class="auth-form__aside">
-                        <p class="auth-form__policy-text">
-                            Bằng việc đăng kí, bạn đã đồng ý với Shopee về
-                            <a href="" class="auth-form__text-link">Điều khoản dịch vụ</a> &
-                            <a href="" class="auth-form__text-link">Chính sách bảo mật</a>
-                        </p>
-                    </div>
-
-                    <div class="auth-form__controls">
-                        <button class="btn btn--normal auth-form__controls-back">TRỞ LẠI</button>
-                        <button class="btn btn--primary">ĐĂNG KÝ</button>
-                    </div>
-                </div>
-                <div class="auth-form__socials">
-                    <a href="" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
-                        <span class="auth-form__socials-title">
-                            Kết nối với facebook
-                        </span>
-                    </a>
-                    <a href="" class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title">
-                            Kết nối với Google
-                        </span>
-                    </a>
-                </div>
-            </div>-->
-
-            <!-- Login form -->
-            <!--<div class="auth-form" id="login-form" style="display: none;">
-                <div class="auth-form__container">
-                    <div class="auth-form__header">
-                        <h3 class="auth-form__heading">Đăng nhập</h3>
-                        <span class="auth-form__switch-btn btn-register">Đăng ký</span>
-                    </div>
-
-                    <div class="auth-form__form">
-                        <div class="auth-form__group">
-                            <input type="text" class="auth-form__input" placeholder="Email của bạn">
-                        </div>
-                        <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Mật khẩu của bạn">
-                        </div>
-                    </div>
-
-                    <div class="auth-form__aside">
-                        <div class="auth-form__help">
-                            <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
-                            <span class="auth-form__help-separate"></span>
-                            <a href="" class="auth-form__help-link">Cần trợ giúp?</a>
-                        </div>
-                    </div>
-
-                    <div class="auth-form__controls">
-                        <button class="btn btn--normal auth-form__controls-back">TRỞ LẠI</button>
-                        <button class="btn btn--primary">ĐĂNG NHẬP</button>
-                    </div>
-                </div>
-                <div class="auth-form__socials">
-                    <a href="" class="auth-form__socials--facebook btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
-                        <span class="auth-form__socials-title">
-                            Kết nối với facebook
-                        </span>
-                    </a>
-                    <a href="" class="auth-form__socials--google btn btn--size-s btn--with-icon">
-                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                        <span class="auth-form__socials-title">
-                            Kết nối với Google
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-
-
-    <!-- Function switch between login modal and register modal -->
-    <!--<script>
-        const registerForm = document.getElementById('register-form');
-        const loginForm = document.getElementById('login-form');
-        /* Swtich to register */
-        document.querySelector('.btn-register').addEventListener('click', () => {
-            registerForm.style.display = 'block';
-            loginForm.style.display = 'none';
-        });
-        /* Swtich to login */
-        document.querySelector('.btn-login').addEventListener('click', () => {
-            loginForm.style.display = 'block';
-            registerForm.style.display = 'none';
-        });
-
-
-    </script>-->
-
-    <!-- Function show or hide authentication modal -->
-    <!--<script>
-        const modal = document.getElementById('modal');
-        const registerLink = document.getElementById('register-link');
-        const loginLink = document.getElementById('login-link');
-        const authForms = document.querySelectorAll('.auth-form');
-        const backBtns = document.querySelectorAll('.auth-form__controls-back');
-
-        function hideModal() {
-            modal.style.display = 'none';
-        }
-        /* Show register modal when clicking 'Đăng ký' */
-        registerLink.addEventListener('click', () => {
-            modal.style.display = 'flex'; // Show the modal
-            registerForm.style.display = 'block'; // Show the registration form
-            loginForm.style.display = 'none'; // Hide the login form
-        });
-
-        /* Show login modal when clicking 'Đăng nhập' */
-        loginLink.addEventListener('click', () => {
-            modal.style.display = 'flex'; // Show the modal
-            loginForm.style.display = 'block'; // Show the login form
-            registerForm.style.display = 'none'; // Hide the registration form
-        });
-
-        modal.addEventListener('click', hideModal);
-        /* Hide authentication modal when clicking 'Trở lại' */
-        for (const backBtn of backBtns) {
-            backBtn.addEventListener('click', hideModal);
-        }
-
-        /* Hide authentication modal when clicking overlay */
-        for (const authForm of authForms) {
-            authForm.addEventListener('click', function(e) {
-                e.stopPropagation();
-            })
-        }
-    </script>-->
 </body>
 </html>

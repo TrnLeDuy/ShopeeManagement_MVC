@@ -2603,7 +2603,10 @@
     <Content Include="CoolAdmin-master\vendor\wow\animate.css" />
     <Content Include="CoolAdmin-master\vendor\wow\wow.min.js" />
     <Content Include="CSS\dangnhap.css" />
+    <Content Include="CSS\account.css" />
     <Content Include="CustomerAvatar\avatar.jpg" />
+    <Content Include="CustomerAvatar\face28.jpg" />
+    <Content Include="CustomerAvatar\face7.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -4591,6 +4594,7 @@
     <Content Include="star-admin2\template\images\faces\face25.jpg" />
     <Content Include="star-admin2\template\images\faces\face26.jpg" />
     <Content Include="star-admin2\template\images\faces\face27.jpg" />
+    <Content Include="star-admin2\template\images\faces\face28.jpg" />
     <Content Include="star-admin2\template\images\faces\face3.jpg" />
     <Content Include="star-admin2\template\images\faces\face4.jpg" />
     <Content Include="star-admin2\template\images\faces\face5.jpg" />
@@ -6274,6 +6278,7 @@
     <Content Include="Views\TINTUCs\_Delete.cshtml" />
     <Content Include="Views\TINTUCs\_Details.cshtml" />
     <Content Include="Views\TINTUCs\_Edit.cshtml" />
+    <Content Include="Views\KhachHang\profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
