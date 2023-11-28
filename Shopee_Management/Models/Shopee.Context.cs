@@ -55,6 +55,7 @@ namespace Shopee_Management.Models
         public virtual DbSet<TINTUC> TINTUCs { get; set; }
         public virtual DbSet<VANCHUYEN> VANCHUYENs { get; set; }
         public virtual DbSet<XUATXU> XUATXUs { get; set; }
+        public virtual DbSet<BINHLUAN> BINHLUANs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -1,15 +1,16 @@
 ﻿@model Shopee_Management.Models.KHACHHANG
 
 @{
+    ViewBag.Title = "editProfile";
     Layout = "~/Views/Shared/_ShopeeLayout.cshtml";
-    string maskedEmail = $"{Model.email.Substring(0, 2)}******@{Model.email.Split('@')[1]}";
-
-    Model.sdt = Model.sdt.TrimEnd();
-    string maskedPhoneNumber = new string('*', Model.sdt.Length - 2) + Model.sdt.Substring(Math.Max(0, Model.sdt.Length - 2));
-    
     string imageUrl = $"~/CustomerAvatar/{Model.avatar}";
 }
+
 <link href="~/CSS/account.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 <section>
     <div class="container profile">
@@ -55,14 +56,14 @@
                     <div class="stardust-dropdown__item-body stardust-dropdown__item-body--open">
                         <div class="dropdown-group">
                             <a class="menu-group__content" href="/KhachHang/profile">
-                                <span class="pf-body__content form_active">Hồ sơ</span>
+                                <span class="pf-body__content">Hồ sơ</span>
                             </a>
                             <a class="menu-group__content" href="/KhachHang/editProfile">
-                                <span class="pf-body__content">Chỉnh sửa Hồ sơ</span>
+                                <span class="pf-body__content form_active">Chỉnh sửa Hồ sơ</span>
                             </a>
                             @*<a class="menu-group__content active" href="/KhachHang/address">
-                                <span class="pf-body__content">Địa chỉ</span>
-                            </a>*@
+                                    <span class="pf-body__content">Địa chỉ</span>
+                                </a>*@
                             <a class="menu-group__content active" href="#">
                                 <span class="pf-body__content">Đổi mật khẩu</span>
                             </a>
@@ -101,11 +102,14 @@
                     <div class="main-body__content">
                         <div class="head-main__content">
                             <h1 class="head-form__item">Hồ sơ của tôi</h1>
-                            <div class="head-form__descript">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+                            <div class="head-form__descript">Cập nhật thông tin hồ sơ để bảo mật tài khoản</div>
                         </div>
                         <div class="body-main__content">
                             <div class="body-main__left">
-                                <form>
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
                                     <table class="resize-form">
                                         <tr>
                                             <td class="label-title">
@@ -123,51 +127,20 @@
                                             </td>
                                             <td class="value-title">
                                                 <div class="value-style">
-                                                    <div class="value-content">@Model.ho_ten</div>
+                                                    <div class="value-content">@Html.EditorFor(model => model.ho_ten, new { htmlAttributes = new { @class = "form-control" } })</div>
+                                                    @Html.ValidationMessageFor(model => model.ho_ten, "", new { @class = "text-danger" })
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="label-title">
-                                                <label>Email</label>
-                                            </td>
-                                            <td class="value-title">
-                                                <div class="value-style">
-                                                    <div class="value-content">@maskedEmail</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-title">
-                                                <label>Số điện thoại</label>
-                                            </td>
-                                            <td class="value-title">
-                                                <div class="value-style">
-                                                    <div class="value-content">@maskedPhoneNumber</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @*<tr>
-                                            <td class="label-title">
-                                                <label>Giới tính</label>
-                                            </td>
-                                            <td class="value-title">
-                                                <div class="value-style">
-                                                    <div class="value-content">@Model.username</div>
-                                                </div>
-                                            </td>
-                                        </tr>*@
+                                        <!-- Các trường dữ liệu khác có thể thêm tương tự -->
                                         <tr>
                                             <td class="label-title">
                                                 <label>Ngày sinh</label>
                                             </td>
                                             <td class="value-title">
                                                 <div class="value-style">
-                                                    @{
-                                                        // Assuming ngay_sinh is a DateTime property in your model
-                                                        string formattedDate = Model.ngay_sinh?.ToString("dd/MM/yyyy");
-                                                    }
-                                                    <div class="value-content">@formattedDate</div>
+                                                    @Html.TextBoxFor(model => model.ngay_sinh, "{0:yyyy-MM-dd}", new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.ngay_sinh, "", new { @class = "text-danger" })
                                                 </div>
                                             </td>
                                         </tr>
@@ -177,17 +150,37 @@
                                             </td>
                                             <td class="value-title">
                                                 <div class="value-style">
-                                                    <div class="value-content">@Model.dia_chi</div>
+                                                    @Html.EditorFor(model => model.dia_chi, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.dia_chi, "", new { @class = "text-danger" })
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="label-title">
+                                                <label>Avatar</label>
+                                            </td>
+                                            <td class="value-title">
+                                                <div class="value-style">
+                                                    <input type="file" name="avatarFile" id="avatarFile" class="form-control" onchange="previewImage(event)" />
+                                                    @Html.ValidationMessageFor(model => model.avatar, "", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input type="submit" value="Lưu" class="btn btn--primary" />
+                                            </td>
+                                        </tr>
                                     </table>
-                                </form>
+                                }
                             </div>
+
                             <div class="body-main_right">
                                 <div class="avatar-card">
                                     <div class="avatar-card__image">
-                                        <div class="avatar-images" style="background-image: url('@Url.Content(imageUrl)')"></div>
+                                        <div id="avatarBackgroundImage" class="avatar-images" style="background-image: url('@Url.Content(imageUrl)')"></div>
+                                        <img class="avatar-images" id="avatarPreview" src="#" alt="Preview" style="display: none;" />
                                     </div>
                                 </div>
                             </div>
@@ -198,3 +191,31 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(function () {
+        $("#ngay_sinh").datepicker({
+            dateFormat: 'yy-mm-dd', // Định dạng ngày tháng năm
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0" // Hiển thị từ năm hiện tại đến 100 năm trước
+        });
+    });
+
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function () {
+            var img = document.getElementById('avatarPreview');
+            img.src = reader.result;
+            img.style.display = 'block';
+
+            var backgroundImg = document.getElementById('avatarBackgroundImage');
+            backgroundImg.style.display = 'none';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+

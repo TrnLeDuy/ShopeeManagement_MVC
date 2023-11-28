@@ -18,6 +18,7 @@ namespace Shopee_Management.Models
         public CHITIETSP()
         {
             this.CHITIETDONHANGs = new HashSet<CHITIETDONHANG>();
+            this.BINHLUANs = new HashSet<BINHLUAN>();
         }
     
         public int id_ctsp { get; set; }
@@ -44,5 +45,7 @@ namespace Shopee_Management.Models
         public virtual NGANHHANGCAP3 NGANHHANGCAP3 { get; set; }
         public virtual KICHCO KICHCO { get; set; }
         public virtual SANPHAM SANPHAM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
     }
 }

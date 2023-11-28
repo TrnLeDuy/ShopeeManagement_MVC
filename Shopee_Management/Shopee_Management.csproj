@@ -159,11 +159,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Config\PaypalConfiguration.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
     <Compile Include="Controllers\NguoiBanHangController.cs" />
-    <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\QuanLyCuaHangController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLyKhachHangController.cs" />
@@ -174,12 +172,16 @@
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\THELOAITINsController.cs" />
     <Compile Include="Controllers\TINTUCsController.cs" />
+    <Compile Include="Controllers\USERTINTUCsController.cs" />
     <Compile Include="Controllers\VANCHUYENsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Hash.cs" />
     <Compile Include="Models\BANGMAU.cs">
+      <DependentUpon>Shopee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BINHLUAN.cs">
       <DependentUpon>Shopee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
@@ -2604,12 +2606,51 @@
     <Content Include="CoolAdmin-master\vendor\wow\wow.min.js" />
     <Content Include="CSS\dangnhap.css" />
     <Content Include="CSS\account.css" />
+    <Content Include="CustomerAvatar\1.jpg" />
+    <Content Include="CustomerAvatar\2.jpg" />
+    <Content Include="CustomerAvatar\3.jpg" />
+    <Content Include="CustomerAvatar\4.jpg" />
+    <Content Include="CustomerAvatar\5.jpg" />
+    <Content Include="CustomerAvatar\6.jpg" />
+    <Content Include="CustomerAvatar\7.jpg" />
+    <Content Include="CustomerAvatar\8.jpg" />
     <Content Include="CustomerAvatar\avatar.jpg" />
+    <Content Include="CustomerAvatar\face1.jpg" />
+    <Content Include="CustomerAvatar\face10.jpg" />
+    <Content Include="CustomerAvatar\face11.jpg" />
+    <Content Include="CustomerAvatar\face12.jpg" />
+    <Content Include="CustomerAvatar\face13.jpg" />
+    <Content Include="CustomerAvatar\face14.jpg" />
+    <Content Include="CustomerAvatar\face15.jpg" />
+    <Content Include="CustomerAvatar\face16.jpg" />
+    <Content Include="CustomerAvatar\face17.jpg" />
+    <Content Include="CustomerAvatar\face18.jpg" />
+    <Content Include="CustomerAvatar\face19.jpg" />
+    <Content Include="CustomerAvatar\face2.jpg" />
+    <Content Include="CustomerAvatar\face20.jpg" />
+    <Content Include="CustomerAvatar\face21.jpg" />
+    <Content Include="CustomerAvatar\face22.jpg" />
+    <Content Include="CustomerAvatar\face23.jpg" />
+    <Content Include="CustomerAvatar\face24.jpg" />
+    <Content Include="CustomerAvatar\face25.jpg" />
+    <Content Include="CustomerAvatar\face26.jpg" />
+    <Content Include="CustomerAvatar\face27.jpg" />
     <Content Include="CustomerAvatar\face28.jpg" />
+    <Content Include="CustomerAvatar\face3.jpg" />
+    <Content Include="CustomerAvatar\face4.jpg" />
+    <Content Include="CustomerAvatar\face5.jpg" />
+    <Content Include="CustomerAvatar\face6.jpg" />
     <Content Include="CustomerAvatar\face7.jpg" />
+    <Content Include="CustomerAvatar\face8.jpg" />
+    <Content Include="CustomerAvatar\face9.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="imagesTINTUC\QC01.jpg" />
+    <Content Include="imagesTINTUC\QC02.jpg" />
+    <Content Include="imagesTINTUC\QC03.jpg" />
+    <Content Include="imagesTINTUC\QC04.jpg" />
+    <Content Include="imagesTINTUC\QC05.jpg" />
     <Content Include="Images\backgroun3.jpg" />
     <Content Include="Images\Shopee.png" />
     <Content Include="mazer-main\dist\application-chat.html" />
@@ -4386,6 +4427,33 @@
     <Content Include="CoolAdmin-master\vendor\slick\slick-theme.scss" />
     <Content Include="CoolAdmin-master\vendor\slick\slick.less" />
     <Content Include="CoolAdmin-master\vendor\slick\slick.scss" />
+    <Content Include="__NganhHang-img\bachhoaonline.png" />
+    <Content Include="__NganhHang-img\balotuivinam.png" />
+    <Content Include="__NganhHang-img\chamsocthucung.png" />
+    <Content Include="__NganhHang-img\dienthoai.png" />
+    <Content Include="__NganhHang-img\dochoi.png" />
+    <Content Include="__NganhHang-img\dongho.png" />
+    <Content Include="__NganhHang-img\dungcu-thietbitienich.png" />
+    <Content Include="__NganhHang-img\giatgiu-chamsocnhacua.png" />
+    <Content Include="__NganhHang-img\giaydepnam.png" />
+    <Content Include="__NganhHang-img\giaydepnu.png" />
+    <Content Include="__NganhHang-img\laptop.png" />
+    <Content Include="__NganhHang-img\mayanh.png" />
+    <Content Include="__NganhHang-img\me&amp;be.png" />
+    <Content Include="__NganhHang-img\nhacua&amp;doisong.png" />
+    <Content Include="__NganhHang-img\nhasachonline.png" />
+    <Content Include="__NganhHang-img\oto-xemay-xedap.png" />
+    <Content Include="__NganhHang-img\phukientrangsucnu.png" />
+    <Content Include="__NganhHang-img\sacdep.png" />
+    <Content Include="__NganhHang-img\suckhoe.png" />
+    <Content Include="__NganhHang-img\thethao&amp;dulich.png" />
+    <Content Include="__NganhHang-img\thietbidientu.png" />
+    <Content Include="__NganhHang-img\thietbigiadung.png" />
+    <Content Include="__NganhHang-img\thoitrangnam.png" />
+    <Content Include="__NganhHang-img\thoitrangnu.png" />
+    <Content Include="__NganhHang-img\thoitrangtreem.png" />
+    <Content Include="__NganhHang-img\tuivinu.png" />
+    <Content Include="__NganhHang-img\voucher-dichvu.png" />
     <EntityDeploy Include="Models\Shopee.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Shopee.Designer.cs</LastGenOutput>
@@ -6280,6 +6348,9 @@
     <Content Include="Views\TINTUCs\_Edit.cshtml" />
     <Content Include="Views\KhachHang\profile.cshtml" />
     <Content Include="Views\ShoppingCart\PaymentSuccess.cshtml" />
+    <Content Include="Views\USERTINTUCs\Details.cshtml" />
+    <Content Include="Views\USERTINTUCs\Index.cshtml" />
+    <Content Include="Views\KhachHang\editProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

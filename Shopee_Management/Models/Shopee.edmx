@@ -12,6 +12,18 @@
           <Property Name="id_color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ten_mau" Type="nvarchar" MaxLength="64" />
         </EntityType>
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="id_binhluan" />
+          </Key>
+          <Property Name="id_binhluan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_kh" Type="varchar" MaxLength="255" />
+          <Property Name="id_parent" Type="int" />
+          <Property Name="id_ctsp" Type="int" />
+          <Property Name="van_ban_binh_luan" Type="nvarchar(max)" />
+          <Property Name="ngay_binh_luan" Type="datetime" />
+          <Property Name="danh_gia" Type="int" />
+        </EntityType>
         <EntityType Name="CHITIETDONHANG">
           <Key>
             <PropertyRef Name="id_don" />
@@ -141,6 +153,7 @@
           </Key>
           <Property Name="id_nganhhang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ten_nganhhang" Type="nvarchar" MaxLength="255" />
+          <Property Name="anh-bia_nganhhang" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="NGANHHANGCAP3">
           <Key>
@@ -270,6 +283,7 @@
           <Property Name="noi_dung" Type="nvarchar(max)" />
           <Property Name="ngay_dang" Type="datetime" />
           <Property Name="id_theloai" Type="int" />
+          <Property Name="image_tintuc" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="VANCHUYEN">
           <Key>
@@ -289,6 +303,30 @@
           <Property Name="id_member" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="ten_member" Type="nvarchar" MaxLength="64" />
         </EntityType>
+        <Association Name="FK__BINHLUAN__id_cts__28ED12D1">
+          <End Role="CHITIETSP" Type="Self.CHITIETSP" Multiplicity="0..1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHITIETSP">
+              <PropertyRef Name="id_ctsp" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="id_ctsp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__id_kh__27F8EE98">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="id_kh" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="id_kh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CHITIETDO__id_ct__6EF57B66">
           <End Role="CHITIETSP" Type="Self.CHITIETSP" Multiplicity="1" />
           <End Role="CHITIETDONHANG" Type="Self.CHITIETDONHANG" Multiplicity="*" />
@@ -675,6 +713,7 @@
         </Association>
         <EntityContainer Name="TMDTdbModelStoreContainer">
           <EntitySet Name="BANGMAU" EntityType="Self.BANGMAU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BINHLUAN" EntityType="Self.BINHLUAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHITIETDONHANG" EntityType="Self.CHITIETDONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHITIETSP" EntityType="Self.CHITIETSP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHITIETTIN" EntityType="Self.CHITIETTIN" Schema="dbo" store:Type="Tables" />
@@ -703,6 +742,14 @@
           <EntitySet Name="TINTUC" EntityType="Self.TINTUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VANCHUYEN" EntityType="Self.VANCHUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XUATXU" EntityType="Self.XUATXU" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BINHLUAN__id_cts__28ED12D1" Association="Self.FK__BINHLUAN__id_cts__28ED12D1">
+            <End Role="CHITIETSP" EntitySet="CHITIETSP" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__id_kh__27F8EE98" Association="Self.FK__BINHLUAN__id_kh__27F8EE98">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
           <AssociationSet Name="FK__CHITIETDO__id_ct__6EF57B66" Association="Self.FK__CHITIETDO__id_ct__6EF57B66">
             <End Role="CHITIETSP" EntitySet="CHITIETSP" />
             <End Role="CHITIETDONHANG" EntitySet="CHITIETDONHANG" />
@@ -884,6 +931,7 @@
           <NavigationProperty Name="KICHCO" Relationship="Self.FK__CHITIETSP__id_si__59FA5E80" FromRole="CHITIETSP" ToRole="KICHCO" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.FK__CHITIETSP__id_sp__5812160E" FromRole="CHITIETSP" ToRole="SANPHAM" />
           <Property Name="hinh_sp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BINHLUANs" Relationship="TMDTdbModel.FK__BINHLUAN__id_cts__28ED12D1" FromRole="CHITIETSP" ToRole="BINHLUAN" />
         </EntityType>
         <EntityType Name="CHUCVU">
           <Key>
@@ -952,6 +1000,7 @@
           <Property Name="diem_tich_luy" Type="Int32" />
           <NavigationProperty Name="DONHANGs" Relationship="Self.FK__DONHANG__id_kh__693CA210" FromRole="KHACHHANG" ToRole="DONHANG" />
           <NavigationProperty Name="NGUOIBANHANGs" Relationship="Self.FK__NGUOIBANH__id_kh__3B75D760" FromRole="KHACHHANG" ToRole="NGUOIBANHANG" />
+          <NavigationProperty Name="BINHLUANs" Relationship="TMDTdbModel.FK__BINHLUAN__id_kh__27F8EE98" FromRole="KHACHHANG" ToRole="BINHLUAN" />
         </EntityType>
         <EntityType Name="KHUVUC">
           <Key>
@@ -997,6 +1046,7 @@
           <Property Name="ten_nganhhang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CHITIETSPs" Relationship="Self.FK__CHITIETSP__id_ng__5DCAEF64" FromRole="NGANHHANG" ToRole="CHITIETSP" />
           <NavigationProperty Name="NGANHHANGCONs" Relationship="Self.FK__NGANHHANG__id_ng__5070F446" FromRole="NGANHHANG" ToRole="NGANHHANGCON" />
+          <Property Name="anh_bia_nganhhang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="NGANHHANGCAP3">
           <Key>
@@ -1152,6 +1202,7 @@
           <Property Name="id_theloai" Type="Int32" />
           <NavigationProperty Name="THELOAITIN" Relationship="Self.FK__TINTUC__id_thelo__02084FDA" FromRole="TINTUC" ToRole="THELOAITIN" />
           <NavigationProperty Name="NHANVIENs" Relationship="Self.CHITIETTIN" FromRole="TINTUC" ToRole="NHANVIEN" />
+          <Property Name="image_tintuc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VANCHUYEN">
           <Key>
@@ -1721,6 +1772,15 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="BINHLUANs" EntityType="TMDTdbModel.BINHLUAN" />
+          <AssociationSet Name="FK__BINHLUAN__id_cts__28ED12D1" Association="TMDTdbModel.FK__BINHLUAN__id_cts__28ED12D1">
+            <End Role="CHITIETSP" EntitySet="CHITIETSPs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BINHLUAN__id_kh__27F8EE98" Association="TMDTdbModel.FK__BINHLUAN__id_kh__27F8EE98">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1733,6 +1793,44 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="id_binhluan" />
+          </Key>
+          <Property Name="id_binhluan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_kh" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_parent" Type="Int32" />
+          <Property Name="id_ctsp" Type="Int32" />
+          <Property Name="van_ban_binh_luan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ngay_binh_luan" Type="DateTime" Precision="3" />
+          <Property Name="danh_gia" Type="Int32" />
+          <NavigationProperty Name="CHITIETSP" Relationship="TMDTdbModel.FK__BINHLUAN__id_cts__28ED12D1" FromRole="BINHLUAN" ToRole="CHITIETSP" />
+          <NavigationProperty Name="KHACHHANG" Relationship="TMDTdbModel.FK__BINHLUAN__id_kh__27F8EE98" FromRole="BINHLUAN" ToRole="KHACHHANG" />
+        </EntityType>
+        <Association Name="FK__BINHLUAN__id_cts__28ED12D1">
+          <End Type="TMDTdbModel.CHITIETSP" Role="CHITIETSP" Multiplicity="0..1" />
+          <End Type="TMDTdbModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHITIETSP">
+              <PropertyRef Name="id_ctsp" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="id_ctsp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BINHLUAN__id_kh__27F8EE98">
+          <End Type="TMDTdbModel.KHACHHANG" Role="KHACHHANG" Multiplicity="0..1" />
+          <End Type="TMDTdbModel.BINHLUAN" Role="BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="id_kh" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="id_kh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1872,6 +1970,7 @@
           <EntitySetMapping Name="NGANHHANGs">
             <EntityTypeMapping TypeName="TMDTdbModel.NGANHHANG">
               <MappingFragment StoreEntitySet="NGANHHANG">
+                <ScalarProperty Name="anh_bia_nganhhang" ColumnName="anh-bia_nganhhang" />
                 <ScalarProperty Name="id_nganhhang" ColumnName="id_nganhhang" />
                 <ScalarProperty Name="ten_nganhhang" ColumnName="ten_nganhhang" />
               </MappingFragment>
@@ -2012,6 +2111,7 @@
           <EntitySetMapping Name="TINTUCs">
             <EntityTypeMapping TypeName="TMDTdbModel.TINTUC">
               <MappingFragment StoreEntitySet="TINTUC">
+                <ScalarProperty Name="image_tintuc" ColumnName="image_tintuc" />
                 <ScalarProperty Name="id_tin_tuc" ColumnName="id_tin_tuc" />
                 <ScalarProperty Name="tieu_de" ColumnName="tieu_de" />
                 <ScalarProperty Name="noi_dung" ColumnName="noi_dung" />
@@ -2048,6 +2148,19 @@
               <ScalarProperty Name="id_tin_tuc" ColumnName="id_tin_tuc" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BINHLUANs">
+            <EntityTypeMapping TypeName="TMDTdbModel.BINHLUAN">
+              <MappingFragment StoreEntitySet="BINHLUAN">
+                <ScalarProperty Name="danh_gia" ColumnName="danh_gia" />
+                <ScalarProperty Name="ngay_binh_luan" ColumnName="ngay_binh_luan" />
+                <ScalarProperty Name="van_ban_binh_luan" ColumnName="van_ban_binh_luan" />
+                <ScalarProperty Name="id_ctsp" ColumnName="id_ctsp" />
+                <ScalarProperty Name="id_parent" ColumnName="id_parent" />
+                <ScalarProperty Name="id_kh" ColumnName="id_kh" />
+                <ScalarProperty Name="id_binhluan" ColumnName="id_binhluan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
