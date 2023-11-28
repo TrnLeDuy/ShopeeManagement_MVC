@@ -6279,6 +6279,7 @@
     <Content Include="Views\TINTUCs\_Details.cshtml" />
     <Content Include="Views\TINTUCs\_Edit.cshtml" />
     <Content Include="Views\KhachHang\profile.cshtml" />
+    <Content Include="Views\ShoppingCart\PaymentSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

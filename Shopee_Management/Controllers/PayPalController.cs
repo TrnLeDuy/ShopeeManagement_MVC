@@ -68,11 +68,25 @@ namespace Shopee_Management.Controllers
                     var guid = Request.Params["guid"];
                     var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
                     //If executed payment failed then we will show payment failure message to user  
-                    if (executedPayment.state.ToLower() != "approved")
+                    if (executedPayment.state.ToLower() == "approved")
                     {
-                        //return RedirectToAction("Message", "Cart", new { mess = "Lỗi" });
-                        return RedirectToAction("Index", "TrangChu");
+                        TMDTdbEntities _db = new TMDTdbEntities();
 
+                        // Retrieve the DONHANG entity from the database
+                        DONHANG sessionDonHang = Session["DonHang"] as DONHANG;
+                        DONHANG dbDonHang = _db.DONHANGs.Find(sessionDonHang.id_don);
+
+                        // Update tt_thanhtoan to 2
+                        dbDonHang.tt_thanh_toan = 2;
+
+                        // Save changes to the database
+                        _db.SaveChanges();
+                    }
+                    // If executed payment failed, redirect to an appropriate page
+                    else
+                    {
+                        // return RedirectToAction("Message", "Cart", new { mess = "Lỗi" });
+                        return RedirectToAction("Index", "TrangChu");
                     }
                 }
             }
@@ -93,7 +107,7 @@ namespace Shopee_Management.Controllers
 
             new Shopee_Management.Models.mapContactEmail.mapContactEmail().SendEmail(khachHang.email, "Thanh toán thành công", "<p style=\"font-size:20px\">Cảm ơn bạn đã đặt sản phẩm của chúng tôi <br/>Mã đơn hàng của bạn là: " + donHang.id_don);
 
-            return RedirectToAction("HoanTatThanhToan", "Cart");
+            return RedirectToAction("PaymentSuccess", "ShoppingCart");
         }
 
         private PayPal.Api.Payment payment;
@@ -111,52 +125,49 @@ namespace Shopee_Management.Controllers
             return this.payment.Execute(apiContext, paymentExecution);
         }
 
-        private Payment CreatePayment(APIContext apicontext, string redirectURl)
+        private Payment CreatePayment(APIContext apiContext, string redirectURl)
         {
-            Item item = new Item();
-
             if (Session["DonHang"] != null)
             {
-
-                // Tỷ giá hối đoái USD/VND hiện tại
                 decimal usdToVndRate = 23465m;
 
+                var dr = GetCurrencyExchange("VND", "USD");
 
-                var d = GetCurrencyExchange("VND", "USD");
+                DONHANG donHang = Session["DonHang"] as DONHANG;
 
-                DONHANG donhang = Session["DonHang"] as DONHANG;
+                // Assuming you have the order details stored in the database
+                // Adjust the logic based on your actual database schema
+                var orderDetailsList = db.CHITIETDONHANGs
+                    .Where(d => d.id_don == donHang.id_don)
+                    .ToList();
 
-                decimal priceOneItem = (donhang.TongTien) / usdToVndRate;
-                decimal p = Math.Round(priceOneItem * d, 0);
+                var itemList = new List<Item>();
 
-                int soLuong = 0;
-                string strSoLuong = "";
-
-                string strThanhTien = donhang.TongTien.ToString();
-
-                List<CTDONHANG> ctdon = Session["CTDH"] as List<CTDONHANG>;
-                if (ctdon != null)
+                foreach (var orderDetail in orderDetailsList)
                 {
-                    foreach (var ct in ctdon)
+                    // Retrieve additional information about the product from your database
+                    var productInfo = db.CHITIETSPs.SingleOrDefault(p => p.id_ctsp == orderDetail.id_ctsp);
+
+                    if (productInfo != null)
                     {
-                        soLuong = soLuong + ct.SoLuongDat;
-                        strSoLuong = soLuong.ToString();
+                        // Calculate price per item in USD
+                        decimal priceOneItem = ((decimal?)donHang.tong_cong ?? 0) / ((decimal?)usdToVndRate ?? 1);
+
+                        // Convert price to VND
+                        decimal priceInVnd = Math.Round(priceOneItem * dr, 0);
+
+                        var item = new Item()
+                        {
+                            name = productInfo.SANPHAM.ten_sp,
+                            currency = "USD",
+                            price = priceInVnd.ToString("0.00"), // Format as a string with two decimal places
+                            quantity = orderDetail.so_luong.ToString(),
+                            sku = productInfo.id_sp?.ToString(),
+                        };
+
+                        itemList.Add(item);
                     }
                 }
-                else
-                {
-                    // Handle the case where the Session["CTDH"] is null
-                }
-
-                item = new Item()
-                {
-                    name = "Airplane Ticket " + "(" + donhang.TongTien + ")",
-                    currency = "USD",
-                    price = p.ToString(),
-                    quantity = strSoLuong,
-                    sku = donhang.MaDH,
-
-                };
 
                 var payer = new Payer()
                 {
@@ -173,7 +184,7 @@ namespace Shopee_Management.Controllers
                 {
                     tax = "0",
                     shipping = "0",
-                    subtotal = strThanhTien,
+                    subtotal = string.Format("{0:0.00}", donHang.thanh_tien), // Format as a string with two decimal places
                 };
 
                 var amount = new Amount()
@@ -189,8 +200,7 @@ namespace Shopee_Management.Controllers
                     description = "Transaction Description",
                     invoice_number = Convert.ToString((new Random()).Next(100000)),
                     amount = amount,
-                    //item_list = itemList
-
+                    item_list = new ItemList { items = itemList }
                 });
 
                 this.payment = new Payment()
@@ -200,10 +210,22 @@ namespace Shopee_Management.Controllers
                     transactions = transactionList,
                     redirect_urls = redirUrl
                 };
+
+                try
+                {
+                    return this.payment.Create(apiContext);
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the exception
+                    throw;
+                }
             }
 
-            return this.payment.Create(apicontext);
+            return null;
         }
+
+
 
         public Decimal GetCurrencyExchange(String localCurrency, String foreignCurrency)
         {

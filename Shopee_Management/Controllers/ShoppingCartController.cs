@@ -84,8 +84,9 @@ namespace Shopee_Management.Controllers
             return PartialView("BagCart");
         }
 
-        public ActionResult HoanTatThanhToan() 
-        { 
+        public ActionResult PaymentSuccess()
+        {
+            // Add logic or view for the success page
             return View();
         }
 
@@ -141,6 +142,13 @@ namespace Shopee_Management.Controllers
                 Session["ChiTietDonHang"] = orderDetailsList;
 
                 cart.ClearCart();
+
+                if (_order.id_pttt == 2)
+                {
+                    // Redirect to the PayPal payment page
+                    return RedirectToAction("PaymentWithPaypal", "PayPal");
+                }
+
                 return RedirectToAction("Index", "TrangChu");
             } 
             catch (Exception ex)

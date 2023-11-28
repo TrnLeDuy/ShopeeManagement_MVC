@@ -14,8 +14,8 @@ namespace Shopee_Management.Config
         static PaypalConfiguration()
         {
             var config = getconfig();
-            clientId = "AQnl15H7PuPKrMooTifMftDnSy0VT-FHWzc27XFHU2cUjH0VaxiREQ40OsjFVLr62G68xYe5U-9q91If";
-            clientSecret = "EDXfcXlHqdj4qydP25ytfsHlVrMBfnS8TKMMBzh4ZehuVHUbQkq-KW_90mhcla2njABsPe07-33Rbdri";
+            clientId = "AWZx2NxWwr0N9NXr50qm1Nbe2XQAu7o2wDwn9R6HtDGd0RR3PyoLf1s6u4nl-bwCJ62n6DPJn5Zt3ZL9";
+            clientSecret = "ELastgemG8opJcB0QbxqnTb_4dJxtACPeiDMmdAojKMegSPpfkGMJwiZkRxWE4ob0fWxzwmEKoguJYBr";
         }
 
         private static Dictionary<string, string> getconfig()
