@@ -34,19 +34,22 @@
                 <tr>
                     <td colspan="14"></td>
                     <td class="control" colspan="3">
-                        <a style="width:100%" href=""></a>
+                        <div style="color: #ee4d2d;font-size:34px;margin-bottom:20px">Danh mục sản phẩm</div>
                     </td>
                     <td class="control">
-                        <a href="~/QuanLySanPham/ThemSP">Thêm Sản Phẩm</a>
+                        
                     </td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td><a href="~/QuanLySanPham/ThemSP" style="margin-bottom: 20px; background-color: #0ab618;color:white" class="btn btn--add">Thêm Sản Phẩm</a></td>
                 </tr>
             </table>
         </div>
         <form name="timkiem">
             <div class="form-group form-inline">
                 <input name="key" type="text" placeholder="Tìm kiếm..." class="form-control form-inline">
-                <input type="submit" name="submit" value="Tìm Kiếm" class="search" />
+                <input type="submit" name="submit" value="Tìm Kiếm" class="search" style="margin:20px;padding : 10px" />
             </div>
 
         </form>
@@ -83,9 +86,9 @@
                                         <td>@item.ten_sp</td>
                                         <td>@item.gia_sp</td>
                                         <td>
-                                            <button class="edit-product" data-id="@item.id_sp">Edit</button>
+                                            <button style="background-color: #ffce3e; padding: 10px" class="edit-product" data-id="@item.id_sp">Edit</button>
                                         </td>
-                                        <td> <button class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
+                                        <td> <button style="background-color: #e72311; padding: 10px" class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
                                     </tr>
                                 }
                             </tbody>
@@ -104,7 +107,8 @@
                                 <th>Mã sản phẩm</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Giá sản phẩm</th>
-                                <th>Cập nhật</th>
+                                <th>...</th>
+                                <th>...</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,9 +119,9 @@
                                     <td>@item.ten_sp</td>
                                     <td>@item.gia_sp</td>
                                     <td>
-                                        <button class="edit-product" data-id="@item.id_sp">Edit</button>
+                                        <button style="background-color: #ffce3e;padding:10px" class="edit-product" data-id="@item.id_sp">Edit</button>
                                     </td>
-                                    <td> <button class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
+                                    <td> <button style="background-color: #e72311; padding: 10px" class="detail-product" data-id="@item.id_sp">Xem Chi Tiết </button></td>
                                 </tr>
                             }
                         </tbody>
