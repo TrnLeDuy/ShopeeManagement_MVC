@@ -11,7 +11,8 @@ namespace Shopee_Management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class KHACHHANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,14 @@ namespace Shopee_Management.Models
         {
             this.DONHANGs = new HashSet<DONHANG>();
             this.NGUOIBANHANGs = new HashSet<NGUOIBANHANG>();
+            this.BINHLUANs = new HashSet<BINHLUAN>();
         }
     
         public string id_kh { get; set; }
         public string ho_ten { get; set; }
         public string sdt { get; set; }
         public string email { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yy-mm-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ngay_sinh { get; set; }
         public string dia_chi { get; set; }
         public string username { get; set; }
@@ -37,5 +40,7 @@ namespace Shopee_Management.Models
         public virtual ICollection<DONHANG> DONHANGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NGUOIBANHANG> NGUOIBANHANGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
     }
 }

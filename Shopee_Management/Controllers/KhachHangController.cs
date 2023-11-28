@@ -10,6 +10,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
+using System.Globalization;
 
 namespace Shopee_Management.Controllers
 {
@@ -287,19 +288,66 @@ namespace Shopee_Management.Controllers
 
             return View(khachHang);
         }
-        public ActionResult address(string id)
+
+        [HttpGet]
+        public ActionResult editProfile(string id)
         {
             id = Session["ID"] as string;
-            // Lấy thông tin khách hàng từ id
             var khachHang = db.KHACHHANGs.Find(id);
-
             if (khachHang == null)
             {
-                // Xử lý khi không tìm thấy khách hàng
                 return HttpNotFound();
             }
 
             return View(khachHang);
         }
+        [HttpPost]
+        public ActionResult editProfile(string id, KHACHHANG kh, HttpPostedFileBase kh_avatar)
+        {
+            id = Session["ID"] as string;
+
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Thông tin không hợp lệ, vui lòng kiểm tra lại!";
+                return View(kh);
+            }
+
+            var existingKhachHang = db.KHACHHANGs.Find(id);
+            if (existingKhachHang == null)
+            {
+                TempData["Error"] = "Không tìm thấy thông tin khách hàng để cập nhật!";
+                return View(kh);
+            }
+
+            try
+            {
+                existingKhachHang.ho_ten = kh.ho_ten ?? existingKhachHang.ho_ten;
+                existingKhachHang.dia_chi = kh.dia_chi ?? existingKhachHang.dia_chi;
+                existingKhachHang.ngay_sinh = kh.ngay_sinh ?? existingKhachHang.ngay_sinh;
+
+                if (kh_avatar != null && kh_avatar.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(kh_avatar.FileName);
+                    var path = Path.Combine(Server.MapPath("~/CustomerAvatar"), fileName);
+                    kh_avatar.SaveAs(path);
+
+                    // Lưu đường dẫn tệp ảnh vào trường avatar trong cơ sở dữ liệu
+                    existingKhachHang.avatar = "~/CustomerAvatar/" + fileName;
+                }
+
+                db.SaveChanges();
+                TempData["Success"] = "Cập nhật thành công!";
+                return RedirectToAction("Index", "TrangChu");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Đã xảy ra lỗi khi cập nhật: " + ex.Message;
+                // Log lỗi để kiểm tra và sửa
+            }
+
+            return View(kh);
+        }
+
+
     }
 }

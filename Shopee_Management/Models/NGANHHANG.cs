@@ -23,6 +23,7 @@ namespace Shopee_Management.Models
     
         public int id_nganhhang { get; set; }
         public string ten_nganhhang { get; set; }
+        public string anh_bia_nganhhang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETSP> CHITIETSPs { get; set; }

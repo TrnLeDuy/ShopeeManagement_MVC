@@ -64,6 +64,9 @@
         <AssociationConnector Association="TMDTdbModel.FK__VANCHUYEN__id_sh__778AC167" ManuallyRouted="false" />
         <AssociationConnector Association="TMDTdbModel.FK__TINTUC__id_thelo__02084FDA" ManuallyRouted="false" />
         <AssociationConnector Association="TMDTdbModel.CHITIETTIN" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TMDTdbModel.BINHLUAN" Width="1.5" PointX="7.5" PointY="18.875" />
+        <AssociationConnector Association="TMDTdbModel.FK__BINHLUAN__id_cts__28ED12D1" />
+        <AssociationConnector Association="TMDTdbModel.FK__BINHLUAN__id_kh__27F8EE98" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
