@@ -6347,6 +6347,7 @@
     <Content Include="Views\TINTUCs\_Details.cshtml" />
     <Content Include="Views\TINTUCs\_Edit.cshtml" />
     <Content Include="Views\KhachHang\profile.cshtml" />
+    <Content Include="Views\ShoppingCart\PaymentSuccess.cshtml" />
     <Content Include="Views\USERTINTUCs\Details.cshtml" />
     <Content Include="Views\USERTINTUCs\Index.cshtml" />
     <Content Include="Views\KhachHang\editProfile.cshtml" />

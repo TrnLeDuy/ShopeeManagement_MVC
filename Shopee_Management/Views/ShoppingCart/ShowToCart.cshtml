@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <body>
     <h2 class="text-center">Giỏ hàng</h2>
 
@@ -80,9 +79,8 @@
                     double sum = 0;
                 }
 
-                @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+                @using (Html.BeginForm("CheckOut", "ShoppingCart", FormMethod.Post))
                 {
-
                     foreach (var item in Model.Cart.Items)
                     {
                         double total = Convert.ToDouble(item._shopping_product.SANPHAM.gia_sp.Value * item._shopping_quantity);
@@ -90,8 +88,9 @@
                         <input type="hidden" value="@item._shopping_product.id_nbh" name="nguoiBH" />
                         <input type="hidden" id="subTotal" name="SubTotal" />
                     }
-                        <input type="hidden" id="totalMoney" value="@sum" name="TotalMoney" />
-                        <input type="hidden" id="discountedTotalMoney" name="DiscountedTotalMoney" />
+                    <input type="hidden" id="totalMoney" value="@sum" name="TotalMoney" />
+                    <input type="hidden" id="discountedTotalMoney" name="DiscountedTotalMoney" />
+
                     <tr>
                         <td>Phương thức thanh toán</td>
                         <td>
@@ -103,7 +102,17 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
+
+                    <!-- Section for PayPal -->
+                    <tr id="paypalSection" style="display: none;">
+                        <td colspan="2">
+                            <!-- Add any specific content or styling for PayPal -->
+                            <div id="paypal-button-container"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Section for Voucher -->
+                    <tr id="voucherSection">
                         <td>Mã khuyến mãi</td>
                         <td>
                             <select name="Voucher">
@@ -135,6 +144,44 @@
             </tfoot>
         </table>
     </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AWZx2NxWwr0N9NXr50qm1Nbe2XQAu7o2wDwn9R6HtDGd0RR3PyoLf1s6u4nl-bwCJ62n6DPJn5Zt3ZL9"></script>
+    <script>
+        document.getElementById("paymentMethod").addEventListener("change", function () {
+            var selectedMethod = this.value;
+            if (selectedMethod === "2") { // Assuming "2" corresponds to PayPal
+                initiatePayPalCheckout();
+            }
+        });
+
+        function initiatePayPalCheckout() {
+            // Use the PayPal SDK to create an order and initiate checkout
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    // Add logic to create an order on your server and return the order ID
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                currency_code: 'USD', // Update with your currency code
+                                value: '10.00' // Update with the order total
+                            }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    // Add logic to capture the payment on your server
+                    return actions.order.capture().then(function (details) {
+                        // Redirect to the success page
+                        window.location.href = '/ShoppingCart/PaymentSuccess'; // Update with your controller action
+                    });
+                }
+            }).render('#paypal-button-container')
+                .catch(function (error) {
+                    console.error('PayPal SDK failed to initialize:', error);
+                    // Handle the error appropriately (e.g., display a message to the user)
+                    alert('PayPal initialization failed. Please try again later.');
+                });
+        }
+    </script>
     <!-- Add this script block after including jQuery -->
     <script>
         $(document).ready(function () {
@@ -169,6 +216,7 @@
                         console.log('Discounted Price:', discountedPrice0);
                         console.log('Discounted Price All:', discountedPrice0 * quantity0);
                         $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice0 * quantity0).toFixed(3)) + "đ");
+                        $('#subTotal').val((discountedPrice0 * quantity0).toFixed(3));
                     }
                     // Check if productIdNbh matches selectedNbh
                     else if (productIdNbh === selectedNbh) {
