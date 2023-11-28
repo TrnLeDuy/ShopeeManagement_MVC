@@ -25,6 +25,7 @@ namespace Shopee_Management.Models
         public string noi_dung { get; set; }
         public Nullable<System.DateTime> ngay_dang { get; set; }
         public Nullable<int> id_theloai { get; set; }
+        public string image_tintuc { get; set; }
     
         public virtual THELOAITIN THELOAITIN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

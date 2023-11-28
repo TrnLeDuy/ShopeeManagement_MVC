@@ -19,8 +19,13 @@
 </p>
 <table class="table">
     <tr>
+
         <th>
             <strong>TIÊU ĐỀ</strong>
+        </th>
+
+        <th>
+            <strong>ẢNH</strong>
         </th>
 
         <th>
@@ -38,7 +43,9 @@
             <td>
                 <a href="javascript:void(0);" class="popupDetail" data-toggle="modal" data-target="#ModalDetails" data-id="@item.id_tin_tuc" style="color: #666666; transition: color 0.3s;" onmouseover="this.style.color='orange';" onmouseout="this.style.color='#666666';">@item.tieu_de</a>
             </td>
-
+            <td>
+                <img src="~/imagesTINTUC/@item.image_tintuc" alt="Image" class="img-thumbnail" style="width:100px; height:100px;" />
+            </td>
 
             <td>
                 @Html.DisplayFor(modelItem => item.ngay_dang)
@@ -83,7 +90,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-          @*      <button type="button" class="close" data-dismiss="modal" aria-label="Close">*@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" style="text-align:center;">CHI TIẾT TIN TỨC</h4>

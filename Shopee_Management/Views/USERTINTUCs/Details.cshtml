@@ -1,0 +1,21 @@
+﻿@model Shopee_Management.Models.TINTUC
+
+@{
+    ViewBag.Title = "Chi tiết tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin: 10px auto; width:60%; text-align: center;">
+    <h2>CHI TIẾT TIN TỨC</h2>
+    <hr />
+    <div>
+        <img class="img-fluid" src="~/imagesTINTUC/@Model.image_tintuc" alt="Image" style="max-width: 100%; height: auto; display: inline-block;">
+        <h3>@Model.tieu_de</h3>
+        <br />
+        <p>@Model.noi_dung</p>
+        <p style="float:right;"><strong>Ngày đăng:</strong> @Model.ngay_dang</p>
+    </div>
+    <div style="margin-top: 20px; margin-left:300px;">
+        @Html.ActionLink("Đóng", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
