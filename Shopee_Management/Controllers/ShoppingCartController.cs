@@ -5,6 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Common;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+using PayPal.Api;
+using System.ComponentModel;
+using System.Security.Policy;
+using System.Security.Cryptography;
 
 namespace Shopee_Management.Controllers
 {
@@ -37,10 +44,16 @@ namespace Shopee_Management.Controllers
         // trang giỏ hàng
         public ActionResult ShowToCart()
         {
+
             if (Session["Cart"] == null)         
                 return RedirectToAction("ShowToCart", "ShoppingCart");
             Cart cart = Session["Cart"] as Cart;
-            return View(cart);          
+            var model = new ModelTrangGioHang
+            {
+                Cart = cart,
+                khuyenmai = _db.KHUYENMAIs.ToList()
+            };
+            return View(model);          
         }
 
         public ActionResult Update_Quantity_Cart(FormCollection form)
@@ -71,35 +84,62 @@ namespace Shopee_Management.Controllers
             return PartialView("BagCart");
         }
 
+        public ActionResult HoanTatThanhToan() 
+        { 
+            return View();
+        }
+
         public ActionResult CheckOut(FormCollection form)
         {
             try
             {
                 Cart cart = Session["Cart"] as Cart;
+
                 string kh = (string)Session["ID"];
+
                 DONHANG _order = new DONHANG();
+
                 _order.ngay_dat = DateTime.Now;
                 _order.trang_thai_dh = 1;
                 _order.tt_thanh_toan = 1;
-                _order.tong_cong = 10;
-                _order.thanh_tien = 1;
-                _order.id_pttt = int.Parse(form["paymentMethod"]);
+                _order.tong_cong = decimal.Parse(form["TotalMoney"]);
+                _order.thanh_tien = decimal.Parse(form["DiscountedTotalMoney"]);
+                _order.id_pttt = int.Parse(form["PaymentMethod"]);
                 _order.id_kh = kh;
-                _order.id_nbh = "NBH0000000001";
-                _order.id_voucher = 5;
+                _order.id_nbh = null;
+                _order.id_voucher = int.Parse(form["Voucher"]);
                 _order.ngay_giao = DateTime.Now.AddDays(3);
+
                 _db.DONHANGs.Add(_order);
-                foreach(var item in cart.Items)
+
+                List<CHITIETDONHANG> orderDetailsList = new List<CHITIETDONHANG>();
+                
+                foreach (var item in cart.Items)
                 {
                     CHITIETDONHANG _order_Detail = new CHITIETDONHANG();
+
+                    string id_nbh = _db.CHITIETSPs
+                        .Where(c => c.id_ctsp == item._shopping_product.id_ctsp)
+                        .Select(c => c.id_nbh).FirstOrDefault();
+
                     _order_Detail.id_don = _order.id_don;
                     _order_Detail.id_ctsp = item._shopping_product.id_ctsp;
-                    _order_Detail.id_nbh = "NBH0000000001";
+                    _order_Detail.id_nbh = id_nbh;
                     _order_Detail.so_luong = item._shopping_quantity;
-                    _order_Detail.gia_tien = 10;
-                    _db.CHITIETDONHANGs.Add(_order_Detail);    
+
+                    string gia = form["SubTotal"];
+                    gia = gia.Replace(",", "");                   
+                    _order_Detail.gia_tien = decimal.Parse(gia); 
+
+                    _db.CHITIETDONHANGs.Add(_order_Detail);
+
+                    orderDetailsList.Add(_order_Detail);
                 }
                 _db.SaveChanges();
+
+                Session["DonHang"] = _order;
+                Session["ChiTietDonHang"] = orderDetailsList;
+
                 cart.ClearCart();
                 return RedirectToAction("Index", "TrangChu");
             } 
@@ -107,6 +147,6 @@ namespace Shopee_Management.Controllers
             { 
                 return Content("Error" + ex.Message);
             }
-        }
+        }  
     }
 }

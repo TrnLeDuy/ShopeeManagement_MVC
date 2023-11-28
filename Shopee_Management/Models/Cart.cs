@@ -15,6 +15,7 @@ namespace Shopee_Management.Models
 
     public class Cart
     {
+
         List<CartItem> items = new List<CartItem>();
         public IEnumerable<CartItem> Items
         {
@@ -51,7 +52,7 @@ namespace Shopee_Management.Models
         public double Total_Money()
         {
             var total = items.Sum(s => s._shopping_product.SANPHAM.gia_sp * s._shopping_quantity);
-            return (double)total;
+             return Math.Round(((double)total), 0, MidpointRounding.AwayFromZero);
         }
 
         public void Remove_CartItem(int id)
