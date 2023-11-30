@@ -215,8 +215,8 @@
                         console.log(index);
                         console.log('Discounted Price:', discountedPrice0);
                         console.log('Discounted Price All:', discountedPrice0 * quantity0);
-                        $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice0 * quantity0).toFixed(3)) + "đ");
-                        $('#subTotal').val((discountedPrice0 * quantity0).toFixed(3));
+                        $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice0 * quantity0)) + "đ");
+                        $('#subTotal').val((discountedPrice0 * quantity0));
                     }
                     // Check if productIdNbh matches selectedNbh
                     else if (productIdNbh === selectedNbh) {
@@ -232,8 +232,8 @@
                         console.log('Discounted Price All:', discountedPrice * quantity);
 
                         // Update the displayed subtotal for this product
-                        $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice * quantity).toFixed(3)) + "đ");
-                        $('#subTotal').val((discountedPrice * quantity).toFixed(3));
+                        $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice * quantity)) + "đ");
+                        $('#subTotal').val((discountedPrice * quantity));
                     } else {
                         console.log("False" + productIdNbh);
                         var originalPrice1 = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text());
@@ -258,9 +258,9 @@
                 });
                 console.log(total);
                 // Update the displayed total
-                $('td.price-change strong').text('Tổng tiền thanh toán: ' + total.toFixed(3) + "đ");
+                $('td.price-change strong').text('Tổng tiền thanh toán: ' + total + "đ");
 
-                $('#discountedTotalMoney').val(total.toFixed(3));
+                $('#discountedTotalMoney').val(total);
             }
         });
     </script>

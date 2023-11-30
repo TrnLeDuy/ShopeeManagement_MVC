@@ -159,9 +159,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Config\PaypalConfiguration.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
     <Compile Include="Controllers\NguoiBanHangController.cs" />
+    <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\QuanLyCuaHangController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLyKhachHangController.cs" />
@@ -2652,6 +2654,7 @@
     <Content Include="imagesTINTUC\QC04.jpg" />
     <Content Include="imagesTINTUC\QC05.jpg" />
     <Content Include="Images\backgroun3.jpg" />
+    <Content Include="Images\istockphoto-1180394598-612x612.jpg" />
     <Content Include="Images\Shopee.png" />
     <Content Include="mazer-main\dist\application-chat.html" />
     <Content Include="mazer-main\dist\application-checkout.html" />
@@ -6351,6 +6354,7 @@
     <Content Include="Views\USERTINTUCs\Details.cshtml" />
     <Content Include="Views\USERTINTUCs\Index.cshtml" />
     <Content Include="Views\KhachHang\editProfile.cshtml" />
+    <Content Include="Views\TrangChu\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

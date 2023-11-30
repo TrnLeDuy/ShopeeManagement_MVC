@@ -1,0 +1,132 @@
+﻿@model Shopee_Management.Models.CHITIETSP
+
+@{
+    ViewBag.Title = "Shopee Việt Nam";
+    Layout = "~/Views/Shared/_ShopeeLayout.cshtml";
+}
+
+<link rel="stylesheet" href="your-styles.css" />
+<script src="~/assets/js/chuyenDoiNumeric.js"></script>
+
+<style>
+    /* Thêm style CSS của bạn */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .product-details {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .product-details h1 {
+            margin-top: 0;
+        }
+
+    .product-image {
+        width: 300px;
+        height: 300px;
+        margin-right: 20px;
+    }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .product-image img:hover {
+                transform: scale(1.1);
+            }
+
+    .product-info {
+        flex: 1;
+    }
+
+        .product-info p {
+            margin: 8px 0;
+        }
+
+    .product-price {
+        color: #f00;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+</style>
+<div class="container">
+    <div class="product-details">
+        <div class="product-image">
+            @if (!string.IsNullOrEmpty(Model.hinh_sp))
+            {
+                <img src="@Model.hinh_sp" alt="Product Image" />
+            }
+            else
+            {
+                <!-- Nếu không có hình, hiển thị hình mặc định -->
+                <img src="~/Images/istockphoto-1180394598-612x612.jpg" alt="Default Image" />
+            }
+        </div>
+        <div class="product-info">
+            <h1>@Model.SANPHAM.ten_sp</h1>
+            <strong>Giá:</strong><p class="numeric_value"> @Model.SANPHAM.gia_sp</p>
+            <p><strong>Tên cửa hàng:</strong> @Model.NGUOIBANHANG.ten_cua_hang</p>
+            @if (Model.KICHCO != null)
+            {
+                <p><strong>Kích cỡ:</strong> @Model.KICHCO.ten_size</p>
+            }
+            @if (Model.BANGMAU != null)
+            {
+                <p><strong>Màu sắc:</strong> @Model.BANGMAU.ten_mau</p>
+            }
+            <p><strong>Xuất xứ:</strong> @Model.XUATXU.ten_member</p>
+            <!-- Nút thêm vào giỏ hàng -->
+            <form id="addToCartForm" method="post" action="@Url.Action("AddToCart", "ShoppingCart")">
+                <!-- Input field chứa ID sản phẩm -->
+                <input type="hidden" id="productId" name="id" value="@Model.id_ctsp" />
+                <!-- Nút thêm vào giỏ hàng -->
+                <button type="submit">Thêm vào giỏ hàng</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Xử lý khi nhấn nút thêm vào giỏ hàng
+    document.getElementById("addToCartForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn chặn form gửi đi một cách tự động
+
+        // Lấy giá trị ID sản phẩm từ input hidden
+        var productId = document.getElementById("productId").value;
+
+        // Gửi yêu cầu POST bằng JavaScript
+        fetch('/ShoppingCart/AddToCart/' + productId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            // Thêm các tùy chọn và xử lý phản hồi ở đây nếu cần
+        });
+
+        // Hoặc sử dụng XMLHttpRequest hoặc thư viện khác để gửi yêu cầu POST
+
+        // Optional: Chuyển hướng hoặc hiển thị thông báo sau khi thêm vào giỏ hàng thành công
+        // window.location.href = '/ShoppingCart'; // Chuyển hướng đến trang giỏ hàng
+    });
+</script>
