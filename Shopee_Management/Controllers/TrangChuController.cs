@@ -74,5 +74,28 @@ namespace Shopee_Management.Controllers
             return View("Index", filteredModel);
         }
 
+        public ActionResult Detail(int productId)
+        {
+            // Lấy thông tin chi tiết sản phẩm dựa trên ID
+            var productDetail = db.CHITIETSPs
+                .Include(c => c.BANGMAU)
+                .Include(c => c.THUONGHIEU)
+                .Include(c => c.XUATXU)
+                .Include(c => c.NGUOIBANHANG)
+                .Include(c => c.NGANHHANG)
+                .Include(c => c.NGANHHANGCON)
+                .Include(c => c.NGANHHANGCAP3)
+                .Include(c => c.KICHCO)
+                .Include(c => c.SANPHAM)
+                .FirstOrDefault(c => c.id_ctsp == productId);
+
+            if (productDetail == null)
+            {
+                // Xử lý khi không tìm thấy sản phẩm
+                return RedirectToAction("Index", "TrangChu");
+            }
+
+            return View(productDetail);
+        }
     }
 }

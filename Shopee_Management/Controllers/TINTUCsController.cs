@@ -64,7 +64,7 @@ namespace Shopee_Management.Controllers
                 {
                     var fileName = Path.GetFileName(image_tintuc.FileName);
 
-                    var path = Path.Combine(Server.MapPath("imagesTINTUC"), fileName);
+                    var path = Path.Combine(Server.MapPath("imagesTINTUC") + fileName);
                     tINTUC.image_tintuc = fileName;
                     image_tintuc.SaveAs(path);
                 }
