@@ -395,5 +395,35 @@ namespace Shopee_Management.Controllers
                 return PartialView("_ProductListPartial", products);
             }
         }
+
+        public ActionResult LichSuDonHang()
+        {
+            string customerID = (string)Session["ID"];
+            var cuaHang = entities1.NGUOIBANHANGs.FirstOrDefault(k => k.id_kh == customerID);
+
+            if (cuaHang != null)
+            {
+                var id_nbh = cuaHang.id_nbh;
+
+                // Retrieve all order details for the specified id_nbh
+                var orderDetails = entities1.CHITIETDONHANGs
+                    .Where(ct => ct.id_nbh == id_nbh)
+                    .ToList();
+
+                // Extract unique id_don values from orderDetails
+                var uniqueOrderIds = orderDetails.Select(od => od.id_don).Distinct();
+
+                // Retrieve all orders corresponding to the unique id_don values
+                var orders = entities1.DONHANGs
+                    .Where(o => uniqueOrderIds.Contains(o.id_don))
+                    .ToList();
+
+                return View("LichSuDonHang", orders);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "KhachHang");
+            }
+        }
     }
 }

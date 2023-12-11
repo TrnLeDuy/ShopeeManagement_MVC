@@ -22,5 +22,6 @@ namespace Shopee_Management.Models
     
         public virtual CHITIETSP CHITIETSP { get; set; }
         public virtual DONHANG DONHANG { get; set; }
+        public virtual NGUOIBANHANG NGUOIBANHANG { get; set; }
     }
 }

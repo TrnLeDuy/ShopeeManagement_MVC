@@ -38,5 +38,6 @@ namespace Shopee_Management.Models
         public virtual KHACHHANG KHACHHANG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHUYENMAI> KHUYENMAIs { get; set; }
+        public virtual ICollection<CHITIETDONHANG> CHITIETDONHANGs { get; set; }
     }
 }
