@@ -114,7 +114,14 @@ namespace Shopee_Management.Controllers
                 _db.DONHANGs.Add(_order);
 
                 List<CHITIETDONHANG> orderDetailsList = new List<CHITIETDONHANG>();
-                
+
+                // Split the gia string into individual values based on the comma
+                string gia = form["SubTotal"];
+                gia = gia.Replace(",", "");
+                string[] giaValues = gia.Split(',');
+
+                // Use foreach to iterate through cart.Items
+                int i = 0;
                 foreach (var item in cart.Items)
                 {
                     CHITIETDONHANG _order_Detail = new CHITIETDONHANG();
@@ -128,14 +135,16 @@ namespace Shopee_Management.Controllers
                     _order_Detail.id_nbh = id_nbh;
                     _order_Detail.so_luong = item._shopping_quantity;
 
-                    string gia = form["SubTotal"];
-                    gia = gia.Replace(",", "");                   
-                    _order_Detail.gia_tien = decimal.Parse(gia); 
+                    // Retrieve the gia_tien for the current product
+                    _order_Detail.gia_tien = decimal.Parse(giaValues[i]);
 
                     _db.CHITIETDONHANGs.Add(_order_Detail);
 
                     orderDetailsList.Add(_order_Detail);
+
+                    i++;
                 }
+
                 _db.SaveChanges();
 
                 Session["DonHang"] = _order;
@@ -150,11 +159,12 @@ namespace Shopee_Management.Controllers
                 }
 
                 return RedirectToAction("Index", "TrangChu");
-            } 
+            }
             catch (Exception ex)
-            { 
+            {
                 return Content("Error" + ex.Message);
             }
-        }  
+        }
+
     }
 }
