@@ -348,6 +348,22 @@ namespace Shopee_Management.Controllers
             return View(kh);
         }
 
+        public ActionResult LichSuDonMua()
+        {
+            string customerID = (string)Session["ID"];
 
+            if (!string.IsNullOrEmpty(customerID))
+            {
+                var customerOrders = db.DONHANGs
+                    .Where(o => o.id_kh == customerID)
+                    .ToList();
+
+                return View("LichSuDonMua", customerOrders);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "KhachHang");
+            }
+        }
     }
 }

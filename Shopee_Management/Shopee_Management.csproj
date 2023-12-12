@@ -6355,6 +6355,8 @@
     <Content Include="Views\USERTINTUCs\Index.cshtml" />
     <Content Include="Views\KhachHang\editProfile.cshtml" />
     <Content Include="Views\TrangChu\Detail.cshtml" />
+    <Content Include="Views\KhachHang\LichSuDonMua.cshtml" />
+    <Content Include="Views\NguoiBanHang\LichSuDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

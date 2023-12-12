@@ -1,0 +1,45 @@
+﻿@model List<Shopee_Management.Models.DONHANG>
+
+@{
+    ViewBag.Title = "LichSuDonMua";
+    Layout = "~/Views/Shared/_ShopeeLayout.cshtml";
+}
+
+<h2>LichSuDonMua</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var order in Model)
+    {
+        <div>
+            <h4>Order ID: @order.id_don</h4>
+            <p>Order Date: @order.ngay_dat</p>
+            <p>Total Amount: @order.thanh_tien</p>
+
+            <table border="1">
+                <tr>
+                    <th>Selling Shop ID</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Product Image</th>
+                </tr>
+                @foreach (var item in order.CHITIETDONHANGs)
+                {
+                    <tr>
+                        <td>@item.CHITIETSP.id_nbh</td>
+                        <td>@item.CHITIETSP.SANPHAM.ten_sp</td>
+                        <td>@item.so_luong</td>
+                        <td>@item.gia_tien</td>
+                        <td><img src="@item.CHITIETSP.hinh_sp" alt="Product Image" style="width: 50px; height: 50px;" /></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <p>No orders found for the current customer.</p>
+}

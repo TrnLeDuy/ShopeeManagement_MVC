@@ -1,0 +1,48 @@
+﻿@model List<Shopee_Management.Models.DONHANG>
+
+@{
+    ViewBag.Title = "LichSuDonHang";
+    Layout = "~/Views/Shared/_KenhBanHangLayout.cshtml";
+    string idNbh = (string)Session["StoreID"];
+}
+
+<h2>LichSuDonHang</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var order in Model)
+    {
+        <div>
+            <h4>Order ID: @order.id_don</h4>
+            <p>Customer ID: @order.id_kh</p>
+            <p>Order Date: @order.ngay_dat</p>
+            <p>Total Amount: @order.thanh_tien</p>
+
+            <table border="1">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                </tr>
+                @foreach (var item in order.CHITIETDONHANGs)
+                {
+                    if (item.id_nbh == idNbh)
+                    {
+                        <tr>
+                            <td>@item.CHITIETSP.SANPHAM.ten_sp</td>
+                            <td>@item.so_luong</td>
+                            <td>@item.gia_tien</td>
+                            <td><img src="@item.CHITIETSP.hinh_sp" alt="Product Image" style="width: 50px; height: 50px;" /></td>
+                        </tr>
+                    }                   
+                }
+            </table>
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <p>No order history found.</p>
+}
