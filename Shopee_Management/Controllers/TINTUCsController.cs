@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Interop;
 using Shopee_Management.Models;
 
 namespace Shopee_Management.Controllers
@@ -54,6 +55,7 @@ namespace Shopee_Management.Controllers
         // POST: TINTUCs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai,image_tintuc")] TINTUC tINTUC, HttpPostedFileBase image_tintuc)
@@ -96,6 +98,7 @@ namespace Shopee_Management.Controllers
         // POST: TINTUCs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_tin_tuc,tieu_de,noi_dung,ngay_dang,id_theloai,image_tintuc")] TINTUC tINTUC, HttpPostedFileBase image_tintuc)
@@ -110,6 +113,7 @@ namespace Shopee_Management.Controllers
                     tINTUC.image_tintuc = fileName;
                     image_tintuc.SaveAs(path);
                 }
+
                 db.Entry(tINTUC).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -145,32 +149,7 @@ namespace Shopee_Management.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        //---------------------------------------------------------------------------------
-        // GET: TINTUCs/Delete/5
-        /*        public ActionResult Delete(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    TINTUC tintuc = db.TINTUCs.Find(id);
-                    if (tintuc == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    return PartialView("_Delete", tintuc);
-                }
-
-                // POST: TINTUCs/Delete/5
-                [HttpPost, ActionName("_Delete")]
-                [ValidateAntiForgeryToken]
-                public ActionResult DeleteConfirmed(int id)
-                {
-                    TINTUC tintuc = db.TINTUCs.Find(id);
-                    db.TINTUCs.Remove(tintuc);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }*/
+      
 
 
 
