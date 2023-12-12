@@ -25,9 +25,6 @@ CREATE TABLE KHACHHANG (
     diem_tich_luy INT DEFAULT 0
 );
 
-Insert into KHACHHANG(id_kh,ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_kh,diem_tich_luy) values ('KH001',N'Nguyễn Hà Xuân Tài',0926247716,'xuantai@gmail.com','2002-01-16',N'Q.12,TP.Hồ Chí Minh','Batai123','Batai123','GODDID',1,0)
-Insert into KHACHHANG(id_kh,ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_kh,diem_tich_luy) values ('KH002',N'Phan Lại Hào',0902569671,'haomam@gmail.com','2002-12-2',N'Q.11,TP.Hồ Chí Minh','haomam123','haomam123','YOUSEE',2,0)
-
 CREATE TABLE NGUOIBANHANG (
 	id_nbh VARCHAR(255),
 	ten_cua_hang NVARCHAR(MAX),
@@ -37,9 +34,6 @@ CREATE TABLE NGUOIBANHANG (
 	FOREIGN KEY (id_kh) REFERENCES KHACHHANG(id_kh)
 );
 
-Insert into NGUOIBANHANG(id_nbh,ten_cua_hang,trang_thai_ch,id_kh) values ('NBH01','COZY WORLDWIDE',1,'KH001')
-Insert into NGUOIBANHANG(id_nbh,ten_cua_hang,trang_thai_ch,id_kh) values ('NBH02','CH2 WORLDWIDE',1,'KH002')
-SELECT * from NGUOIBANHANG
 /* ---------- NGƯỜI DÙNG ---------- */ 
 /*------------------------------------------------------------*/
 /* ---------- BỘ PHẬN QUẢN LÝ ---------- */
@@ -72,10 +66,7 @@ CREATE TABLE NHANVIEN (
 	FOREIGN KEY (id_cv) REFERENCES CHUCVU(id_cv),
 	FOREIGN KEY (id_pb) REFERENCES PHONGBAN(id_pb)
 );
-Insert into NHANVIEN(ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_nv) values (N'Trần Lê Duy',0903404070,'leduy123@gmail.com','2002-01-01',N'Q.10,TP.Hồ Chí Minh','duy123','duy123','HELLO',1)
-Insert into NHANVIEN(ho_ten,sdt,email,ngay_sinh,dia_chi,username,[password],avatar,tinh_trang_nv) values (N'Nguyễn Hoàng Kha',0969698998,'hoangkha123@gmail.com','2002-02-02',N'Q.10,TP.Hồ Chí Minh','kha123','kha123','HI',1)
 
-Select * from nhanvien
 /* ---------- BỘ PHẬN QUẢN LÝ ---------- */
 /*------------------------------------------------------------*/
 /* ---------- SẢN PHẨM ---------- */
@@ -83,7 +74,9 @@ CREATE TABLE SANPHAM (
 	id_sp INT IDENTITY(1,1),
 	ten_sp NVARCHAR(MAX) NULL,
 	gia_sp NUMERIC(19, 5) NULL,
-	PRIMARY KEY (id_sp)
+	id_nbh VARCHAR(255) NULL,
+	PRIMARY KEY (id_sp),
+	FOREIGN KEY (id_nbh) REFERENCES NGUOIBANHANG(id_nbh)
 );
 
 CREATE TABLE KICHCO (

@@ -191,7 +191,7 @@
     </script>
 </head>
 <body>
-    @using (Html.BeginForm("ChiTietKhachHang", "KhachHang", FormMethod.Post))
+    @using (Html.BeginForm("ChiTietKhachHang", "KhachHang", FormMethod.Post, new {enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
 

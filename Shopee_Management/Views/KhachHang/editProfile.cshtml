@@ -82,18 +82,6 @@
                         </a>
                     </div>
                 </div>
-                <div class="stardust-dropdown stardust-dropdown--open">
-                    <div class="stardust-dropdown__item-header">
-                        <a class="pf-body__link" href="/KhachHang/profile">
-                            <div class="pf-body__icon">
-                                <img src="https://down-vn.img.susercontent.com/file/84feaa363ce325071c0a66d3c9a88748">
-                            </div>
-                            <div class="pf-body-kh_title">
-                                <span class="kh-title__content">Kho Voucher</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="profile-main__content">
@@ -106,7 +94,7 @@
                         </div>
                         <div class="body-main__content">
                             <div class="body-main__left">
-                                @using (Html.BeginForm())
+                                @using (Html.BeginForm("editProfile", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     @Html.AntiForgeryToken()
 
@@ -140,6 +128,7 @@
                                             <td class="value-title">
                                                 <div class="value-style">
                                                     @Html.TextBoxFor(model => model.ngay_sinh, "{0:yyyy-MM-dd}", new { @class = "form-control", @readonly = "readonly" })
+
                                                     @Html.ValidationMessageFor(model => model.ngay_sinh, "", new { @class = "text-danger" })
                                                 </div>
                                             </td>
@@ -161,7 +150,7 @@
                                             </td>
                                             <td class="value-title">
                                                 <div class="value-style">
-                                                    <input type="file" name="avatarFile" id="avatarFile" class="form-control" onchange="previewImage(event)" />
+                                                    <input type="file" name="kh_avatar" id="avatarFile" class="form-control" onchange="previewImage(event)" />
                                                     @Html.ValidationMessageFor(model => model.avatar, "", new { @class = "text-danger" })
                                                 </div>
                                             </td>
