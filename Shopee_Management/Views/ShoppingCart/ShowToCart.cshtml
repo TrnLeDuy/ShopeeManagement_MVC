@@ -86,7 +86,7 @@
                         double total = Convert.ToDouble(item._shopping_product.SANPHAM.gia_sp.Value * item._shopping_quantity);
                         sum += total;
                         <input type="hidden" value="@item._shopping_product.id_nbh" name="nguoiBH" />
-                        <input type="hidden" id="subTotal" name="SubTotal" />
+                        <input type="hidden" id="subTotal" class="subTotal" name="SubTotal" />
                     }
                     <input type="hidden" id="totalMoney" value="@sum" name="TotalMoney" />
                     <input type="hidden" id="discountedTotalMoney" name="DiscountedTotalMoney" />
@@ -209,20 +209,21 @@
                 // Iterate through productIdNbhArray
                 productIdNbhArray.forEach(function (productIdNbh, index) {
                     if (selectedNbh == undefined && selectedNV) {
-                        var originalPrice0 = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text());
+                        var originalPrice0 = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text().replace(/[^\d.-]/g, ''));
                         var quantity0 = parseInt($('table#cart tbody tr').eq(index).find('input[name="Quantity"]').val());
                         var discountedPrice0 = (originalPrice0 * (100 - selectedDiscount)) / 100;
                         console.log(index);
                         console.log('Discounted Price:', discountedPrice0);
                         console.log('Discounted Price All:', discountedPrice0 * quantity0);
                         $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice0 * quantity0)) + "đ");
-                        $('#subTotal').val((discountedPrice0 * quantity0));
+                        $('table#cart tfoot .subTotal').eq(index).val((discountedPrice0 * quantity0));
                     }
                     // Check if productIdNbh matches selectedNbh
                     else if (productIdNbh === selectedNbh) {
                         // Iterate through the product rows
                         console.log("True" + productIdNbh);
-                        var originalPrice = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text());
+                        var originalPrice = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text().replace(/[^\d.-]/g, ''));
+                        console.log(originalPrice);
                         var quantity = parseInt($('table#cart tbody tr').eq(index).find('input[name="Quantity"]').val());
 
                         // Calculate the discounted price
@@ -233,16 +234,19 @@
 
                         // Update the displayed subtotal for this product
                         $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((discountedPrice * quantity)) + "đ");
-                        $('#subTotal').val((discountedPrice * quantity));
+                        $('table#cart tfoot .subTotal').eq(index).val((discountedPrice * quantity));
                     } else {
                         console.log("False" + productIdNbh);
-                        var originalPrice1 = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text());
+                        var originalPrice1 = parseFloat($('table#cart tbody tr').eq(index).find('td[data-th="Price"]').text().replace(/[^\d.-]/g, ''));
                         var quantity1 = parseInt($('table#cart tbody tr').eq(index).find('input[name="Quantity"]').val());
                         console.log(index);
                         console.log('Discounted Price:', originalPrice1);
                         console.log('Discounted Price All:', originalPrice1 * quantity1);
+                        $('table#cart tbody tr').eq(index).find('td[data-th="Subtotal"]').text(((originalPrice1 * quantity1)) + "đ");
+                        $('table#cart tfoot .subTotal').eq(index).val((originalPrice1 * quantity1));
                     }
                 });
+                console.log(document.querySelectorAll('input[name=SubTotal]'));
 
                 // Update the displayed total at the bottom of the table
                 updateTotal();
@@ -254,7 +258,9 @@
 
                 // Iterate through the product rows and sum up the subtotals
                 $('table#cart tbody tr').each(function () {
-                    total += parseFloat($(this).find('td[data-th="Subtotal"]').text());
+                    var subtotalText = $(this).find('td[data-th="Subtotal"]').text();
+                    // Remove commas from the text and convert to a float
+                    total += parseFloat(subtotalText.replace(/,/g, ''));
                 });
                 console.log(total);
                 // Update the displayed total
@@ -266,5 +272,3 @@
     </script>
     <script src="~/assets/js/chuyenDoiNumeric.js"></script>
 </body>
-
-
