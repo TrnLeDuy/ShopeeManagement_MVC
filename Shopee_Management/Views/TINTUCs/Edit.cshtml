@@ -5,73 +5,101 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<head>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#tiny',
+            plugins: [
+                'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',
+                'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+                'powerpaste', 'fullscreen', 'formatpainter', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | a11ycheck casechange blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify |' +
+                'bullist numlist checklist outdent indent | removeformat | code table help'
+        })
+    </script>
+</head>
 
 
 @using (Html.BeginForm())
 {
     <h4 style="text-align:center;">CHỈNH SỬA</h4>
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.id_tin_tuc)
 
-    <div class="form-group">
-        <strong>TIÊU ĐỀ</strong>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_tin_tuc)
 
-    <div class="form-group">
-        <strong>NỘI DUNG</strong>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.noi_dung, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        Hình ảnh
-        <div class="col-md-10">
-            CHỌN ẢNH MỚI
-            <input type="file" name="image_tintuc" style="padding-bottom: 20px;" />
-            <img src="~/ImagesTINTUC/@Model.image_tintuc" style="height:200px; width:300px;" />(Ảnh hiện tại)
-            @Html.ValidationMessageFor(model => model.image_tintuc, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <strong>NGÀY ĐĂNG</strong>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ngay_dang, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <strong>THỂ LOẠI</strong>
-        <div class="col-md-10">
-            @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="LƯU" class="btn btn-success" />|
-            @Html.ActionLink("TRỞ VỀ", "Index", new { id = Model.id_tin_tuc }, new { @class = "btn btn-primary" })
+        <div class="form-group">
+            <p>  <STRONG>HÌNH ẢNH</STRONG> </p>
+            <div class="col-md-10">
+                <strong style="padding-right:10px;">CHỌN ẢNH MỚI </strong>
+                <input type="file" name="image_tintuc" style="padding-bottom: 20px;" />
+                <img src="~/ImagesTINTUC/@Model.image_tintuc" style="height:200px; width:300px;" />
+                @Html.ValidationMessageFor(model => model.image_tintuc, "", new { @class = "text-danger" })
+            </div>
         </div>
 
+        <div class="form-group">
+            <strong>TIÊU ĐỀ</strong>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tieu_de, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tieu_de, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <strong>NỘI DUNG</strong>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.noi_dung, new { @class = "form-control", @id = "tiny", rows = 4 })
+                @Html.ValidationMessageFor(model => model.noi_dung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <strong>NGÀY ĐĂNG</strong>
+            <div class="col-md-10">
+                @if (Model.ngay_dang.HasValue)
+                {
+                    <input type="date" name="ngay_dang" value="@Model.ngay_dang.Value.ToString("yyyy-MM-dd")" />
+                }
+                else
+                {
+                    <input type="date" name="ngay_dang" value="2023-01-01" /> <!-- Giá trị mặc định nếu ngày đăng không có giá trị -->
+                }
+                @Html.ValidationMessageFor(model => model.ngay_dang, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <strong>THỂ LOẠI</strong>
+            <div class="col-md-10">
+                @Html.DropDownList("id_theloai", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_theloai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="LƯU" class="btn btn-success" />|
+                @Html.ActionLink("TRỞ VỀ", "Index", new { id = Model.id_tin_tuc }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
     </div>
-</div>
 }
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
