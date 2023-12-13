@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Daily Orders Count";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Số lượng đơn hàng theo ngày</h2>
+    <p>Ngày: @DateTime.Today.ToShortDateString()</p>
+    <p>Số lượng đơn hàng: @Model</p>
+</div>

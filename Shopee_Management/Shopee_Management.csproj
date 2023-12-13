@@ -169,6 +169,7 @@
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLyKhachHangController.cs" />
     <Compile Include="Controllers\QuanLyShipperController.cs" />
+    <Compile Include="Controllers\RevenueController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KHUYENMAIsController.cs" />
@@ -6361,6 +6362,10 @@
     <Content Include="Views\KhachHang\LichSuDonMua.cshtml" />
     <Content Include="Views\NguoiBanHang\LichSuDonHang.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Revenue\Daily.cshtml" />
+    <Content Include="Views\Revenue\Weekly.cshtml" />
+    <Content Include="Views\Revenue\Monthly.cshtml" />
+    <Content Include="Views\Revenue\Yearly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

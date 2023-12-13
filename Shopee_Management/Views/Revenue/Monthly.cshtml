@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Monthly Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<int>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<div>
+    <h2>Biểu đồ đơn hàng của các cửa hàng trong tháng này</h2>
+    <canvas id="monthlyChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var monthlyOrders = @Html.Raw(Json.Encode(Model));
+    var monthlyLabels = @Html.Raw(Json.Encode(ViewBag.MonthlyLabels));
+
+    var ctx = document.getElementById('monthlyChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                label: 'Number of Orders',
+                data: monthlyOrders,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

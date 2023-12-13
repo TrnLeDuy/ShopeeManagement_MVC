@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Yearly Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<int>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<div>
+    <h2>Biểu đồ đơn hàng của các cửa hàng trong năm này</h2>
+    <canvas id="yearlyOrdersChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var yearlyOrdersData = @Html.Raw(Json.Encode(Model));
+
+    var ctx = document.getElementById('yearlyOrdersChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Orders',
+                data: yearlyOrdersData,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

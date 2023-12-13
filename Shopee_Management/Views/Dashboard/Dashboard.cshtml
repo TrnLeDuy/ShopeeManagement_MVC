@@ -93,48 +93,5 @@
         <div class="col-md-3">
             <button id="yearlyChartBtn" class="btn btn-primary">Biểu đồ theo năm</button>
         </div>
-        <div class="col-md-12">
-            <canvas id="revenueChart"></canvas>
-        </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#dailyChartBtn').click(function () {
-            loadChart('DailyChart', new Date());
-        });
-
-        $('#weeklyChartBtn').click(function () {
-            // Logic để lấy ngày đầu tiên của tuần hiện tại
-            var today = new Date();
-            var firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
-            loadChart('WeeklyChart', firstDayOfWeek);
-        });
-
-        $('#monthlyChartBtn').click(function () {
-            var today = new Date();
-            loadChart('MonthlyChart', today.getFullYear(), today.getMonth() + 1);
-        });
-
-        $('#yearlyChartBtn').click(function () {
-            var today = new Date();
-            loadChart('YearlyChart', today.getFullYear());
-        });
-
-        function loadChart(chartType, ...params) {
-            $.ajax({
-                url: '/Dashboard/' + chartType,
-                type: 'GET',
-                data: { ...params },
-                success: function (data) {
-                    // Xử lý dữ liệu và vẽ biểu đồ tại đây
-                    console.log('Revenue:', data);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(xhr.status);
-                    console.log(thrownError);
-                }
-            });
-        }
-    });
-</script>

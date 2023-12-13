@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Weekly Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<int>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<div>
+    <h2>Biểu đồ đơn hàng của các cửa hàng trong tuần này</h2>
+    <canvas id="weeklyChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var weeklyOrders = @Html.Raw(Json.Encode(Model));
+    var weeklyLabels = @Html.Raw(Json.Encode(ViewBag.WeeklyLabels));
+
+    var ctx = document.getElementById('weeklyChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: weeklyLabels,
+            datasets: [{
+                label: 'Số lượng đơn hàng',
+                data: weeklyOrders,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
