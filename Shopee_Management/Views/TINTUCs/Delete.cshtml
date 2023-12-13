@@ -5,15 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div>
     <h4 style="text-align:center;">XÓA TIN TỨC</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            <strong>HÌNH ẢNH</strong>
+        </dt>
+        <dd>
+            <img src="~/ImagesTINTUC/@Model.image_tintuc" style="height:200px; width:300px;" />
+        </dd>
+        <dt>
             <strong>TIÊU ĐỀ</strong>
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.tieu_de)
         </dd>
@@ -21,7 +25,6 @@
         <dt>
             <strong>NỘI DUNG</strong>
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.noi_dung)
         </dd>
@@ -29,27 +32,27 @@
         <dt>
             <strong>NGÀY ĐĂNG</strong>
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ngay_dang)
         </dd>
 
         <dt>
-            THỂ LOẠI
+            <strong>THỂ LOẠI</strong>
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.THELOAITIN.ten_the_loai)
         </dd>
 
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="XÓA" class="btn btn-danger" /> |
-    @Html.ActionLink("TRỞ VỀ", "Index", new {id=Model.id_tin_tuc}, new { @class = "btn btn-primary" })
-</div>
+        <div class="form-actions no-color">
+            <input type="submit" value="XÓA" class="btn btn-danger" /> |
+            @Html.ActionLink("TRỞ VỀ", "Index", new { id = Model.id_tin_tuc }, new { @class = "btn btn-primary" })
+        </div>
     }
 </div>

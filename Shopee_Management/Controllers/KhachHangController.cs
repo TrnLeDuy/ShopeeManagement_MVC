@@ -33,6 +33,7 @@ namespace Shopee_Management.Controllers
         {
             public string id_nbh { get; set; }
             public string ten_cua_hang { get; set; }
+            public string hinh_cua_hang { get; set; }
 
         }
 
@@ -70,7 +71,7 @@ namespace Shopee_Management.Controllers
                         Session["HoTen"] = user.ho_ten;
                         Session["Avatar"] = user.avatar;
                         //Lấy id và tên cửa hàng 
-                        string query = "SELECT id_nbh, ten_cua_hang FROM KHACHHANG, NGUOIBANHANG WHERE NGUOIBANHANG.id_kh = @p1";
+                        string query = "SELECT id_nbh, ten_cua_hang, hinh_cua_hang FROM KHACHHANG, NGUOIBANHANG WHERE NGUOIBANHANG.id_kh = @p1";
                         string id_kh = user.id_kh; // Assuming user.id_kh is a string, adjust the type accordingly
                         var result = db.Database.SqlQuery<NguoiBanHangInfo>(query, new SqlParameter("@p1", id_kh)).FirstOrDefault();
                         if (result != null)
@@ -78,9 +79,11 @@ namespace Shopee_Management.Controllers
                             // Access the values of id_nbh and ten_cua_hang
                             string id_nbh = result.id_nbh;
                             string ten_cua_hang = result.ten_cua_hang;
+                            string hinh_cua_hang = result.hinh_cua_hang;
                             // Store the values in the session
                             Session["StoreID"] = id_nbh;
                             Session["StoreName"] = ten_cua_hang;
+                            Session["StorePic"] = hinh_cua_hang;
                         }
                         TempData["Success"] = "Đăng nhập thành công !";
                         return Redirect("/TrangChu/Index");
@@ -157,13 +160,6 @@ namespace Shopee_Management.Controllers
 
         public ActionResult DangXuat()
         {
-            Session["KhachHang"] = null;
-            Session["ID"] = null;
-            Session["Username"] = null;
-            Session["HoTen"] = null;
-            Session["Avatar"] = null;
-            Session["StoreID"] = null;
-            Session["StoreName"] = null;
             Session.Abandon();
             return Redirect("/TrangChu/Index");
         }
@@ -198,12 +194,12 @@ namespace Shopee_Management.Controllers
                         var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                         avatarFile.SaveAs(path);
                         existingKhachHang.avatar = fileName;
+
                     }
 
                     db.SaveChanges();
 
                     TempData["Success"] = "Cập nhật thông tin hoàn tất!";
-                    Session["ID"] = null;
                     return RedirectToAction("Default");
                 }
             }
@@ -251,18 +247,19 @@ namespace Shopee_Management.Controllers
                 model.id_kh = idNguoiBanHang_New;
 
                 // Thực hiện câu lệnh SQL để chèn dữ liệu vào bảng NGUOIBANHANG
-                string sqlInsert = "INSERT INTO NGUOIBANHANG (ten_cua_hang, id_kh, sdt_ch, dia_chi_ch, email_ch) VALUES (@ten_cua_hang, @id_kh, @sdt_ch, @dia_chi_ch, @email_ch)";
+                string sqlInsert = "INSERT INTO NGUOIBANHANG (ten_cua_hang, id_kh, sdt_ch, dia_chi_ch, email_ch, hinh_cua_hang) VALUES (@ten_cua_hang, @id_kh, @sdt_ch, @dia_chi_ch, @email_ch, @hinh_cua_hang)";
 
                 db.Database.ExecuteSqlCommand(sqlInsert,
                     new SqlParameter("@ten_cua_hang", model.ten_cua_hang),
                     new SqlParameter("@id_kh", model.id_kh),
                     new SqlParameter("@sdt_ch", model.sdt_ch),
                     new SqlParameter("@dia_chi_ch", model.dia_chi_ch),
-                    new SqlParameter("@email_ch", model.email_ch));
+                    new SqlParameter("@email_ch", model.email_ch),
+                    new SqlParameter("@hinh_cua_hang", model.hinh_cua_hang));
 
 
                 TempData["Success"] = "Đăng ký cửa hàng thành công!";
-                return RedirectToAction("Index", "TrangChu"); // Chuyển hướng đến trang chủ hoặc trang khác tùy vào yêu cầu
+                return RedirectToAction("DangXuat");
             }
 
             // Nếu ModelState không hợp lệ, hiển thị lại form đăng ký với thông báo lỗi
@@ -328,11 +325,12 @@ namespace Shopee_Management.Controllers
                 if (kh_avatar != null && kh_avatar.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(kh_avatar.FileName);
-                    var path = Path.Combine(Server.MapPath("~/CustomerAvatar"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                     kh_avatar.SaveAs(path);
 
                     // Lưu đường dẫn tệp ảnh vào trường avatar trong cơ sở dữ liệu
-                    existingKhachHang.avatar = "~/CustomerAvatar/" + fileName;
+                    existingKhachHang.avatar =  fileName;
+                    Session["Avatar"] = fileName;
                 }
 
                 db.SaveChanges();

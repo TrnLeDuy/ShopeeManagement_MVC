@@ -160,6 +160,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Config\PaypalConfiguration.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\KhuyenMai_CuaHangController.cs" />
     <Compile Include="Controllers\NguoiBanHangController.cs" />
@@ -4611,6 +4612,8 @@
     <Content Include="mazer-main\dist\assets\vendors\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="mazer-main\dist\assets\vendors\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="mazer-main\dist\mix-manifest.json" />
+    <None Include="Properties\PublishProfiles\shopeevn-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\shopeevn-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\dangnhap.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
@@ -6357,6 +6360,7 @@
     <Content Include="Views\TrangChu\Detail.cshtml" />
     <Content Include="Views\KhachHang\LichSuDonMua.cshtml" />
     <Content Include="Views\NguoiBanHang\LichSuDonHang.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

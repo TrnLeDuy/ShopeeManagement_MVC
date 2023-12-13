@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Doanh thu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<div class="container-fluid">
+    <div class="row m-t-25">
+        <div class="col-sm-6 col-lg-3">
+            <div class="overview-item overview-item--c1">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div style="display: inline-block; vertical-align: top; margin-right: 15px;">
+                            <i style="font-size:40px;color:white;margin-top:-4px;margin-right: 10px" class="zmdi zmdi-account-o"></i>
+                        </div>
+                        <div class="text">
+                            <h2>@ViewBag.countCuaHang</h2>
+                            <span>Tổng số Cửa hàng</span>
+                        </div>
+                    </div>
+                    <div class="overview-chart">
+                        <canvas id="widgetChart1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="overview-item overview-item--c2">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div style="display: inline-block; vertical-align: top; margin-right: 15px; ">
+                            <i style="font-size:40px;color:white;margin-top:-4px;margin-right: 10px" class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+                        <div class="text">
+                            <h2>@ViewBag.countDonHang</h2>
+                            <span>Tổng số Đơn hàng</span>
+                        </div>
+                    </div>
+                    <div class="overview-chart">
+                        <canvas id="widgetChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="overview-item overview-item--c3">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div style="display: inline-block; vertical-align: top; margin-right: 15px;">
+                            <i style="font-size:40px;color:white;margin-top:-4px;margin-right: 10px" class="zmdi zmdi-calendar-note"></i>
+                        </div>
+                        <div class="text">
+                            <h2>@ViewBag.countDoanhThu</h2>
+                            <span>Tổng Doanh thu cửa hàng</span>
+                        </div>
+                    </div>
+                    <div class="overview-chart">
+                        <canvas id="widgetChart3"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="overview-item overview-item--c4">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div style="display: inline-block; vertical-align: top; margin-right: 15px;">
+                            <i style="font-size:40px;color:white;margin-top:-4px;margin-right: 10px" class="zmdi zmdi-money"></i>
+                        </div>
+                        <div class="text">
+                            <h2>@ViewBag.loiNhuan</h2>
+                            <span>Tổng số Lợi nhuận</span>
+                        </div>
+                    </div>
+                    <div class="overview-chart">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-25">
+        <div class="col-md-3">
+            <button id="dailyChartBtn" class="btn btn-primary">Biểu đồ theo ngày</button>
+        </div>
+        <div class="col-md-3">
+            <button id="weeklyChartBtn" class="btn btn-primary">Biểu đồ theo tuần</button>
+        </div>
+        <div class="col-md-3">
+            <button id="monthlyChartBtn" class="btn btn-primary">Biểu đồ theo tháng</button>
+        </div>
+        <div class="col-md-3">
+            <button id="yearlyChartBtn" class="btn btn-primary">Biểu đồ theo năm</button>
+        </div>
+        <div class="col-md-12">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#dailyChartBtn').click(function () {
+            loadChart('DailyChart', new Date());
+        });
+
+        $('#weeklyChartBtn').click(function () {
+            // Logic để lấy ngày đầu tiên của tuần hiện tại
+            var today = new Date();
+            var firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+            loadChart('WeeklyChart', firstDayOfWeek);
+        });
+
+        $('#monthlyChartBtn').click(function () {
+            var today = new Date();
+            loadChart('MonthlyChart', today.getFullYear(), today.getMonth() + 1);
+        });
+
+        $('#yearlyChartBtn').click(function () {
+            var today = new Date();
+            loadChart('YearlyChart', today.getFullYear());
+        });
+
+        function loadChart(chartType, ...params) {
+            $.ajax({
+                url: '/Dashboard/' + chartType,
+                type: 'GET',
+                data: { ...params },
+                success: function (data) {
+                    // Xử lý dữ liệu và vẽ biểu đồ tại đây
+                    console.log('Revenue:', data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+            });
+        }
+    });
+</script>

@@ -100,9 +100,8 @@
         </div>
 
         <div class="form-group">
-            @Html.TextBoxFor(model => model.hinh_cua_hang, new { type = "file", @class = "form-control", id = "fileInput" })
-
-            <img id="previewImage" />
+            <input type="file" name="hinhCuaHang" id="avatarFile" class="form-control" onchange="previewImage(event)" />
+            <img class="avatar-images" id="avatarPreview" src="#" alt="Preview" style="display: none;" />
         </div>
 
         <div class="form-group">
@@ -110,6 +109,24 @@
         </div>
     }
 </div>
+
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function () {
+            var img = document.getElementById('avatarPreview');
+            img.src = reader.result;
+            img.style.display = 'block';
+
+            var backgroundImg = document.getElementById('avatarBackgroundImage');
+            backgroundImg.style.display = 'none';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
