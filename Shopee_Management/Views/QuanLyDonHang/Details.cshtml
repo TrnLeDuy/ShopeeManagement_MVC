@@ -1,18 +1,48 @@
 ﻿@model Shopee_Management.Models.DONHANG
 
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .main-content {
+        background-color: #fff; 
+    }
+
+    h2 {
+        color: #fb5731; /* Change color as needed */
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .order-details {
+        border: 1px solid #ddd; /* Add a border for separation */
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Add more styles as needed */
+</style>
+
+<h2>Order Information</h2>
+<p>Order ID: @Model.id_don</p>
+<p>Order Date: @Model.ngay_dat</p>
 <!-- Display order details -->
 <h2>Order Details</h2>
 @foreach (var detail in ViewBag.OrderDetails)
 {
-    <p>Product ID: @detail.id_ctsp</p>
-    <p>Quantity: @detail.so_luong</p>
-    <p>Price: @detail.gia_tien</p>
-    <!-- Add more fields as needed -->
-    <hr />
+    <div class="order-details">
+        <p>Product ID: @detail.id_ctsp</p>
+        <p>Quantity: @detail.so_luong</p>
+        <p>Price: @detail.gia_tien</p>
+        <!-- Add more fields as needed -->
+        <hr />
+    </div>
 }
 
 <!-- Display other order information -->
-<h2>Order Information</h2>
-<p>Order ID: @Model.id_don</p>
-<p>Order Date: @Model.ngay_dat</p>
+
 <!-- Add more fields as needed -->

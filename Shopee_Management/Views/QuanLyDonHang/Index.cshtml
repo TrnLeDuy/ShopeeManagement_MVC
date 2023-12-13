@@ -93,43 +93,33 @@
     <tr>
         <th>
             Ngày đặt
-            @Html.DisplayNameFor(model => model.ngay_dat)
         </th>
         <th>
             Trạng thái đơn hàng
-            @Html.DisplayNameFor(model => model.trang_thai_dh)
         </th>
         <th>
             Trạng thái thanh toán
-            @Html.DisplayNameFor(model => model.tt_thanh_toan)
         </th>
         <th>
             Tổng tiền
-            @Html.DisplayNameFor(model => model.tong_cong)
         </th>
         <th>
             Thành tiền
-            @Html.DisplayNameFor(model => model.thanh_tien)
         </th>
         <th>
             Ngày giao
-            @Html.DisplayNameFor(model => model.ngay_giao)
         </th>
         <th>
             Họ tên khách hàng
-            @Html.DisplayNameFor(model => model.KHACHHANG.ho_ten)
         </th>
         <th>
             Tên cửa hàng
-            @Html.DisplayNameFor(model => model.NGUOIBANHANG.ten_cua_hang)
         </th>
         <th>
             Phương thức thanh toán
-            @Html.DisplayNameFor(model => model.PTTT.ten_pttt)
         </th>
         <th>
             Mã khuyến mãi
-            @Html.DisplayNameFor(model => model.KHUYENMAI.id_nbh)
         </th>
         <th></th>
     </tr>
@@ -139,13 +129,31 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ngay_dat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.trang_thai_dh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tt_thanh_toan)
-            </td>
+            </td>          
+            @{
+                if (item.trang_thai_dh == 0)
+                {
+                    <td>Chưa giao hàng</td>
+                }
+                if (item.trang_thai_dh == 1)
+                {
+                    <td>Đang giao hàng</td>
+                }
+                if (item.trang_thai_dh == 2)
+                {
+                    <td>Đã giao hàng</td>
+                }
+            }
+            @{
+                if (item.tt_thanh_toan == 1)
+                {
+                    <td>Chưa thanh toán</td>
+                }
+                if (item.tt_thanh_toan == 2)
+                {
+                    <td>Đã thanh toán</td>
+                }
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.tong_cong)
             </td>
@@ -167,10 +175,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.KHUYENMAI.id_nbh)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_don }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id_don }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_don })
+            <td>                
+                @Html.ActionLink("Details", "Details", new { id = item.id_don })
             </td>
         </tr>
     }
