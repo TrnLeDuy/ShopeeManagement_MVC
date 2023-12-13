@@ -146,38 +146,38 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        @if (Session["Avatar"] == null)
+                                        @if (Session["AvatarNV"] == null)
                                         {
                                             <img src="~/CustomerAvatar/avatar.jpg" alt="avatar" />
                                         }
                                         else
                                         {
-                                            <img src="~/CustomerAvatar/NhanVien/@Session["Avatar"]" alt="avatar" />
+                                            <img src="~/CustomerAvatar/NhanVien/@Session["AvatarNV"]" alt="avatar" />
                                         }
 
                                     </div>
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">@Session["FullName"]</a>
+                                        <a class="js-acc-btn" href="#">ADMINISTRATOR</a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
 
                                         <div class="account-dropdown__footer">
                                             <div class="account-dropdown__item">
-                                                <a href="/NhanVien/Details?id=@Session["ID"]">
+                                                <a href="">
                                                     <i class="zmdi zmdi-account"></i>Thông tin chi tiết
                                                 </a>
                                             </div>
 
                                             <div class="account-dropdown__footer">
                                                 <div class="account-dropdown__item">
-                                                    <a href="/Authencation/ChangePassword">
+                                                    <a href="">
                                                         <i class="zmdi zmdi-account"></i>Thay đổi mật khẩu
                                                     </a>
                                                 </div>
 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="/Authencation/Logout">
+                                                <a href="">
                                                     <i class="zmdi zmdi-power"></i>Đăng xuất
                                                 </a>
                                             </div>
@@ -203,14 +203,18 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        @*<li class="active has-sub">
-                            <a class="js-arrow" href="">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="/Dashboard/Dashboard">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
-                        </li>*@
+                        </li>
                         <li class="d-flex align-content-center ">
-                            <i class="fas fa-database" style="padding: 20px 0"></i>
+                            <i class="fas fa-user" style="padding: 20px 0"></i>
                             <a class="w-100 ml-3" href="/QuanLyKhachHang/Index">Danh mục Khách hàng</a>
+                        </li>
+                        <li class="d-flex align-content-center ">
+                            <i class="fas fa-user" style="padding: 20px 0"></i>
+                            <a class="w-100 ml-3" href="/QuanLyCuaHang/Index">Danh mục Người bán hàng</a>
                         </li>
                         <li class="d-flex align-content-center ">
                             <i class="fas fa-database" style="padding: 20px 0"></i>
@@ -222,7 +226,7 @@
                         </li>
                         <li class="d-flex align-content-center ">
                             <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                            <a class="w-100 ml-3" href="/DONHANGs/Index">Quản lí Đơn hàng</a>
+                            <a class="w-100 ml-3" href="/QuanLyDonHang/Index">Quản lí Đơn hàng</a>
                         </li>
                         <li class="d-flex align-content-center ">
                             <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
@@ -232,77 +236,6 @@
                             <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
                             <a class="w-100 ml-3" href="/KHUYENMAIs/Index">Voucher Khuyến mãi</a>
                         </li>
-                        @*Sau khi xong chức năng sẽ xóa*@
-                        @*<li class="d-flex align-content-center ">
-                            <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                            <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
-                        </li>*@
-                        @*@if (Session["Role"] != null && Session["Role"].ToString() == "quan_tri_vien")
-                        {
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-user" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/NhanVien/Index">Quản lí Nhân viên</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-database" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/KhachHang/Index">Quản lí Khách hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-archive" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/QuanLySanPham/DanhSachSanPham">Quản lí Sản phẩm</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/HoaDon/Index">Quản lí Hóa đơn</a>
-                            </li>
-                        }
-                        @if (Session["Role"] != null && Session["Role"].ToString() == "chu_cua_hang")
-                        {
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-database" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/NhanVien/Index">Danh sách Nhân viên</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-database" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/KhachHang/Index">Quản lí Khách hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-archive" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/QuanLySanPham/DanhSachSanPham">Quản lí Sản phẩm</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/HoaDon/Index">Quản lí Hóa đơn</a>
-                            </li>
-                        }
-                        @if (Session["Role"] != null && Session["Role"].ToString() == "nhan_vien")
-                        {
-
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-database" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/KhachHang/Index">Quản lí Khách hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-archive" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/QuanLySanPham/DanhSachSanPham">Quản lí Sản phẩm</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-shopping-cart" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/DonHang/Index">Quản lí Đơn hàng</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-clipboard-list" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/HoaDon/Index">Quản lí Hóa đơn</a>
-                            </li>
-                        }*@
                     </ul>
                 </nav>
             </div>
