@@ -127,46 +127,50 @@ namespace Shopee_Management.Controllers
 
         private Payment CreatePayment(APIContext apiContext, string redirectURl)
         {
+            var itemList = new ItemList()
+            {
+                items = new List<Item>()
+            };
+
             if (Session["DonHang"] != null)
             {
                 decimal usdToVndRate = 23465m;
 
-                var dr = GetCurrencyExchange("VND", "USD");
-
                 DONHANG donHang = Session["DonHang"] as DONHANG;
 
-                // Assuming you have the order details stored in the database
-                // Adjust the logic based on your actual database schema
-                var orderDetailsList = db.CHITIETDONHANGs
-                    .Where(d => d.id_don == donHang.id_don)
-                    .ToList();
+                string strThanhTien = Math.Round(donHang.thanh_tien.Value / usdToVndRate).ToString();
 
-                var itemList = new List<Item>();
-
-                foreach (var orderDetail in orderDetailsList)
+                List<CHITIETDONHANG> ctdon = Session["ChiTietDonHang"] as List<CHITIETDONHANG>;
+                if (ctdon != null)
                 {
-                    // Retrieve additional information about the product from your database
-                    var productInfo = db.CHITIETSPs.SingleOrDefault(p => p.id_ctsp == orderDetail.id_ctsp);
-
-                    if (productInfo != null)
+                    foreach (var ct in ctdon)
                     {
-                        // Calculate price per item in USD
-                        decimal priceOneItem = ((decimal?)donHang.tong_cong ?? 0) / ((decimal?)usdToVndRate ?? 1);
-
-                        // Convert price to VND
-                        decimal priceInVnd = Math.Round(priceOneItem * dr, 0);
-
-                        var item = new Item()
+                        // Check if CHITIETSP is null
+                        if (ct.CHITIETSP != null)
                         {
-                            name = productInfo.SANPHAM.ten_sp,
-                            currency = "USD",
-                            price = priceInVnd.ToString("0.00"), // Format as a string with two decimal places
-                            quantity = orderDetail.so_luong.ToString(),
-                            sku = productInfo.id_sp?.ToString(),
-                        };
+                            var sanPham = ct.CHITIETSP.SANPHAM;
 
-                        itemList.Add(item);
+                            // Check if SANPHAM is null
+                            if (sanPham != null)
+                            {
+                                var ten_sp = sanPham.ten_sp ?? "Unknown Product";
+                                var id_sp = sanPham.id_sp;
+
+                                itemList.items.Add(new Item()
+                                {
+                                    name = ten_sp,
+                                    currency = "USD",
+                                    price = (Math.Round(ct.gia_tien.Value / usdToVndRate)).ToString(),
+                                    quantity = ct.so_luong.ToString(),
+                                    sku = id_sp.ToString(),
+                                });
+                            }
+                        }
                     }
+                }
+                else
+                {
+                    // Handle the case where the Session["CTDH"] is null
                 }
 
                 var payer = new Payer()
@@ -184,7 +188,7 @@ namespace Shopee_Management.Controllers
                 {
                     tax = "0",
                     shipping = "0",
-                    subtotal = string.Format("{0:0.00}", donHang.thanh_tien), // Format as a string with two decimal places
+                    subtotal = strThanhTien,
                 };
 
                 var amount = new Amount()
@@ -195,13 +199,16 @@ namespace Shopee_Management.Controllers
                 };
 
                 var transactionList = new List<Transaction>();
+                // Adding description about the transaction  
+                var paypalOrderId = DateTime.Now.Ticks;
                 transactionList.Add(new Transaction()
                 {
-                    description = "Transaction Description",
-                    invoice_number = Convert.ToString((new Random()).Next(100000)),
+                    description = $"Invoice #{paypalOrderId}",
+                    invoice_number = paypalOrderId.ToString(), //Generate an Invoice No    
                     amount = amount,
-                    item_list = new ItemList { items = itemList }
+                    item_list = itemList
                 });
+
 
                 this.payment = new Payment()
                 {
@@ -217,15 +224,12 @@ namespace Shopee_Management.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Log or handle the exception
-                    throw;
+                    throw ex.InnerException;
                 }
             }
 
             return null;
         }
-
-
 
         public Decimal GetCurrencyExchange(String localCurrency, String foreignCurrency)
         {

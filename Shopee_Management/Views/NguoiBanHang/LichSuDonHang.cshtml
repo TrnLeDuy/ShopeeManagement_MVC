@@ -5,8 +5,54 @@
     Layout = "~/Views/Shared/_KenhBanHangLayout.cshtml";
     string idNbh = (string)Session["StoreID"];
 }
+<style>
+    h2 {
+        color: #fb5731;
+        text-align: center;
+    }
 
-<h2>LichSuDonHang</h2>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: #ccc;
+        margin: 20px 0;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+        p.no-orders {
+            color: #888;
+        }
+</style>
+<h2>Lịch Sử Đơn Hàng</h2>
 
 @if (Model != null && Model.Any())
 {
